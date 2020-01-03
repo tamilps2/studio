@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::middleware('verified')->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
-});
+Route::get('/{username}', 'UserController');
+Route::get('/{username}/{slug}', 'PostController')->middleware('Canvas\Http\Middleware\ViewThrottle');
+Route::get('/tag/{slug}', 'TagController');
+Route::get('/topic/{slug}', 'TopicController');
