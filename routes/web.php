@@ -14,13 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController')->name('home');
 
 Auth::routes(['verify' => true]);
 
-Route::get('/{username}', 'UserController');
-Route::get('/{username}/{slug}', 'PostController')->middleware('Canvas\Http\Middleware\ViewThrottle');
-Route::get('/tag/{slug}', 'TagController');
-Route::get('/topic/{slug}', 'TopicController');
+Route::get('tag/{slug}', 'TagController')->name('tag');
+Route::get('topic/{slug}', 'TopicController')->name('topic');
+Route::get('{username}', 'UserController')->name('user');
+Route::get('{username}/{slug}', 'PostController')->middleware('Canvas\Http\Middleware\ViewThrottle')->name('post');

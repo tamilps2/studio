@@ -21,12 +21,18 @@ $box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.0
 $border-radius: .5rem;
 $border-radius-sm: .4rem;
 
+$link-color: $gray-500;
+
 $badge-border-radius: .25rem;
 
 $text-muted: $gray-500;
 
 .primary {
     fill: $gray-500;
+}
+
+.primary:hover {
+    fill: darken($gray-500, 15%);
 }
 
 .secondary {

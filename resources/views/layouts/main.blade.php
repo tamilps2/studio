@@ -26,14 +26,6 @@
             line-height: 1.6;
         }
 
-        .primary {
-            fill: #A5B3BB;
-        }
-
-        .secondary {
-            fill: #0D2B3E;
-        }
-
         .nav-scroller {
             position: relative;
             z-index: 2;
@@ -182,11 +174,6 @@
 
         .post hr:before {
             content: '...';
-        }
-
-        .post a {
-            text-decoration: underline !important;
-            color: #343a40 !important;
         }
 
         .post p code {

@@ -21,16 +21,22 @@ class PostController extends Controller
      */
     public function __invoke(Request $request, string $username, string $slug)
     {
-        $meta = UserMeta::where('username', $username)->first();
+        $authorMeta = UserMeta::where('username', $username)->first();
 
-        if ($meta) {
-            $posts = Post::with('tags', 'topic', 'user')->published()->get();
+        if ($authorMeta) {
+            $posts = Post::with('tags', 'topic')->published()->get();
             $post = $posts->firstWhere('slug', $slug);
 
-            if ($post && $post->published && $post->user->id == $meta->user_id) {
+            if ($post && $post->published && $post->user->id == $authorMeta->user_id) {
                 $readNext = $posts->sortBy('published_at')->firstWhere('published_at', '>', $post->published_at);
 
                 if ($readNext) {
+                    if ($readNext->user_id == $authorMeta->user_id) {
+                        $readNextUsername = $authorMeta->username;
+                    } else {
+                        $readNextUsername = UserMeta::where('user_id', $readNext->user_id)->pluck('username')->first();
+                    }
+
                     $randomPool = $posts->filter(function ($item) use ($readNext, $post) {
                         return $item->id != $post->id && $item->id != $readNext->id;
                     });
@@ -47,17 +53,36 @@ class PostController extends Controller
                     $readRandom = $randomPool->random();
                 }
 
-                $metaData = UserMeta::forCurrentUser()->first();
-                $emailHash = md5(trim(Str::lower(optional(request()->user())->email)));
+                if ($authorMeta->user_id == optional($readRandom)->user_id) {
+                    $readRandomUsername = $authorMeta->username;
+                } else {
+                    $readRandomUsername = UserMeta::where('user_id', optional($readRandom)->user_id)->pluck('username')->first();
+                }
+
+                if ($authorMeta->user_id == optional(auth()->user())->id) {
+                    $userAvatar = $authorMeta->avatar;
+                } else {
+                    $userMeta = UserMeta::forCurrentUser()->first();
+                    $emailHash = md5(trim(Str::lower(optional(auth()->user())->email)));
+                    $userAvatar = optional($userMeta)->avatar ?? "https://secure.gravatar.com/avatar/{$emailHash}?s=500";
+                }
 
                 $data = [
-                    'avatar' => optional($metaData)->avatar && !empty(optional($metaData)->avatar) ? $metaData->avatar : "https://secure.gravatar.com/avatar/{$emailHash}?s=500",
-                    'author' => $post->author,
-                    'post'   => $post,
-                    'meta'   => $post->meta,
-                    'next'   => $readNext,
-                    'random' => $readRandom,
-                    'topic'  => $post->topic->first() ?? null,
+                    'user'     => $userAvatar,
+                    'avatar'   => $authorMeta->avatar,
+                    'username' => $authorMeta->username,
+                    'author'   => $post->author,
+                    'post'     => $post,
+                    'meta'     => $post->meta,
+                    'next'     => [
+                        'post'     => $readNext,
+                        'username' => $readNextUsername ?? null,
+                    ],
+                    'random'   => [
+                        'post'     => $readRandom,
+                        'username' => $readRandomUsername ?? null,
+                    ],
+                    'topic'    => $post->topic->first() ?? null,
                 ];
 
                 event(new PostViewed($post));
