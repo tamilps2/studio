@@ -59,10 +59,6 @@
                     @endforeach
 
                     {{ $data['posts']->links() }}
-                @else
-                    <p class="mt-4">{{ __('canvas::blog.empty.description') }}
-                        <a href="{{ url(sprintf('%s/posts/create', config('canvas.path'))) }}" class="text-success text-decoration-none">{{ __('canvas::blog.empty.action') }}</a>.
-                    </p>
                 @endif
             </div>
 

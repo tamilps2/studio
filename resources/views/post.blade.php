@@ -45,14 +45,14 @@
 
                 <div class="media py-1">
                     <a href="{{ route('user', $data['username']) }}">
-                        <img src="{{ $data['avatar'] }}"
+                        <img src="{{ $data['userAvatar'] }}"
                              class="mr-3 rounded-circle shadow-inner"
                              style="width: 50px"
-                             alt="{{ $data['author']->name }}">
+                             alt="{{ $data['user']->name }}">
                     </a>
                     <div class="media-body">
                         <a href="{{ route('user', $data['username']) }}">
-                            <p class="mt-0 mb-1 font-weight-bold text-dark">{{ $data['author']->name }}</p>
+                            <p class="mt-0 mb-1 font-weight-bold text-dark">{{ $data['user']->name }}</p>
                         </a>
                         <span class="text-muted">{{ \Carbon\Carbon::parse($data['post']->published_at)->format('M d, Y') }} — {{ $data['post']->read_time }}</span>
                     </div>

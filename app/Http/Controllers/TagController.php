@@ -32,7 +32,7 @@ class TagController extends Controller
             })->published()->orderByDesc('published_at')->simplePaginate(10);
 
             $data = [
-                'avatar' => $userAvatar,
+                'authAvatar' => $userAvatar,
                 'tag'    => $tag,
                 'tags'   => Tag::all(['name', 'slug']),
                 'topics' => Topic::all(['name', 'slug']),

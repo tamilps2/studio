@@ -21,13 +21,12 @@ class HomeController extends Controller
     {
         $userMeta = UserMeta::forCurrentUser()->first();
         $emailHash = md5(trim(Str::lower(optional(auth()->user())->email)));
-        $userAvatar = optional($userMeta)->avatar ?? "https://secure.gravatar.com/avatar/{$emailHash}?s=500";
 
         $data = [
-            'avatar' => $userAvatar,
-            'tags'   => Tag::all(['name', 'slug']),
-            'topics' => Topic::all(['name', 'slug']),
-            'posts'  => Post::published()->withUserMeta()->orderByDesc('published_at')->simplePaginate(10),
+            'authAvatar' => optional($userMeta)->avatar ?? "https://secure.gravatar.com/avatar/{$emailHash}?s=500",
+            'tags'       => Tag::all(['name', 'slug']),
+            'topics'     => Topic::all(['name', 'slug']),
+            'posts'      => Post::published()->withUserMeta()->orderByDesc('published_at')->simplePaginate(10),
         ];
 
         return view('home', compact('data'));

@@ -68,21 +68,21 @@ class PostController extends Controller
                 }
 
                 $data = [
-                    'user'     => $userAvatar,
-                    'avatar'   => $authorMeta->avatar,
-                    'username' => $authorMeta->username,
-                    'author'   => $post->user,
-                    'post'     => $post,
-                    'meta'     => $post->meta,
-                    'next'     => [
+                    'authAvatar' => $userAvatar,
+                    'userAvatar' => $authorMeta->avatar,
+                    'username'   => $authorMeta->username,
+                    'user'       => $post->user,
+                    'post'       => $post,
+                    'meta'       => $post->meta,
+                    'next'       => [
                         'post'     => $readNext,
                         'username' => $readNextUsername ?? null,
                     ],
-                    'random'   => [
+                    'random'     => [
                         'post'     => $readRandom,
                         'username' => $readRandomUsername ?? null,
                     ],
-                    'topic'    => $post->topic->first() ?? null,
+                    'topic'      => $post->topic->first() ?? null,
                 ];
 
                 event(new PostViewed($post));

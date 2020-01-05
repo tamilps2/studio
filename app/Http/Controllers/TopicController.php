@@ -32,11 +32,11 @@ class TopicController extends Controller
             })->published()->orderByDesc('published_at')->simplePaginate(10);
 
             $data = [
-                'avatar' => $userAvatar,
-                'topic'  => $topic,
-                'tags'   => Tag::all(['name', 'slug']),
-                'topics' => Topic::all(['name', 'slug']),
-                'posts'  => $posts,
+                'authAvatar' => $userAvatar,
+                'topic'      => $topic,
+                'tags'       => Tag::all(['name', 'slug']),
+                'topics'     => Topic::all(['name', 'slug']),
+                'posts'      => $posts,
             ];
 
             return view('topic', compact('data'));
