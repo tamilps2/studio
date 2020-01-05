@@ -71,7 +71,7 @@ class PostController extends Controller
                     'user'     => $userAvatar,
                     'avatar'   => $authorMeta->avatar,
                     'username' => $authorMeta->username,
-                    'author'   => $post->author,
+                    'author'   => $post->user,
                     'post'     => $post,
                     'meta'     => $post->meta,
                     'next'     => [
