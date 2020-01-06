@@ -7,18 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title')</title>
+    <title>{{ config('app.name') }}</title>
 
-    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Karla|Merriweather" rel="stylesheet">
 
-    <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css">
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <style type="text/css">
         html, body {
@@ -203,7 +198,12 @@
     </style>
 </head>
 <body>
-    @include('components.navbar')
-    @yield('content')
+<div id="studio">
+    <router-view></router-view>
+</div>
+
+@javascript('Studio', $scripts)
+
+<script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

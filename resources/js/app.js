@@ -1,38 +1,48 @@
-import $ from 'jquery'
-import hljs from 'highlightjs'
-import mediumZoom from 'medium-zoom';
+import Vue from 'vue'
+import Routes from './routes'
+import NProgress from 'nprogress'
+import VueRouter from 'vue-router'
+import HelperMixin from "./mixins/HelperMixin"
+import RequestMixin from "./mixins/RequestMixin"
 
-window._ = require('lodash');
+require('bootstrap')
 
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
+window.Popper = require('popper.js').default
 
-try {
-    window.Popper = require('popper.js').default
-    window.$ = window.jQuery = require('jquery');
+Vue.mixin(HelperMixin)
+Vue.mixin(RequestMixin)
 
-    $(function () {
-        mediumZoom('.embedded_image img');
-    });
+// Prevent the production tip on Vue startup
+Vue.config.productionTip = false
 
-    document.addEventListener('DOMContentLoaded', (event) => {
-        document.querySelectorAll('pre').forEach((block) => {
-            hljs.highlightBlock(block);
-        });
-    });
+Vue.use(VueRouter)
 
-    require('bootstrap');
-} catch (e) {}
+const router = new VueRouter({
+    routes: Routes,
+    mode: 'history',
+    base: Studio.path,
+})
 
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
+NProgress.configure({
+    showSpinner: false,
+    easing: 'ease',
+    speed: 300,
+})
 
-window.axios = require('axios');
+router.beforeEach((to, from, next) => {
+    NProgress.start()
+    next()
+})
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+router.afterEach(() => {
+    NProgress.done()
+})
+
+const app = new Vue({
+    el: '#studio',
+    router,
+    data: {
+        avatar: Studio.avatar
+    }
+})
+
