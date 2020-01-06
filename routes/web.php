@@ -16,10 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-// Catch-all routes...
 Route::get('/{view?}', 'BaseController')->where('view', '(.*)')->name('studio');
-
-//Route::get('tag/{slug}', 'TagController')->name('tag');
-//Route::get('topic/{slug}', 'TopicController')->name('topic');
-//Route::get('{username}', 'UserController')->name('user');
-//Route::get('{username}/{slug}', 'PostController')->middleware('Canvas\Http\Middleware\ViewThrottle')->name('post');
