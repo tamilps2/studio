@@ -83,6 +83,12 @@
             }
         },
 
+        watch: {
+            '$route.params.slug': function (slug) {
+                this.fetchData()
+            }
+        },
+
         mounted() {
             this.fetchData()
         },
@@ -90,7 +96,7 @@
         methods: {
             fetchData() {
                 this.request()
-                    .get('/api/posts')
+                    .get('/api/topics/' + this.$route.params.slug)
                     .then(response => {
                         this.posts = response.data.posts
                         this.featuredPost = this.posts.shift()

@@ -21,8 +21,11 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
+        $posts = Post::published()->withUserMeta()->orderByDesc('published_at')->get();
+        $posts->each->append('read_time');
+
         return response()->json([
-            'posts'  => Post::published()->withUserMeta()->orderByDesc('published_at')->get(),
+            'posts'  => $posts,
             'tags'   => Tag::all(['name', 'slug']),
             'topics' => Topic::all(['name', 'slug']),
         ]);

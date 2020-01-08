@@ -2,12 +2,18 @@ import Vue from 'vue'
 import Routes from './routes'
 import NProgress from 'nprogress'
 import VueRouter from 'vue-router'
+import moment from 'moment-timezone'
 import HelperMixin from "./mixins/HelperMixin"
 import RequestMixin from "./mixins/RequestMixin"
 
 require('bootstrap')
 
 window.Popper = require('popper.js').default
+
+Vue.prototype.moment = moment
+
+// Set the default timezone
+moment.tz.setDefault(Studio.timezone)
 
 Vue.mixin(HelperMixin)
 Vue.mixin(RequestMixin)
@@ -20,7 +26,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({
     routes: Routes,
     mode: 'history',
-    base: Studio.path,
+    base: '/',
 })
 
 NProgress.configure({
@@ -32,10 +38,6 @@ NProgress.configure({
 router.beforeEach((to, from, next) => {
     NProgress.start()
     next()
-})
-
-router.afterEach(() => {
-    NProgress.done()
 })
 
 const app = new Vue({

@@ -7,6 +7,7 @@ use App\User;
 use Canvas\Post;
 use Canvas\UserMeta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -23,6 +24,8 @@ class UserController extends Controller
                          ->published()
                          ->orderByDesc('published_at')
                          ->get();
+
+            $posts->each->append('read_time');
 
             return response()->json([
                 'user'       => $user,

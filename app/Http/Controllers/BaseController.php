@@ -15,7 +15,7 @@ class BaseController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('layouts.main', [
+        return view('app', [
             'scripts' => Studio::scriptVariables(),
         ]);
     }

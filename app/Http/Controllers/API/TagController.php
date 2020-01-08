@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Canvas\Post;
 use Canvas\Tag;
+use Canvas\Topic;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -36,9 +37,13 @@ class TagController extends Controller
                 $query->where('slug', $slug);
             })->published()->withUserMeta()->orderByDesc('published_at')->get();
 
+            $posts->each->append('read_time');
+
             return response()->json([
-                'tag'   => $tag,
-                'posts' => $posts,
+                'tag'    => $tag,
+                'posts'  => $posts,
+                'tags'   => Tag::all(['name', 'slug']),
+                'topics' => Topic::all(['name', 'slug']),
             ]);
         } else {
             return response()->json(null, 404);

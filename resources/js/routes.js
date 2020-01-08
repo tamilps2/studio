@@ -7,12 +7,12 @@ export default [
     {
         path: '/tag/:slug',
         name: 'tag',
-        component: require('./screens/posts/PostIndex').default,
+        component: require('./screens/tags/PostIndex').default,
     },
     {
         path: '/topic/:slug',
         name: 'topic',
-        component: require('./screens/posts/PostIndex').default,
+        component: require('./screens/topics/PostIndex').default,
     },
     {
         path: '/:username',
