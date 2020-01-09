@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
@@ -20,7 +17,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-light">
-    <div id="app" class="container vh-100">
+    <div class="container vh-100">
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-lg-5">
                 @yield('content')

@@ -15,9 +15,11 @@
                     </a>
                 </div>
                 <div class="col-6 d-flex justify-content-center align-items-center">
-                    <a href="/" class="h2 text-dark font-weight-bold text-decoration-none font-serif d-inline-block mb-0">
+                    <router-link
+                        :to="{ name: 'home' }"
+                        class="h2 text-dark font-weight-bold text-decoration-none font-serif d-inline-block mb-0">
                         Studio
-                    </a>
+                    </router-link>
                     <span class="badge badge-secondary small text-uppercase ml-1 mb-3">Beta</span>
                 </div>
 

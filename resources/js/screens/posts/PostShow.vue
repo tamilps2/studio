@@ -8,7 +8,7 @@
         />
 
         <page-header>
-            <div v-if="isReady && user.id === Studio.user.id" class="dropdown" slot="actions">
+            <div v-if="isReady && !hasErrors && postBelongsToAuthUser" class="dropdown" slot="actions">
                 <a href="#" id="actionDropdownMenu" class="nav-link pl-0 pr-3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" viewBox="0 0 24 24" class="icon-cog primary">
                         <path d="M6.8 3.45c.87-.52 1.82-.92 2.83-1.17a2.5 2.5 0 0 0 4.74 0c1.01.25 1.96.65 2.82 1.17a2.5 2.5 0 0 0 3.36 3.36c.52.86.92 1.8 1.17 2.82a2.5 2.5 0 0 0 0 4.74c-.25 1.01-.65 1.96-1.17 2.82a2.5 2.5 0 0 0-3.36 3.36c-.86.52-1.8.92-2.82 1.17a2.5 2.5 0 0 0-4.74 0c-1.01-.25-1.96-.65-2.82-1.17a2.5 2.5 0 0 0-3.36-3.36 9.94 9.94 0 0 1-1.17-2.82 2.5 2.5 0 0 0 0-4.74c.25-1.01.65-1.96 1.17-2.82a2.5 2.5 0 0 0 3.36-3.36zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
@@ -46,13 +46,13 @@
                             class="font-serif text-dark text-decoration-none">
                             <p class="mt-0 mb-1 font-weight-bold text-dark">{{ user.name }}</p>
                         </router-link>
-                        <span class="text-muted">{{ moment(post.published_at).format('M d, Y') }} — {{ post.read_time }}</span>
+                        <span class="text-muted">{{ moment(post.published_at).format('MMM d, Y') }} — {{ post.read_time }}</span>
                     </div>
                 </div>
 
                 <img v-if="post.featured_image"
                      :src="post.featured_image"
-                     class="pt-4"
+                     class="pt-4 img-fluid w-100"
                      :alt="post.featured_image_caption"
                      :title="post.featured_image_caption">
 
@@ -68,11 +68,11 @@
 
                 <div v-if="tags">
                     <router-link
-                        v-for="tag in tags"
-                        :key="tag.slug"
-                        :to="{ name: 'tag', params: { slug: tag.slug } }"
-                        class="badge badge-light p-2 my-1 text-decoration-none">
-                        {{ tag.name }}
+                        v-for="(key, value) in tags"
+                        :key="key"
+                        :to="{ name: 'tag', params: { slug: value } }"
+                        class="badge badge-light p-2 my-1 text-decoration-none text-uppercase">
+                        {{ key }}
                     </router-link>
                 </div>
             </div>
@@ -86,7 +86,7 @@
             </p>
         </div>
 
-        <div class="read-more mt-5 container-fluid">
+        <div v-if="!hasErrors" class="read-more mt-5 container-fluid">
             <div class="row">
                 <div v-if="next.post"
                      class="col-lg bg-light text-center px-lg-5 py-5"
@@ -113,7 +113,6 @@
                     </p>
                 </div>
 
-
                 <div v-if="random.post"
                      class="col-lg bg-light text-center px-lg-5 py-5"
                      :style="random.post.featured_image ? 'background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url('+random.post.featured_image+'); background-size: cover' : ''">
@@ -139,9 +138,9 @@
                     </p>
                 </div>
             </div>
-
-            <not-found v-if="hasErrors"/>
         </div>
+
+        <not-found v-if="hasErrors"/>
     </div>
 </template>
 
@@ -190,6 +189,7 @@
 
         watch: {
             '$route.params.slug': function (slug) {
+                this.isReady = false
                 this.fetchData()
             }
         },
@@ -216,21 +216,30 @@
                     })
                     .catch(error => {
                         // Add any error debugging...
-                        this.$router.push(this.$route.path).catch(err => {
-                        })
+                        this.$router.push(this.$route.path).catch(err => {})
                         this.isReady = true
                         this.hasErrors = true
                         NProgress.done()
                     })
             }
         },
+
+        computed: {
+            postBelongsToAuthUser() {
+                if (Studio.user) {
+                    return this.user.id === Studio.user.id
+                } else {
+                    return false
+                }
+            }
+        }
     }
 </script>
 
 <style scoped>
     .post {
-        /*font-weight: 300;*/
-        /*color: hsla(0, 0%, 0%, 0.9);*/
+        font-weight: 300;
+        color: hsla(0, 0%, 0%, 0.9);
         font-size: 1.1rem;
         line-height: 2;
         position: relative !important;

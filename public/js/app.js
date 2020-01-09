@@ -2017,6 +2017,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'page-header',
   data: function data() {
@@ -2188,7 +2190,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PostList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/PostList */ "./resources/js/components/PostList.vue");
 /* harmony import */ var _components_TopicBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/TopicBar */ "./resources/js/components/TopicBar.vue");
 /* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
-//
 //
 //
 //
@@ -2457,7 +2458,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2497,6 +2497,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     '$route.params.slug': function $routeParamsSlug(slug) {
+      this.isReady = false;
       this.fetchData();
     }
   },
@@ -2527,6 +2528,15 @@ __webpack_require__.r(__webpack_exports__);
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
       });
     }
+  },
+  computed: {
+    postBelongsToAuthUser: function postBelongsToAuthUser() {
+      if (Studio.user) {
+        return this.user.id === Studio.user.id;
+      } else {
+        return false;
+      }
+    }
   }
 });
 
@@ -2548,7 +2558,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PostList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/PostList */ "./resources/js/components/PostList.vue");
 /* harmony import */ var _components_TopicBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/TopicBar */ "./resources/js/components/TopicBar.vue");
 /* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
-//
 //
 //
 //
@@ -2677,7 +2686,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PostList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/PostList */ "./resources/js/components/PostList.vue");
 /* harmony import */ var _components_TopicBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/TopicBar */ "./resources/js/components/TopicBar.vue");
 /* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
-//
 //
 //
 //
@@ -7480,7 +7488,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.post[data-v-0b97e8c2] {\n    /*font-weight: 300;*/\n    /*color: hsla(0, 0%, 0%, 0.9);*/\n    font-size: 1.1rem;\n    line-height: 2;\n    position: relative !important;\n    -webkit-box-align: center !important;\n    align-items: center !important;\n    overflow-y: visible !important;\n}\nblockquote[data-v-0b97e8c2] {\n    margin-top: 2em;\n    margin-bottom: 2em;\n    font-style: italic;\n    border-left: 4px solid #ccc;\n    padding-left: 16px;\n}\ndiv.embedded_image img[data-v-0b97e8c2] {\n    width: 100% !important;\n    height: auto;\n    margin-bottom: 30px;\n    display: block;\n}\n.embedded_image[data-layout=\"wide\"] img[data-v-0b97e8c2] {\n    max-width: 1024px;\n    margin: 0 auto 30px;\n}\ndiv.embedded_image[data-layout=wide][data-v-0b97e8c2] {\n    width: 100vw;\n    position: relative;\n    left: 50%;\n    margin-left: -50vw;\n}\ndiv.embedded_image p[data-v-0b97e8c2] {\n    text-align: center !important;\n    color: #6c757d !important;\n    font-size: 0.9rem !important;\n    line-height: 1.6 !important;\n    font-weight: 400 !important;\n    font-family: \"Karla\", sans-serif;\n}\nhr[data-v-0b97e8c2] {\n    border: none;\n    color: #111;\n    letter-spacing: 1em;\n    text-align: center;\n}\n.canonical[data-v-0b97e8c2] {\n    margin-top: 0;\n    border: none;\n    font-size: 17px;\n    color: #111;\n    letter-spacing: 1em;\n    text-align: center;\n}\n.canonical[data-v-0b97e8c2]:before {\n    content: \"...\";\n}\nhr[data-v-0b97e8c2]:before {\n    content: '...';\n}\np code[data-v-0b97e8c2] {\n    background-color: rgba(0, 0, 0, 0.05) !important;\n    padding: 2px 4px !important;\n    border-radius: 3px !important;\n}\npre.ql-syntax[data-v-0b97e8c2] {\n    background-color: rgba(0, 0, 0, 0.05) !important;\n    border: none !important;\n    border-radius: 3px !important;\n    color: #000 !important;\n    overflow-x: auto !important;\n    padding: 1em !important;\n}\n@media screen and (max-width: 1024px) {\n.post .embedded_image[data-layout=wide] img[data-v-0b97e8c2] {\n        max-width: 100%\n}\n}\n", ""]);
+exports.push([module.i, "\n.post[data-v-0b97e8c2] {\n    font-weight: 300;\n    color: hsla(0, 0%, 0%, 0.9);\n    font-size: 1.1rem;\n    line-height: 2;\n    position: relative !important;\n    -webkit-box-align: center !important;\n    align-items: center !important;\n    overflow-y: visible !important;\n}\nblockquote[data-v-0b97e8c2] {\n    margin-top: 2em;\n    margin-bottom: 2em;\n    font-style: italic;\n    border-left: 4px solid #ccc;\n    padding-left: 16px;\n}\ndiv.embedded_image img[data-v-0b97e8c2] {\n    width: 100% !important;\n    height: auto;\n    margin-bottom: 30px;\n    display: block;\n}\n.embedded_image[data-layout=\"wide\"] img[data-v-0b97e8c2] {\n    max-width: 1024px;\n    margin: 0 auto 30px;\n}\ndiv.embedded_image[data-layout=wide][data-v-0b97e8c2] {\n    width: 100vw;\n    position: relative;\n    left: 50%;\n    margin-left: -50vw;\n}\ndiv.embedded_image p[data-v-0b97e8c2] {\n    text-align: center !important;\n    color: #6c757d !important;\n    font-size: 0.9rem !important;\n    line-height: 1.6 !important;\n    font-weight: 400 !important;\n    font-family: \"Karla\", sans-serif;\n}\nhr[data-v-0b97e8c2] {\n    border: none;\n    color: #111;\n    letter-spacing: 1em;\n    text-align: center;\n}\n.canonical[data-v-0b97e8c2] {\n    margin-top: 0;\n    border: none;\n    font-size: 17px;\n    color: #111;\n    letter-spacing: 1em;\n    text-align: center;\n}\n.canonical[data-v-0b97e8c2]:before {\n    content: \"...\";\n}\nhr[data-v-0b97e8c2]:before {\n    content: '...';\n}\np code[data-v-0b97e8c2] {\n    background-color: rgba(0, 0, 0, 0.05) !important;\n    padding: 2px 4px !important;\n    border-radius: 3px !important;\n}\npre.ql-syntax[data-v-0b97e8c2] {\n    background-color: rgba(0, 0, 0, 0.05) !important;\n    border: none !important;\n    border-radius: 3px !important;\n    color: #000 !important;\n    overflow-x: auto !important;\n    padding: 1em !important;\n}\n@media screen and (max-width: 1024px) {\n.post .embedded_image[data-layout=wide] img[data-v-0b97e8c2] {\n        max-width: 100%\n}\n}\n", ""]);
 
 // exports
 
@@ -40968,7 +40976,34 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._m(0),
+        _c(
+          "div",
+          {
+            staticClass:
+              "col-6 d-flex justify-content-center align-items-center"
+          },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass:
+                  "h2 text-dark font-weight-bold text-decoration-none font-serif d-inline-block mb-0",
+                attrs: { to: { name: "home" } }
+              },
+              [_vm._v("\n                    Studio\n                ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass:
+                  "badge badge-secondary small text-uppercase ml-1 mb-3"
+              },
+              [_vm._v("Beta")]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
         _vm.user
           ? _c(
@@ -41117,36 +41152,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-6 d-flex justify-content-center align-items-center" },
-      [
-        _c(
-          "a",
-          {
-            staticClass:
-              "h2 text-dark font-weight-bold text-decoration-none font-serif d-inline-block mb-0",
-            attrs: { href: "/" }
-          },
-          [_vm._v("\n                    Studio\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "span",
-          {
-            staticClass: "badge badge-secondary small text-uppercase ml-1 mb-3"
-          },
-          [_vm._v("Beta")]
-        )
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -41399,8 +41405,8 @@ var render = function() {
               ? _c(
                   "div",
                   {
-                    staticClass: "jumbotron p-4 p-md-5 text-white rounded",
-                    class: { "bg-dark": _vm.featuredPost.featured_image },
+                    staticClass:
+                      "jumbotron p-4 p-md-5 text-white rounded bg-dark",
                     style: _vm.featuredPost.featured_image
                       ? "background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url(" +
                         _vm.featuredPost.featured_image +
@@ -41595,7 +41601,7 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("page-header", [
-        _vm.isReady && _vm.user.id === _vm.Studio.user.id
+        _vm.isReady && !_vm.hasErrors && _vm.postBelongsToAuthUser
           ? _c(
               "div",
               {
@@ -41753,7 +41759,7 @@ var render = function() {
                       _c("span", { staticClass: "text-muted" }, [
                         _vm._v(
                           _vm._s(
-                            _vm.moment(_vm.post.published_at).format("M d, Y")
+                            _vm.moment(_vm.post.published_at).format("MMM d, Y")
                           ) +
                             " — " +
                             _vm._s(_vm.post.read_time)
@@ -41768,7 +41774,7 @@ var render = function() {
               _vm._v(" "),
               _vm.post.featured_image
                 ? _c("img", {
-                    staticClass: "pt-4",
+                    staticClass: "pt-4 img-fluid w-100",
                     attrs: {
                       src: _vm.post.featured_image,
                       alt: _vm.post.featured_image_caption,
@@ -41806,21 +41812,21 @@ var render = function() {
               _vm.tags
                 ? _c(
                     "div",
-                    _vm._l(_vm.tags, function(tag) {
+                    _vm._l(_vm.tags, function(key, value) {
                       return _c(
                         "router-link",
                         {
-                          key: tag.slug,
+                          key: key,
                           staticClass:
-                            "badge badge-light p-2 my-1 text-decoration-none",
+                            "badge badge-light p-2 my-1 text-decoration-none text-uppercase",
                           attrs: {
-                            to: { name: "tag", params: { slug: tag.slug } }
+                            to: { name: "tag", params: { slug: value } }
                           }
                         },
                         [
                           _vm._v(
                             "\n                    " +
-                              _vm._s(tag.name) +
+                              _vm._s(key) +
                               "\n                "
                           )
                         ]
@@ -41866,222 +41872,219 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "read-more mt-5 container-fluid" },
-        [
-          _c("div", { staticClass: "row" }, [
-            _vm.next.post
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "col-lg bg-light text-center px-lg-5 py-5",
-                    style: _vm.next.post.featured_image
-                      ? "background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url(" +
-                        _vm.next.post.featured_image +
-                        "); background-size: cover"
-                      : ""
-                  },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass:
-                          "btn btn-sm text-decoration-none text-uppercase font-weight-bold mt-3",
-                        class: _vm.next.post.featured_image
-                          ? "btn-outline-light"
-                          : "btn-outline-secondary",
-                        attrs: {
-                          to: {
-                            name: "post",
-                            params: {
-                              username: _vm.next.username,
-                              slug: _vm.next.post.slug
-                            }
-                          }
-                        },
-                        nativeOn: {
-                          click: function($event) {
-                            return _vm.scrollToTop($event)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(_vm.trans.studio.buttons.next) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "h2",
-                      { staticClass: "font-weight-bold font-serif my-3" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "text-decoration-none",
-                            class: _vm.next.post.featured_image
-                              ? "text-light"
-                              : "text-dark",
-                            attrs: {
-                              to: {
-                                name: "post",
-                                params: {
-                                  username: _vm.next.username,
-                                  slug: _vm.next.post.slug
-                                }
-                              }
-                            },
-                            nativeOn: {
-                              click: function($event) {
-                                return _vm.scrollToTop($event)
+      !_vm.hasErrors
+        ? _c("div", { staticClass: "read-more mt-5 container-fluid" }, [
+            _c("div", { staticClass: "row" }, [
+              _vm.next.post
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "col-lg bg-light text-center px-lg-5 py-5",
+                      style: _vm.next.post.featured_image
+                        ? "background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url(" +
+                          _vm.next.post.featured_image +
+                          "); background-size: cover"
+                        : ""
+                    },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass:
+                            "btn btn-sm text-decoration-none text-uppercase font-weight-bold mt-3",
+                          class: _vm.next.post.featured_image
+                            ? "btn-outline-light"
+                            : "btn-outline-secondary",
+                          attrs: {
+                            to: {
+                              name: "post",
+                              params: {
+                                username: _vm.next.username,
+                                slug: _vm.next.post.slug
                               }
                             }
                           },
-                          [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(_vm.next.post.title) +
-                                "\n                    "
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        staticClass: "text-lg font-serif",
-                        class: _vm.next.post.featured_image
-                          ? "text-white-50"
-                          : "text-muted"
-                      },
-                      [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(_vm.next.post.summary) +
-                            "\n                "
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.random.post
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "col-lg bg-light text-center px-lg-5 py-5",
-                    style: _vm.random.post.featured_image
-                      ? "background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url(" +
-                        _vm.random.post.featured_image +
-                        "); background-size: cover"
-                      : ""
-                  },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass:
-                          "btn btn-sm text-decoration-none text-uppercase font-weight-bold mt-3",
-                        class: _vm.random.post.featured_image
-                          ? "btn-outline-light"
-                          : "btn-outline-secondary",
-                        attrs: {
-                          to: {
-                            name: "post",
-                            params: {
-                              username: _vm.random.username,
-                              slug: _vm.random.post.slug
+                          nativeOn: {
+                            click: function($event) {
+                              return _vm.scrollToTop($event)
                             }
                           }
                         },
-                        nativeOn: {
-                          click: function($event) {
-                            return _vm.scrollToTop($event)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(_vm.trans.studio.buttons.enjoy) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "h2",
-                      { staticClass: "font-weight-bold font-serif my-3" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "text-decoration-none",
-                            class: _vm.random.post.featured_image
-                              ? "text-light"
-                              : "text-dark",
-                            attrs: {
-                              to: {
-                                name: "post",
-                                params: {
-                                  username: _vm.random.username,
-                                  slug: _vm.random.post.slug
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(_vm.trans.studio.buttons.next) +
+                              "\n                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "h2",
+                        { staticClass: "font-weight-bold font-serif my-3" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "text-decoration-none",
+                              class: _vm.next.post.featured_image
+                                ? "text-light"
+                                : "text-dark",
+                              attrs: {
+                                to: {
+                                  name: "post",
+                                  params: {
+                                    username: _vm.next.username,
+                                    slug: _vm.next.post.slug
+                                  }
+                                }
+                              },
+                              nativeOn: {
+                                click: function($event) {
+                                  return _vm.scrollToTop($event)
                                 }
                               }
                             },
-                            nativeOn: {
-                              click: function($event) {
-                                return _vm.scrollToTop($event)
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(_vm.next.post.title) +
+                                  "\n                    "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "text-lg font-serif",
+                          class: _vm.next.post.featured_image
+                            ? "text-white-50"
+                            : "text-muted"
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(_vm.next.post.summary) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.random.post
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "col-lg bg-light text-center px-lg-5 py-5",
+                      style: _vm.random.post.featured_image
+                        ? "background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url(" +
+                          _vm.random.post.featured_image +
+                          "); background-size: cover"
+                        : ""
+                    },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass:
+                            "btn btn-sm text-decoration-none text-uppercase font-weight-bold mt-3",
+                          class: _vm.random.post.featured_image
+                            ? "btn-outline-light"
+                            : "btn-outline-secondary",
+                          attrs: {
+                            to: {
+                              name: "post",
+                              params: {
+                                username: _vm.random.username,
+                                slug: _vm.random.post.slug
                               }
                             }
                           },
-                          [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(_vm.random.post.title) +
-                                "\n                    "
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        staticClass: "text-lg font-serif",
-                        class: _vm.random.post.featured_image
-                          ? "text-white-50"
-                          : "text-muted"
-                      },
-                      [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(_vm.random.post.summary) +
-                            "\n                "
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _vm.hasErrors ? _c("not-found") : _vm._e()
-        ],
-        1
-      )
+                          nativeOn: {
+                            click: function($event) {
+                              return _vm.scrollToTop($event)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(_vm.trans.studio.buttons.enjoy) +
+                              "\n                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "h2",
+                        { staticClass: "font-weight-bold font-serif my-3" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "text-decoration-none",
+                              class: _vm.random.post.featured_image
+                                ? "text-light"
+                                : "text-dark",
+                              attrs: {
+                                to: {
+                                  name: "post",
+                                  params: {
+                                    username: _vm.random.username,
+                                    slug: _vm.random.post.slug
+                                  }
+                                }
+                              },
+                              nativeOn: {
+                                click: function($event) {
+                                  return _vm.scrollToTop($event)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(_vm.random.post.title) +
+                                  "\n                    "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "text-lg font-serif",
+                          class: _vm.random.post.featured_image
+                            ? "text-white-50"
+                            : "text-muted"
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(_vm.random.post.summary) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.hasErrors ? _c("not-found") : _vm._e()
     ],
     1
   )
@@ -42123,8 +42126,8 @@ var render = function() {
               ? _c(
                   "div",
                   {
-                    staticClass: "jumbotron p-4 p-md-5 text-white rounded",
-                    class: { "bg-dark": _vm.featuredPost.featured_image },
+                    staticClass:
+                      "jumbotron p-4 p-md-5 text-white rounded bg-dark",
                     style: _vm.featuredPost.featured_image
                       ? "background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url(" +
                         _vm.featuredPost.featured_image +
@@ -42320,8 +42323,8 @@ var render = function() {
               ? _c(
                   "div",
                   {
-                    staticClass: "jumbotron p-4 p-md-5 text-white rounded",
-                    class: { "bg-dark": _vm.featuredPost.featured_image },
+                    staticClass:
+                      "jumbotron p-4 p-md-5 text-white rounded bg-dark",
                     style: _vm.featuredPost.featured_image
                       ? "background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url(" +
                         _vm.featuredPost.featured_image +
