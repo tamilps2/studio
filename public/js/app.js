@@ -2185,11 +2185,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_TagList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/TagList */ "./resources/js/components/TagList.vue");
-/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/NotFound */ "./resources/js/components/NotFound.vue");
-/* harmony import */ var _components_PostList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/PostList */ "./resources/js/components/PostList.vue");
-/* harmony import */ var _components_TopicBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/TopicBar */ "./resources/js/components/TopicBar.vue");
-/* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
+/* harmony import */ var vue_headful__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-headful */ "./node_modules/vue-headful/dist/vue-headful.js");
+/* harmony import */ var vue_headful__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_headful__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_TagList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/TagList */ "./resources/js/components/TagList.vue");
+/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/NotFound */ "./resources/js/components/NotFound.vue");
+/* harmony import */ var _components_PostList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/PostList */ "./resources/js/components/PostList.vue");
+/* harmony import */ var _components_TopicBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/TopicBar */ "./resources/js/components/TopicBar.vue");
+/* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
 //
 //
 //
@@ -2243,6 +2245,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -2252,11 +2261,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'post-index',
   components: {
-    NotFound: _components_NotFound__WEBPACK_IMPORTED_MODULE_2__["default"],
-    PageHeader: _components_PageHeader__WEBPACK_IMPORTED_MODULE_5__["default"],
-    PostList: _components_PostList__WEBPACK_IMPORTED_MODULE_3__["default"],
-    TagList: _components_TagList__WEBPACK_IMPORTED_MODULE_1__["default"],
-    TopicBar: _components_TopicBar__WEBPACK_IMPORTED_MODULE_4__["default"]
+    NotFound: _components_NotFound__WEBPACK_IMPORTED_MODULE_3__["default"],
+    PageHeader: _components_PageHeader__WEBPACK_IMPORTED_MODULE_6__["default"],
+    PostList: _components_PostList__WEBPACK_IMPORTED_MODULE_4__["default"],
+    TagList: _components_TagList__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TopicBar: _components_TopicBar__WEBPACK_IMPORTED_MODULE_5__["default"],
+    vueHeadful: vue_headful__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   data: function data() {
     return {
@@ -2312,6 +2322,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_headful__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_headful__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/NotFound */ "./resources/js/components/NotFound.vue");
 /* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
+//
+//
 //
 //
 //
@@ -2553,11 +2565,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_TagList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/TagList */ "./resources/js/components/TagList.vue");
-/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/NotFound */ "./resources/js/components/NotFound.vue");
-/* harmony import */ var _components_PostList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/PostList */ "./resources/js/components/PostList.vue");
-/* harmony import */ var _components_TopicBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/TopicBar */ "./resources/js/components/TopicBar.vue");
-/* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
+/* harmony import */ var vue_headful__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-headful */ "./node_modules/vue-headful/dist/vue-headful.js");
+/* harmony import */ var vue_headful__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_headful__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_TagList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/TagList */ "./resources/js/components/TagList.vue");
+/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/NotFound */ "./resources/js/components/NotFound.vue");
+/* harmony import */ var _components_PostList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/PostList */ "./resources/js/components/PostList.vue");
+/* harmony import */ var _components_TopicBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/TopicBar */ "./resources/js/components/TopicBar.vue");
+/* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
 //
 //
 //
@@ -2611,6 +2625,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -2620,16 +2642,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'post-index',
   components: {
-    NotFound: _components_NotFound__WEBPACK_IMPORTED_MODULE_2__["default"],
-    PageHeader: _components_PageHeader__WEBPACK_IMPORTED_MODULE_5__["default"],
-    PostList: _components_PostList__WEBPACK_IMPORTED_MODULE_3__["default"],
-    TagList: _components_TagList__WEBPACK_IMPORTED_MODULE_1__["default"],
-    TopicBar: _components_TopicBar__WEBPACK_IMPORTED_MODULE_4__["default"]
+    NotFound: _components_NotFound__WEBPACK_IMPORTED_MODULE_3__["default"],
+    PageHeader: _components_PageHeader__WEBPACK_IMPORTED_MODULE_6__["default"],
+    PostList: _components_PostList__WEBPACK_IMPORTED_MODULE_4__["default"],
+    TagList: _components_TagList__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TopicBar: _components_TopicBar__WEBPACK_IMPORTED_MODULE_5__["default"],
+    vueHeadful: vue_headful__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   data: function data() {
     return {
       posts: null,
       featuredPost: null,
+      tag: null,
       tags: null,
       topics: null,
       isReady: false,
@@ -2651,6 +2675,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.request().get('/api/tags/' + this.$route.params.slug).then(function (response) {
         _this.posts = response.data.posts;
+        _this.tag = response.data.tag;
         _this.featuredPost = _this.posts.shift();
         _this.tags = response.data.tags;
         _this.topics = response.data.topics;
@@ -2681,11 +2706,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_TagList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/TagList */ "./resources/js/components/TagList.vue");
-/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/NotFound */ "./resources/js/components/NotFound.vue");
-/* harmony import */ var _components_PostList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/PostList */ "./resources/js/components/PostList.vue");
-/* harmony import */ var _components_TopicBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/TopicBar */ "./resources/js/components/TopicBar.vue");
-/* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
+/* harmony import */ var vue_headful__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-headful */ "./node_modules/vue-headful/dist/vue-headful.js");
+/* harmony import */ var vue_headful__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_headful__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_TagList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/TagList */ "./resources/js/components/TagList.vue");
+/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/NotFound */ "./resources/js/components/NotFound.vue");
+/* harmony import */ var _components_PostList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/PostList */ "./resources/js/components/PostList.vue");
+/* harmony import */ var _components_TopicBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/TopicBar */ "./resources/js/components/TopicBar.vue");
+/* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
 //
 //
 //
@@ -2739,6 +2766,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -2748,16 +2783,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'post-index',
   components: {
-    NotFound: _components_NotFound__WEBPACK_IMPORTED_MODULE_2__["default"],
-    PageHeader: _components_PageHeader__WEBPACK_IMPORTED_MODULE_5__["default"],
-    PostList: _components_PostList__WEBPACK_IMPORTED_MODULE_3__["default"],
-    TagList: _components_TagList__WEBPACK_IMPORTED_MODULE_1__["default"],
-    TopicBar: _components_TopicBar__WEBPACK_IMPORTED_MODULE_4__["default"]
+    NotFound: _components_NotFound__WEBPACK_IMPORTED_MODULE_3__["default"],
+    PageHeader: _components_PageHeader__WEBPACK_IMPORTED_MODULE_6__["default"],
+    PostList: _components_PostList__WEBPACK_IMPORTED_MODULE_4__["default"],
+    TagList: _components_TagList__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TopicBar: _components_TopicBar__WEBPACK_IMPORTED_MODULE_5__["default"],
+    vueHeadful: vue_headful__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   data: function data() {
     return {
       posts: null,
       featuredPost: null,
+      topic: null,
       tags: null,
       topics: null,
       isReady: false,
@@ -2779,6 +2816,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.request().get('/api/topics/' + this.$route.params.slug).then(function (response) {
         _this.posts = response.data.posts;
+        _this.topic = response.data.topic;
         _this.featuredPost = _this.posts.shift();
         _this.tags = response.data.tags;
         _this.topics = response.data.topics;
@@ -41393,6 +41431,14 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("vue-headful", {
+        attrs: {
+          title: "Studio — A Laravel publishing platform",
+          description: "A Laravel publishing platform",
+          image: ""
+        }
+      }),
+      _vm._v(" "),
       _c("page-header"),
       _vm._v(" "),
       _vm.isReady
@@ -41593,7 +41639,7 @@ var render = function() {
       _vm.isReady && !_vm.hasErrors
         ? _c("vue-headful", {
             attrs: {
-              title: _vm.post.title,
+              title: _vm.post.title + " — Studio",
               description: _vm.post.summary,
               image: _vm.post.featured_image
             }
@@ -41784,20 +41830,13 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _vm.post.featured_image && _vm.post.featured_image_caption
-                ? _c(
-                    "p",
-                    {
-                      staticClass: "text-muted text-center pt-3",
-                      staticStyle: { "font-size": "0.9rem" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(_vm.post.featured_image_caption) +
-                          "\n            "
-                      )
-                    ]
-                  )
+                ? _c("p", {
+                    staticClass: "text-muted text-center pt-3",
+                    staticStyle: { "font-size": "0.9rem" },
+                    domProps: {
+                      innerHTML: _vm._s(_vm.post.featured_image_caption)
+                    }
+                  })
                 : _vm._e(),
               _vm._v(" "),
               _c(
@@ -41818,7 +41857,7 @@ var render = function() {
                         {
                           key: key,
                           staticClass:
-                            "badge badge-light p-2 my-1 text-decoration-none text-uppercase",
+                            "badge badge-light p-2 my-1 mr-2 text-decoration-none text-uppercase",
                           attrs: {
                             to: { name: "tag", params: { slug: value } }
                           }
@@ -41835,41 +41874,53 @@ var render = function() {
                     1
                   )
                 : _vm._e()
-            ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.isReady && !_vm.hasErrors && _vm.meta.canonical_link
-        ? _c(
-            "div",
-            {
-              staticClass:
-                "position-relative align-items-center overflow-y-visible"
-            },
-            [
-              _c("hr"),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-center font-italic pt-3 my-5" }, [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(_vm.trans.studio.buttons.canonical) +
-                    "\n            "
-                ),
-                _c(
-                  "a",
+            ]),
+            _vm._v(" "),
+            _vm.isReady && !_vm.hasErrors && _vm.meta.canonical_link
+              ? _c(
+                  "div",
                   {
-                    staticClass: "text-dark",
-                    attrs: {
-                      href: _vm.meta.canonical_link,
-                      target: "_blank",
-                      rel: "noopener"
-                    }
+                    staticClass:
+                      "position-relative align-items-center overflow-y-visible"
                   },
-                  [_vm._v(_vm._s(_vm.meta.canonical_link))]
+                  [
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      { staticClass: "text-center font-italic pt-3 my-5" },
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.trans.studio.buttons.canonical) +
+                            "\n                "
+                        ),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-dark",
+                            attrs: {
+                              href: _vm.meta.canonical_link,
+                              target: "_blank",
+                              rel: "noopener"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(
+                                  _vm.parseURL(_vm.meta.canonical_link).hostname
+                                ) +
+                                "\n                "
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]
                 )
-              ])
-            ]
-          )
+              : _vm._e()
+          ])
         : _vm._e(),
       _vm._v(" "),
       !_vm.hasErrors
@@ -42114,6 +42165,16 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm.isReady && !_vm.hasErrors
+        ? _c("vue-headful", {
+            attrs: {
+              title: _vm.tag.name + " — Studio",
+              description: "A Laravel publishing platform",
+              image: ""
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c("page-header"),
       _vm._v(" "),
       _vm.isReady
@@ -42311,6 +42372,16 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm.isReady && !_vm.hasErrors
+        ? _c("vue-headful", {
+            attrs: {
+              title: _vm.topic.name + " — Studio",
+              description: "A Laravel publishing platform",
+              image: ""
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c("page-header"),
       _vm._v(" "),
       _vm.isReady
@@ -42511,7 +42582,7 @@ var render = function() {
       _vm.isReady
         ? _c("vue-headful", {
             attrs: {
-              title: _vm.user.name,
+              title: _vm.user.name + " — Studio",
               description: _vm.summary,
               image: _vm.avatar
             }
@@ -58123,6 +58194,38 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     scrollToTop: function scrollToTop() {
       window.scrollTo(0, 0);
+    },
+
+    /**
+     * Parse a given url.
+     *
+     * @param url
+     * @link https://www.abeautifulsite.net/parsing-urls-in-javascript
+     */
+    parseURL: function parseURL(url) {
+      var parser = document.createElement('a'),
+          searchObject = {},
+          queries,
+          split,
+          i;
+      parser.href = url;
+      queries = parser.search.replace(/^\?/, '').split('&');
+
+      for (i = 0; i < queries.length; i++) {
+        split = queries[i].split('=');
+        searchObject[split[0]] = split[1];
+      }
+
+      return {
+        protocol: parser.protocol,
+        host: parser.host,
+        hostname: parser.hostname,
+        port: parser.port,
+        pathname: parser.pathname,
+        search: parser.search,
+        searchObject: searchObject,
+        hash: parser.hash
+      };
     }
   }
 });

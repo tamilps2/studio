@@ -1,5 +1,11 @@
 <template>
     <div>
+        <vue-headful
+            title="Studio — A Laravel publishing platform"
+            description="A Laravel publishing platform"
+            image=""
+        />
+
         <page-header/>
         <topic-bar v-if="isReady" :topics="topics"/>
 
@@ -53,6 +59,7 @@
 
 <script>
     import NProgress from 'nprogress'
+    import vueHeadful from 'vue-headful'
     import TagList from '../../components/TagList'
     import NotFound from '../../components/NotFound'
     import PostList from '../../components/PostList'
@@ -67,7 +74,8 @@
             PageHeader,
             PostList,
             TagList,
-            TopicBar
+            TopicBar,
+            vueHeadful
         },
 
         data() {

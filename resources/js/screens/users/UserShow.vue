@@ -2,7 +2,7 @@
     <div>
         <vue-headful
             v-if="isReady"
-            :title="user.name"
+            :title="user.name + ' — Studio'"
             :description="summary"
             :image="avatar"
         />

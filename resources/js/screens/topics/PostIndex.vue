@@ -1,5 +1,12 @@
 <template>
     <div>
+        <vue-headful
+            v-if="isReady && !hasErrors"
+            :title="topic.name + ' — Studio'"
+            description="A Laravel publishing platform"
+            image=""
+        />
+
         <page-header/>
         <topic-bar v-if="isReady" :topics="topics"/>
 
@@ -53,6 +60,7 @@
 
 <script>
     import NProgress from 'nprogress'
+    import vueHeadful from 'vue-headful'
     import TagList from '../../components/TagList'
     import NotFound from '../../components/NotFound'
     import PostList from '../../components/PostList'
@@ -67,13 +75,15 @@
             PageHeader,
             PostList,
             TagList,
-            TopicBar
+            TopicBar,
+            vueHeadful
         },
 
         data() {
             return {
                 posts: null,
                 featuredPost: null,
+                topic: null,
                 tags: null,
                 topics: null,
                 isReady: false,
@@ -98,6 +108,7 @@
                     .get('/api/topics/' + this.$route.params.slug)
                     .then(response => {
                         this.posts = response.data.posts
+                        this.topic = response.data.topic
                         this.featuredPost = this.posts.shift()
                         this.tags = response.data.tags
                         this.topics = response.data.topics

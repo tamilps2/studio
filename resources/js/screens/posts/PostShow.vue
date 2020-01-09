@@ -2,7 +2,7 @@
     <div>
         <vue-headful
             v-if="isReady && !hasErrors"
-            :title="post.title"
+            :title="post.title + ' — Studio'"
             :description="post.summary"
             :image="post.featured_image"
         />
@@ -58,8 +58,8 @@
 
                 <p v-if="post.featured_image && post.featured_image_caption"
                    class="text-muted text-center pt-3"
-                   style="font-size: 0.9rem">
-                    {{ post.featured_image_caption }}
+                   style="font-size: 0.9rem"
+                   v-html="post.featured_image_caption">
                 </p>
 
                 <div class="position-relative align-items-center overflow-y-visible font-serif mt-4">
@@ -71,19 +71,21 @@
                         v-for="(key, value) in tags"
                         :key="key"
                         :to="{ name: 'tag', params: { slug: value } }"
-                        class="badge badge-light p-2 my-1 text-decoration-none text-uppercase">
+                        class="badge badge-light p-2 my-1 mr-2 text-decoration-none text-uppercase">
                         {{ key }}
                     </router-link>
                 </div>
             </div>
-        </div>
 
-        <div v-if="isReady && !hasErrors && meta.canonical_link" class="position-relative align-items-center overflow-y-visible">
-            <hr>
-            <p class="text-center font-italic pt-3 my-5">
-                {{ trans.studio.buttons.canonical }}
-                <a :href="meta.canonical_link" target="_blank" class="text-dark" rel="noopener">{{ meta.canonical_link }}</a>
-            </p>
+            <div v-if="isReady && !hasErrors && meta.canonical_link" class="position-relative align-items-center overflow-y-visible">
+                <hr>
+                <p class="text-center font-italic pt-3 my-5">
+                    {{ trans.studio.buttons.canonical }}
+                    <a :href="meta.canonical_link" target="_blank" class="text-dark" rel="noopener">
+                        {{ parseURL(meta.canonical_link).hostname }}
+                    </a>
+                </p>
+            </div>
         </div>
 
         <div v-if="!hasErrors" class="read-more mt-5 container-fluid">
