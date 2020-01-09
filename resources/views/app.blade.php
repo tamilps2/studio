@@ -6,11 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description">
+    <meta property="og:image">
+    <meta property="og:title">
+    <meta property="og:description">
+    <meta name="twitter:image">
+    <meta name="twitter:title">
+    <meta name="twitter:description">
+    <meta name="twitter:card" content="summary">
 
     <title>{{ config('app.name') }}</title>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Karla|Merriweather" rel="stylesheet">
+    <link rel="canonical">
 
     <style type="text/css">
         /*html, body {*/

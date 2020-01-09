@@ -22,16 +22,17 @@ class UserController extends Controller
 
             $posts = Post::where('user_id', $user->id)
                          ->published()
+                         ->withUserMeta()
                          ->orderByDesc('published_at')
                          ->get();
 
             $posts->each->append('read_time');
 
             return response()->json([
-                'user'       => $user,
-                'avatar'     => $userAvatar,
-                'summary'    => $userMeta->summary,
-                'posts'      => $posts,
+                'user'    => $user,
+                'avatar'  => $userAvatar,
+                'summary' => $userMeta->summary,
+                'posts'   => $posts,
             ]);
         } else {
             return response()->json(null, 404);

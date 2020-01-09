@@ -2027,13 +2027,6 @@ __webpack_require__.r(__webpack_exports__);
       trans: JSON.parse(Studio.lang)
     };
   },
-  mounted: function mounted() {// todo: build the page header component
-    // todo: build the app screens
-    // todo: remember about using NProgress.done() after fetching data
-    // todo: remove the deprecated blade views
-    // todo: if api returns a 404, this.$router.push(this.$route.path)
-    // todo: test all the routes
-  },
   methods: {
     sessionLogout: function sessionLogout() {
       this.logout();
@@ -2619,8 +2612,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/NotFound */ "./resources/js/components/NotFound.vue");
-/* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
+/* harmony import */ var vue_headful__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-headful */ "./node_modules/vue-headful/dist/vue-headful.js");
+/* harmony import */ var vue_headful__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_headful__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_PostList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/PostList */ "./resources/js/components/PostList.vue");
+/* harmony import */ var _components_NotFound__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/NotFound */ "./resources/js/components/NotFound.vue");
+/* harmony import */ var _components_PageHeader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/PageHeader */ "./resources/js/components/PageHeader.vue");
 //
 //
 //
@@ -2633,20 +2629,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'user-show',
   components: {
-    PageHeader: _components_PageHeader__WEBPACK_IMPORTED_MODULE_2__["default"],
-    NotFound: _components_NotFound__WEBPACK_IMPORTED_MODULE_1__["default"]
+    PageHeader: _components_PageHeader__WEBPACK_IMPORTED_MODULE_4__["default"],
+    PostList: _components_PostList__WEBPACK_IMPORTED_MODULE_2__["default"],
+    NotFound: _components_NotFound__WEBPACK_IMPORTED_MODULE_3__["default"],
+    vueHeadful: vue_headful__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   data: function data() {
     return {
       user: null,
+      avatar: null,
+      summary: null,
+      posts: null,
       isReady: false,
-      hasErrors: false
+      hasErrors: false,
+      trans: JSON.parse(Studio.lang)
     };
   },
   created: function created() {
@@ -2658,6 +2691,9 @@ __webpack_require__.r(__webpack_exports__);
 
       this.request().get('/api/users/' + this.$route.params.username).then(function (response) {
         _this.user = response.data.user;
+        _this.avatar = response.data.avatar;
+        _this.summary = response.data.summary;
+        _this.posts = response.data.posts;
         _this.isReady = true;
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
       })["catch"](function (error) {
@@ -7327,6 +7363,149 @@ function toComment(sourceMap) {
 	return '/*# ' + data + ' */';
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/headful/dist/headful.js":
+/*!**********************************************!*\
+  !*** ./node_modules/headful/dist/headful.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.default = headful;
+
+
+var conf = {
+    debug: false
+};
+
+var propertySetters = {
+    html: function html(obj) {
+        obj && Object.keys(obj).forEach(function (selector) {
+            return setRootElementAttributes(selector, obj[selector]);
+        });
+    },
+    head: function head(obj) {
+        obj && Object.keys(obj).forEach(function (selector) {
+            return setHeadElementAttributes(selector, obj[selector]);
+        });
+    },
+    title: function title(val) {
+        document.title = isRemoveValue(val) ? '' : val;
+        setMetaContent('itemprop="name"', val);
+        setMetaContent('property="og:title"', val);
+        setMetaContent('name="twitter:title"', val);
+    },
+    description: function description(val) {
+        setMetaContent('name="description"', val);
+        setMetaContent('itemprop="description"', val);
+        setMetaContent('property="og:description"', val);
+        setMetaContent('name="twitter:description"', val);
+    },
+    keywords: function keywords(val) {
+        setMetaContent('name="keywords"', Array.isArray(val) ? val.join(', ') : val);
+    },
+    image: function image(val) {
+        setMetaContent('itemprop="image"', val);
+        setMetaContent('property="og:image"', val);
+        setMetaContent('name="twitter:image"', val);
+    },
+    lang: function lang(val, props) {
+        setRootElementAttributes('html', { lang: val });
+        noProp(props, this.ogLocale) && setOgLocaleIfValid(val);
+    },
+    ogLocale: function ogLocale(val) {
+        setMetaContent('property="og:locale"', val);
+    },
+    url: function url(val) {
+        setHeadElementAttributes('link[rel="canonical"]', { href: val });
+        setMetaContent('property="og:url"', val);
+        setMetaContent('name="twitter:url"', val);
+    }
+};
+
+function headful(props, userConf) {
+    Object.assign(conf, userConf);
+    Object.keys(props).forEach(function (prop) {
+        if (!propertySetters.hasOwnProperty(prop)) {
+            throw new Error('Headful: Property \'' + prop + '\' is unknown.');
+        }
+        propertySetters[prop](props[prop], props);
+    });
+}
+
+headful.props = propertySetters;
+
+/**
+ * Tests whether the given `props` object contains a property with the name of `propNameOrFunction`.
+ */
+function noProp(props, propNameOrFunction) {
+    if (!props) {
+        throw new Error('Headful: You must pass all declared props when you use headful.props.x() calls.');
+    }
+    var propName = typeof propNameOrFunction === 'function' ? propNameOrFunction.name : propNameOrFunction;
+    return !props.hasOwnProperty(propName);
+}
+
+function setMetaContent(attr, val) {
+    setHeadElementAttributes('meta[' + attr + ']', { content: val });
+}
+
+function setRootElementAttributes(selector, attributes) {
+    setElementAttributes(getElement(document, selector), attributes);
+}
+
+function setHeadElementAttributes(selector, attributes) {
+    setElementAttributes(getElement(document.head, selector), attributes);
+}
+
+function setElementAttributes(element, attributes) {
+    if (element) {
+        Object.keys(attributes).forEach(function (attrName) {
+            if (isRemoveValue(attributes[attrName])) {
+                element.removeAttribute(attrName);
+            } else {
+                element.setAttribute(attrName, attributes[attrName]);
+            }
+        });
+    }
+}
+
+function getElement(parent, selector) {
+    var element = parent.querySelector(selector);
+    if (!element && conf.debug) {
+        console.error('Headful: Element \'' + selector + '\' was not found.');
+    }
+    return element;
+}
+
+function setOgLocaleIfValid(locale) {
+    if (isRemoveValue(locale)) {
+        propertySetters.ogLocale(locale);
+    } else if (locale.match(/^[a-z]{2}-[a-z]{2}$/i)) {
+        var _locale$split = locale.split('-'),
+            _locale$split2 = _slicedToArray(_locale$split, 2),
+            language = _locale$split2[0],
+            region = _locale$split2[1];
+
+        var ogLocale = language + '_' + region.toUpperCase();
+        propertySetters.ogLocale(ogLocale);
+    }
+}
+
+function isRemoveValue(val) {
+    return val === undefined || val === null;
+}
 
 /***/ }),
 
@@ -40362,6 +40541,59 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-headful/dist/vue-headful.js":
+/*!******************************************************!*\
+  !*** ./node_modules/vue-headful/dist/vue-headful.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _headful = __webpack_require__(/*! headful */ "./node_modules/headful/dist/headful.js");
+
+var _headful2 = _interopRequireDefault(_headful);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var handler = function handler(props) {
+    return (0, _headful2.default)(getPassedProps(props));
+};
+
+exports.default = {
+    name: 'vue-headful',
+    props: Object.keys(_headful2.default.props),
+    watch: {
+        '$props': {
+            handler: handler,
+            deep: true,
+            immediate: true
+        }
+    },
+    activated: function activated() {
+        // required for keep-alive components https://vuejs.org/v2/api/#keep-alive
+        handler(this.$props);
+    },
+    render: function render() {}
+};
+
+
+function getPassedProps(props) {
+    return Object.keys(props).reduce(function (passedProps, propKey) {
+        if (props[propKey] !== undefined) {
+            passedProps[propKey] = props[propKey];
+        }
+        return passedProps;
+    }, {});
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/NotFound.vue?vue&type=template&id=2ce50e5a&scoped=true&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/NotFound.vue?vue&type=template&id=2ce50e5a&scoped=true& ***!
@@ -40514,7 +40746,7 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "nav-link px-0",
+                      staticClass: "nav-link p-0",
                       attrs: {
                         href: "#",
                         id: "dropdownMenu",
@@ -40559,7 +40791,7 @@ var render = function() {
                           staticClass: "dropdown-item",
                           attrs: { href: _vm.canvasPath + "/posts" }
                         },
-                        [_vm._v(_vm._s(_vm.trans.nav.user.posts))]
+                        [_vm._v(_vm._s(_vm.trans.studio.nav.user.posts))]
                       ),
                       _vm._v(" "),
                       _c(
@@ -40568,7 +40800,7 @@ var render = function() {
                           staticClass: "dropdown-item",
                           attrs: { href: _vm.canvasPath + "/tags" }
                         },
-                        [_vm._v(_vm._s(_vm.trans.nav.user.tags))]
+                        [_vm._v(_vm._s(_vm.trans.studio.nav.user.tags))]
                       ),
                       _vm._v(" "),
                       _c(
@@ -40577,7 +40809,7 @@ var render = function() {
                           staticClass: "dropdown-item",
                           attrs: { href: _vm.canvasPath + "/topics" }
                         },
-                        [_vm._v(_vm._s(_vm.trans.nav.user.topics))]
+                        [_vm._v(_vm._s(_vm.trans.studio.nav.user.topics))]
                       ),
                       _vm._v(" "),
                       _c(
@@ -40586,7 +40818,7 @@ var render = function() {
                           staticClass: "dropdown-item",
                           attrs: { href: _vm.canvasPath + "/stats" }
                         },
-                        [_vm._v(_vm._s(_vm.trans.nav.user.stats))]
+                        [_vm._v(_vm._s(_vm.trans.studio.nav.user.stats))]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "dropdown-divider" }),
@@ -40597,7 +40829,7 @@ var render = function() {
                           staticClass: "dropdown-item",
                           attrs: { href: _vm.canvasPath + "/settings" }
                         },
-                        [_vm._v(_vm._s(_vm.trans.nav.user.settings))]
+                        [_vm._v(_vm._s(_vm.trans.studio.nav.user.settings))]
                       ),
                       _vm._v(" "),
                       _c(
@@ -40615,7 +40847,7 @@ var render = function() {
                         [
                           _vm._v(
                             "\n                            " +
-                              _vm._s(_vm.trans.nav.user.logout) +
+                              _vm._s(_vm.trans.studio.nav.user.logout) +
                               "\n                        "
                           )
                         ]
@@ -41541,13 +41773,91 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm.isReady
+        ? _c("vue-headful", {
+            attrs: {
+              title: _vm.user.name,
+              description: _vm.summary,
+              image: _vm.avatar
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c("page-header"),
       _vm._v(" "),
       _vm.isReady
         ? _c(
             "div",
             [
-              !_vm.hasErrors ? _c("h1", [_vm._v("UserShow.vue")]) : _vm._e(),
+              !_vm.hasErrors
+                ? _c("div", [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "container my-5 col-xl-8 offset-xl-2 col-md-10 offset-md-1 align-items-center"
+                      },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-lg-2" }, [
+                            _c("img", {
+                              staticClass: "rounded-circle shadow-inner",
+                              attrs: {
+                                src: _vm.avatar,
+                                alt: _vm.user.name,
+                                width: "120"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-10" }, [
+                            _c("h1", { staticClass: "font-weight-bold" }, [
+                              _vm._v(_vm._s(_vm.user.name))
+                            ]),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "text-muted" }, [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(_vm.summary) +
+                                  "\n                        "
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "main",
+                      {
+                        staticClass:
+                          "col-xl-8 offset-xl-2 col-md-10 offset-md-1",
+                        attrs: { role: "main" }
+                      },
+                      [
+                        _c(
+                          "h3",
+                          {
+                            staticClass:
+                              "mb-4 font-italic font-serif border-bottom pb-2"
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(_vm.trans.studio.posts.label) +
+                                "\n                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.isReady
+                          ? _c("post-list", { attrs: { posts: _vm.posts } })
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _vm.hasErrors ? _c("not-found") : _vm._e()
             ],

@@ -22,10 +22,10 @@
                 </div>
 
                 <div v-if="user" class="btn-group pr-0 col-3 d-flex justify-content-end align-items-center">
-                    <slot name="actions"></slot>
+                    <slot name="actions" />
 
                     <div class="dropdown">
-                        <a href="#" id="dropdownMenu" class="nav-link px-0" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" id="dropdownMenu" class="nav-link p-0" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img :src="avatar" class="rounded-circle my-0 shadow-inner" style="width: 31px" :alt="user.name">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
@@ -35,14 +35,14 @@
                                 {{ user.email }}
                             </h6>
                             <div class="dropdown-divider"></div>
-                            <a :href="canvasPath + '/posts'" class="dropdown-item">{{ trans.nav.user.posts }}</a>
-                            <a :href="canvasPath + '/tags'" class="dropdown-item">{{ trans.nav.user.tags }}</a>
-                            <a :href="canvasPath + '/topics'" class="dropdown-item">{{ trans.nav.user.topics }}</a>
-                            <a :href="canvasPath + '/stats'" class="dropdown-item">{{ trans.nav.user.stats }}</a>
+                            <a :href="canvasPath + '/posts'" class="dropdown-item">{{ trans.studio.nav.user.posts }}</a>
+                            <a :href="canvasPath + '/tags'" class="dropdown-item">{{ trans.studio.nav.user.tags }}</a>
+                            <a :href="canvasPath + '/topics'" class="dropdown-item">{{ trans.studio.nav.user.topics }}</a>
+                            <a :href="canvasPath + '/stats'" class="dropdown-item">{{ trans.studio.nav.user.stats }}</a>
                             <div class="dropdown-divider"></div>
-                            <a :href="canvasPath + '/settings'" class="dropdown-item">{{ trans.nav.user.settings }}</a>
+                            <a :href="canvasPath + '/settings'" class="dropdown-item">{{ trans.studio.nav.user.settings }}</a>
                             <a href="" class="dropdown-item" @click.prevent="sessionLogout">
-                                {{ trans.nav.user.logout }}
+                                {{ trans.studio.nav.user.logout }}
                             </a>
                         </div>
                     </div>
@@ -67,15 +67,6 @@
                 canvasPath: Studio.path,
                 trans: JSON.parse(Studio.lang),
             }
-        },
-
-        mounted() {
-            // todo: build the page header component
-            // todo: build the app screens
-            // todo: remember about using NProgress.done() after fetching data
-            // todo: remove the deprecated blade views
-            // todo: if api returns a 404, this.$router.push(this.$route.path)
-            // todo: test all the routes
         },
 
         methods: {

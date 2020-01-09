@@ -1,6 +1,6 @@
 <template>
     <div>
-        <page-header />
+        <page-header/>
 
         <div class="col-xl-10 offset-xl-1 col-md-12">
             <h1>PostShow.vue</h1>

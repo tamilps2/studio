@@ -1,7 +1,7 @@
 <template>
     <div>
-        <page-header />
-        <topic-bar v-if="isReady" :topics="topics" />
+        <page-header/>
+        <topic-bar v-if="isReady" :topics="topics"/>
 
         <div v-if="!hasErrors" class="col-xl-10 offset-xl-1 col-md-12">
             <div v-if="featuredPost"
@@ -39,16 +39,16 @@
                         {{ trans.studio.posts.label }}
                     </h3>
 
-                    <post-list v-if="isReady" :posts="posts" />
+                    <post-list v-if="isReady" :posts="posts"/>
                 </div>
 
                 <div class="col-md-4">
-                    <tag-list v-if="isReady" :tags="tags" />
+                    <tag-list v-if="isReady" :tags="tags"/>
                 </div>
             </main>
         </div>
 
-        <not-found v-if="hasErrors" />
+        <not-found v-if="hasErrors"/>
     </div>
 </template>
 
