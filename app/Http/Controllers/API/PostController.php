@@ -78,6 +78,8 @@ class PostController extends Controller
             $post = $posts->firstWhere('slug', $slug);
 
             if ($post && $post->published && $post->user->id == $userMeta->user_id) {
+                $post->append('read_time');
+
                 $readNext = $posts->sortBy('published_at')->firstWhere('published_at', '>', $post->published_at);
 
                 if ($readNext) {
@@ -115,7 +117,7 @@ class PostController extends Controller
                     'post'     => $post,
                     'tags'     => $post->tags->pluck('name', 'slug'),
                     'topic'    => $post->topic->pluck('name', 'slug'),
-                    'user'     => $post->user->only(['name', 'email']),
+                    'user'     => $post->user->only(['id', 'name', 'email']),
                     'username' => $userMeta->username,
                     'avatar'   => $userMeta->avatar,
                     'meta'     => $post->meta,

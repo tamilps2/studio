@@ -35,12 +35,12 @@
                                 {{ user.email }}
                             </h6>
                             <div class="dropdown-divider"></div>
-                            <a :href="canvasPath + '/posts'" class="dropdown-item">{{ trans.studio.nav.user.posts }}</a>
-                            <a :href="canvasPath + '/tags'" class="dropdown-item">{{ trans.studio.nav.user.tags }}</a>
-                            <a :href="canvasPath + '/topics'" class="dropdown-item">{{ trans.studio.nav.user.topics }}</a>
-                            <a :href="canvasPath + '/stats'" class="dropdown-item">{{ trans.studio.nav.user.stats }}</a>
+                            <a :href="'/' + canvasPath + '/posts'" class="dropdown-item">{{ trans.studio.nav.user.posts }}</a>
+                            <a :href="'/' + canvasPath + '/tags'" class="dropdown-item">{{ trans.studio.nav.user.tags }}</a>
+                            <a :href="'/' + canvasPath + '/topics'" class="dropdown-item">{{ trans.studio.nav.user.topics }}</a>
+                            <a :href="'/' + canvasPath + '/stats'" class="dropdown-item">{{ trans.studio.nav.user.stats }}</a>
                             <div class="dropdown-divider"></div>
-                            <a :href="canvasPath + '/settings'" class="dropdown-item">{{ trans.studio.nav.user.settings }}</a>
+                            <a :href="'/' + canvasPath + '/settings'" class="dropdown-item">{{ trans.studio.nav.user.settings }}</a>
                             <a href="" class="dropdown-item" @click.prevent="sessionLogout">
                                 {{ trans.studio.nav.user.logout }}
                             </a>

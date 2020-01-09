@@ -14,7 +14,7 @@ class Studio
      */
     public static function scriptVariables()
     {
-        $metaData = UserMeta::where('user_id', optional(auth()->user())->id);
+        $metaData = UserMeta::where('user_id', optional(auth()->user())->id)->first();
         $emailHash = md5(trim(Str::lower(optional(auth()->user())->email)));
 
         return [
@@ -22,7 +22,7 @@ class Studio
             'lang'     => self::collectLanguageFiles(config('app.locale')),
             'path'     => config('canvas.path'),
             'timezone' => config('app.timezone'),
-            'user'     => optional(auth()->user())->only(['name', 'email']),
+            'user'     => optional(auth()->user())->only(['id', 'name', 'email']),
         ];
     }
 
