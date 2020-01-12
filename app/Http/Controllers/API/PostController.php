@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Collection;
 use Canvas\Events\PostViewed;
 use Canvas\Post;
 use Canvas\Tag;
 use Canvas\Topic;
 use Canvas\UserMeta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class PostController extends Controller
 {

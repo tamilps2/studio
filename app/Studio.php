@@ -35,7 +35,7 @@ class Studio
      */
     private static function collectLanguageFiles(string $locale): string
     {
-        $langDirectory = dirname(__DIR__, 1) . '/resources/lang';
+        $langDirectory = dirname(__DIR__, 1).'/resources/lang';
         $files = collect(glob("{$langDirectory}/{$locale}/*.php"));
         $lines = collect();
 
