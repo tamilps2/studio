@@ -112,6 +112,7 @@
                         this.$router.push(this.$route.path).catch(err => {})
                         this.isReady = true
                         this.hasErrors = true
+
                         NProgress.done()
                     })
             },

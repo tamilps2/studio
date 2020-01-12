@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex align-items-center justify-content-center mt-auto">
+    <div class="wrapper d-flex align-items-center justify-content-center">
         <div class="code h2 px-3 text-center">404</div>
         <div class="message h3 px-3 text-center">Not Found</div>
     </div>
@@ -25,5 +25,9 @@
 
     .message {
         color: #636b6f;
+    }
+
+    .wrapper {
+        min-height: calc(100vh - 70px);
     }
 </style>

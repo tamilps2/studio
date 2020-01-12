@@ -186,20 +186,16 @@
             }
         },
 
-        mounted() {
+        created() {
             this.fetchData()
+        },
 
-            // todo: images not loaded into DOM yet
-            this.$nextTick(() => {
-                const images = [document.querySelectorAll('.embedded_image img')]
-
-                mediumZoom(images)
-
-                document.addEventListener('DOMContentLoaded', (event) => {
-                    document.querySelectorAll('pre').forEach((block) => {
-                        hljs.highlightBlock(block);
-                    })
-                })
+        updated() {
+            document.querySelectorAll('.embedded_image img').forEach((image) => {
+                mediumZoom(image)
+            })
+            document.querySelectorAll('pre').forEach((block) => {
+                hljs.highlightBlock(block)
             })
         },
 
@@ -226,8 +222,8 @@
                         this.next.username = response.data.next.username
                         this.random.post = response.data.random.post
                         this.random.username = response.data.random.username
-
                         this.isReady = true
+
                         NProgress.done()
                     })
                     .catch(error => {
@@ -235,6 +231,7 @@
                         this.$router.push(this.$route.path).catch(err => {})
                         this.isReady = true
                         this.hasErrors = true
+
                         NProgress.done()
                     })
             }

@@ -81,8 +81,8 @@
                         this.avatar = response.data.avatar
                         this.summary = response.data.summary
                         this.posts = response.data.posts
-
                         this.isReady = true
+
                         NProgress.done()
                     })
                     .catch(error => {
@@ -90,6 +90,7 @@
                         this.$router.push(this.$route.path).catch(err => {})
                         this.isReady = true
                         this.hasErrors = true
+
                         NProgress.done()
                     })
             }

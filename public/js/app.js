@@ -2508,17 +2508,15 @@ __webpack_require__.r(__webpack_exports__);
       trans: JSON.parse(Studio.lang)
     };
   },
-  mounted: function mounted() {
-    this.fetchData(); // todo: images not loaded into DOM yet
-
-    this.$nextTick(function () {
-      var images = [document.querySelectorAll('.embedded_image img')];
-      Object(medium_zoom__WEBPACK_IMPORTED_MODULE_3__["default"])(images);
-      document.addEventListener('DOMContentLoaded', function (event) {
-        document.querySelectorAll('pre').forEach(function (block) {
-          highlightjs__WEBPACK_IMPORTED_MODULE_0___default.a.highlightBlock(block);
-        });
-      });
+  created: function created() {
+    this.fetchData();
+  },
+  updated: function updated() {
+    document.querySelectorAll('.embedded_image img').forEach(function (image) {
+      Object(medium_zoom__WEBPACK_IMPORTED_MODULE_3__["default"])(image);
+    });
+    document.querySelectorAll('pre').forEach(function (block) {
+      highlightjs__WEBPACK_IMPORTED_MODULE_0___default.a.highlightBlock(block);
     });
   },
   watch: {
@@ -7502,7 +7500,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.code[data-v-2ce50e5a] {\n    border-right: 2px solid #636b6f;\n    color: #636b6f;\n}\n.message[data-v-2ce50e5a] {\n    color: #636b6f;\n}\n", ""]);
+exports.push([module.i, "\n.code[data-v-2ce50e5a] {\n    border-right: 2px solid #636b6f;\n    color: #636b6f;\n}\n.message[data-v-2ce50e5a] {\n    color: #636b6f;\n}\n.wrapper[data-v-2ce50e5a] {\n    min-height: calc(100vh - 70px);\n}\n", ""]);
 
 // exports
 
@@ -64446,7 +64444,7 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "d-flex align-items-center justify-content-center mt-auto"
+        staticClass: "wrapper d-flex align-items-center justify-content-center"
       },
       [
         _c("div", { staticClass: "code h2 px-3 text-center" }, [_vm._v("404")]),
