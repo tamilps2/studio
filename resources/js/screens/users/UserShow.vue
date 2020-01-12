@@ -1,7 +1,7 @@
 <template>
     <div>
         <vue-headful
-            v-if="isReady"
+            v-if="isReady && !hasErrors"
             :title="user.name + ' — Studio'"
             :description="summary"
             :image="avatar"

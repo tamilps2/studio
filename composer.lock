@@ -76,7 +76,7 @@
             "dist": {
                 "type": "path",
                 "url": "../canvas",
-                "reference": "9d28181bbe9d25c7be4cb02f87e7146737dd67e9"
+                "reference": "da472391dd1cb73eca9ebc1277ba32e59de87e5d"
             },
             "require": {
                 "doctrine/dbal": "^2.6|^2.7|^2.8|^2.9|^2.10",

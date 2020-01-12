@@ -2509,7 +2509,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.fetchData();
+    this.fetchData(); // todo: images not loaded into DOM yet
+
     this.$nextTick(function () {
       var images = [document.querySelectorAll('.embedded_image img')];
       Object(medium_zoom__WEBPACK_IMPORTED_MODULE_3__["default"])(images);
@@ -64444,7 +64445,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "d-flex align-items-center justify-content-center" },
+      {
+        staticClass: "d-flex align-items-center justify-content-center mt-auto"
+      },
       [
         _c("div", { staticClass: "code h2 px-3 text-center" }, [_vm._v("404")]),
         _vm._v(" "),
@@ -66116,7 +66119,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm.isReady
+      _vm.isReady && !_vm.hasErrors
         ? _c("vue-headful", {
             attrs: {
               title: _vm.user.name + " — Studio",
