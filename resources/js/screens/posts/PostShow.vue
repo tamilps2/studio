@@ -53,8 +53,7 @@
                      :title="post.featured_image_caption">
 
                 <p v-if="post.featured_image && post.featured_image_caption"
-                   class="text-muted text-center pt-3"
-                   style="font-size: 0.9rem"
+                   class="text-muted text-center featured-image-caption"
                    v-html="post.featured_image_caption">
                 </p>
 
@@ -62,7 +61,7 @@
                     <div v-html="post.body"></div>
                 </div>
 
-                <div v-if="tags">
+                <div v-if="tags" class="mt-5">
                     <router-link
                         v-for="(key, value) in tags"
                         :key="key"
@@ -245,25 +244,51 @@
     }
 </script>
 
-<style>
+<style lang="scss">
+    @import '../../../sass/variables';
+
+    .featured-image-caption {
+        text-align: center;
+        color: $text-muted;
+        margin-top: .5em;
+        font-size: 0.9rem;
+        font-family: $font-family-sans-serif, sans-serif;
+    }
+
+    .featured-image-caption a {
+        text-decoration: underline;
+    }
+
     .post-content {
-        font-weight: 300;
         font-size: 1.1rem;
         line-height: 2;
         -webkit-box-align: center;
         -ms-flex-align: center;
     }
 
+    .post-content p {
+        margin: 2em 0 0 0;
+    }
+
+    .post-content a {
+        text-decoration: underline;
+    }
+
+    .post-content h1, h2, h3 {
+        margin: 1.5em 0 0 0;
+    }
+
     .post-content blockquote {
         margin-top: 2em;
-        margin-bottom: 2em;
         font-style: italic;
-        border-left: 4px solid #ccc;
-        padding-left: 16px;
+        font-size: 28px;
+        color: $text-muted;
+        border-left: 4px solid $text-muted;
+        padding-left: 1.5em;
     }
 
     div.embedded_image {
-        padding: 2em 0;
+        margin-top: 2em;
     }
 
     div.embedded_image > img {
@@ -274,13 +299,10 @@
 
     div.embedded_image > p {
         text-align: center;
-        color: #a0aec0;
-        padding-top: 1rem;
-        margin-bottom: 1rem;
+        color: $text-muted;
+        margin-top: .5em;
         font-size: 0.9rem;
-        line-height: 1.6;
-        font-weight: 400;
-        font-family: "Karla", sans-serif;
+        font-family: $font-family-sans-serif, sans-serif;
     }
 
     div.embedded_image[data-layout="wide"] img {
@@ -297,7 +319,7 @@
 
     div.post-content hr {
         border: none;
-        color: #111;
+        color: $gray-900;
         letter-spacing: 1em;
         text-align: center;
     }
@@ -320,7 +342,7 @@
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
-        color: #000;
+        color: $black;
         overflow-x: auto;
         padding: 1em;
     }
