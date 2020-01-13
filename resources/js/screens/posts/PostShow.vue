@@ -31,9 +31,7 @@
                 <h1 class="text-dark font-serif pt-5 mb-4">{{ post.title }}</h1>
 
                 <div class="media py-1">
-                    <router-link
-                        :to="{ name: 'user', params: { username: username } }"
-                        class="font-serif text-dark text-decoration-none">
+                    <router-link :to="{ name: 'user', params: { username: username } }">
                         <img :src="avatar"
                              class="mr-3 rounded-circle shadow-inner"
                              style="width: 50px"
@@ -41,10 +39,8 @@
                     </router-link>
 
                     <div class="media-body">
-                        <router-link
-                            :to="{ name: 'user', params: { username: username } }"
-                            class="font-serif text-dark text-decoration-none">
-                            <p class="mt-0 mb-1 font-weight-bold text-dark">{{ user.name }}</p>
+                        <router-link :to="{ name: 'user', params: { username: username } }">
+                            <p class="my-0 font-weight-bold">{{ user.name }}</p>
                         </router-link>
                         <span class="text-muted">{{ moment(post.published_at).format('MMM d, Y') }} — {{ post.read_time }}</span>
                     </div>
@@ -62,7 +58,7 @@
                    v-html="post.featured_image_caption">
                 </p>
 
-                <div class="post font-serif mt-4">
+                <div class="post-content position-relative align-items-center overflow-y-visible font-serif mt-4">
                     <div v-html="post.body"></div>
                 </div>
 
@@ -77,11 +73,11 @@
                 </div>
             </div>
 
-            <div v-if="isReady && !hasErrors && meta.canonical_link" class="post position-relative align-items-center overflow-y-visible">
+            <div v-if="isReady && !hasErrors && meta.canonical_link" class="post-content position-relative align-items-center overflow-y-visible font-serif">
                 <hr>
                 <p class="text-center font-italic pt-3 my-5">
                     {{ trans.studio.buttons.canonical }}
-                    <a :href="meta.canonical_link" target="_blank" class="text-dark" rel="noopener">
+                    <a :href="meta.canonical_link" target="_blank" rel="noopener">
                         {{ parseURL(meta.canonical_link).hostname }}
                     </a>
                 </p>
@@ -95,12 +91,12 @@
                      :style="next.post.featured_image ? 'background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url('+next.post.featured_image+'); background-size: cover' : ''">
                     <router-link
                         :to="{ name: 'post', params: { username: next.username, slug: next.post.slug } }"
-                        class="btn btn-sm text-decoration-none text-uppercase font-weight-bold mt-3"
+                        class="btn btn-sm text-decoration-none text-uppercase mt-3"
                         :class="next.post.featured_image ? 'btn-outline-light' : 'btn-outline-secondary'"
                         @click.native="scrollToTop">
                         {{ trans.studio.buttons.next }}
                     </router-link>
-                    <h2 class="font-weight-bold font-serif my-3">
+                    <h2 class="font-serif my-3">
                         <router-link
                             :to="{ name: 'post', params: { username: next.username, slug: next.post.slug } }"
                             class="text-decoration-none"
@@ -120,12 +116,12 @@
                      :style="random.post.featured_image ? 'background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url('+random.post.featured_image+'); background-size: cover' : ''">
                     <router-link
                         :to="{ name: 'post', params: { username: random.username, slug: random.post.slug } }"
-                        class="btn btn-sm text-decoration-none text-uppercase font-weight-bold mt-3"
+                        class="btn btn-sm text-decoration-none text-uppercase mt-3"
                         :class="random.post.featured_image ? 'btn-outline-light' : 'btn-outline-secondary'"
                         @click.native="scrollToTop">
                         {{ trans.studio.buttons.enjoy }}
                     </router-link>
-                    <h2 class="font-weight-bold font-serif my-3">
+                    <h2 class="font-serif my-3">
                         <router-link
                             :to="{ name: 'post', params: { username: random.username, slug: random.post.slug } }"
                             class="text-decoration-none"
@@ -249,66 +245,16 @@
     }
 </script>
 
-<style scoped>
-    .post {
-        font-family: "Merriweather", serif;
+<style>
+    .post-content {
         font-weight: 300;
-        color: hsla(0, 0%, 0%, 0.9);
         font-size: 1.1rem;
         line-height: 2;
-        position: relative !important;
-        -webkit-box-align: center !important;
-        -ms-flex-align: center !important;
-        align-items: center !important;
-        overflow-y: visible !important;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
     }
 
-    .post .h1,
-    .post .h2,
-    .post .h3,
-    .post .h4,
-    .post .h5,
-    .post .h6,
-    .post h1,
-    .post h2,
-    .post h3,
-    .post h4,
-    .post h5,
-    .post h6 {
-        margin-top: 2.75rem;
-        margin-bottom: 1rem;
-        font-family: inherit;
-        font-weight: 500;
-        line-height: 1.2;
-        color: inherit
-    }
-
-    .post .h1,
-    .post h1 {
-        font-size: 2.25rem
-    }
-
-    .post .h2,
-    .post h2 {
-        font-size: 1.8rem
-    }
-
-    .post .h3,
-    .post h3 {
-        font-size: 1.575rem
-    }
-
-    .post .h4,
-    .post h4 {
-        font-size: 1.35rem
-    }
-
-    .post .h5,
-    .post h5 {
-        font-size: 1.125rem
-    }
-
-    .post blockquote {
+    .post-content blockquote {
         margin-top: 2em;
         margin-bottom: 2em;
         font-style: italic;
@@ -316,79 +262,71 @@
         padding-left: 16px;
     }
 
-    .post >>> .embedded_image img {
-        max-width: 100%;
+    div.embedded_image {
+        padding: 2em 0;
+    }
+
+    div.embedded_image > img {
+        width: 100%;
         height: auto;
-        margin-bottom: 30px;
         display: block;
     }
 
-    .post >>> .embedded_image[data-layout="wide"] img {
+    div.embedded_image > p {
+        text-align: center;
+        color: #a0aec0;
+        padding-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        font-weight: 400;
+        font-family: "Karla", sans-serif;
+    }
+
+    div.embedded_image[data-layout="wide"] img {
         max-width: 1024px;
         margin: 0 auto 30px;
     }
 
-    div.post.serif.mt-4.pb-3 >>> div.embedded_image[data-layout=wide] {
+    div.embedded_image[data-layout=wide] {
         width: 100vw;
         position: relative;
         left: 50%;
         margin-left: -50vw;
     }
 
-    div.embedded_image >>> p {
-        text-align: center !important;
-        color: #6c757d !important;
-        font-size: 0.9rem !important;
-        line-height: 1.6 !important;
-        font-weight: 400 !important;
-        font-family: "Karla", sans-serif;
-    }
-
-    .post >>> hr {
+    div.post-content hr {
         border: none;
         color: #111;
         letter-spacing: 1em;
         text-align: center;
     }
 
-    .canonical {
-        margin-top: 0;
-        border: none;
-        font-size: 17px;
-        color: #111;
-        letter-spacing: 1em;
-        text-align: center;
-    }
-
-    .canonical:before {
-        content: "...";
-    }
-
-    .post >>> hr:before {
+    div.post-content hr:before {
         content: '...';
     }
 
-    .post >>> p >>> code {
-        background-color: rgba(0, 0, 0, 0.05) !important;
-        padding: 2px 4px !important;
-        -webkit-border-radius: 3px !important;
-        -moz-border-radius: 3px !important;
-        border-radius: 3px !important;
+    .post-content > p > code {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 2px 4px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
     }
 
-    .post >>> pre.ql-syntax {
-        background-color: rgba(0, 0, 0, 0.05) !important;
+    .post-content > pre.ql-syntax {
+        background-color: rgba(0, 0, 0, 0.05);
         border: none !important;
-        -webkit-border-radius: 3px !important;
-        -moz-border-radius: 3px !important;
-        border-radius: 3px !important;
-        color: #000 !important;
-        overflow-x: auto !important;
-        padding: 1em !important;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        color: #000;
+        overflow-x: auto;
+        padding: 1em;
     }
 
     @media screen and (max-width: 1024px) {
-        .post >>> .embedded_image[data-layout=wide] >>> img {
+        .post-content > .embedded_image[data-layout=wide] >>> img {
             max-width: 100%
         }
     }

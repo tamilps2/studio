@@ -18,7 +18,7 @@
     <title>{{ config('app.name') }}</title>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Karla|Merriweather" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Karla|Merriweather:400,700,900" rel="stylesheet">
     <link rel="canonical">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css">
