@@ -283,8 +283,8 @@
         font-style: italic;
         font-size: 28px;
         color: $text-muted;
-        border-left: 4px solid $text-muted;
         padding-left: 1.5em;
+        line-height: 1.5;
     }
 
     div.embedded_image {
