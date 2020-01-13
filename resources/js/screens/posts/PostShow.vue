@@ -319,6 +319,7 @@
 
     div.post-content hr {
         border: none;
+        margin: 3em 0 4em 0;
         color: $gray-900;
         letter-spacing: 1em;
         text-align: center;
@@ -329,22 +330,14 @@
     }
 
     .post-content > p > code {
-        background-color: rgba(0, 0, 0, 0.05);
-        padding: 2px 4px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
+        border-radius: $border-radius;
+        background-color: $text-muted;
     }
 
-    .post-content > pre.ql-syntax {
-        background-color: rgba(0, 0, 0, 0.05);
-        border: none !important;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-        color: $black;
-        overflow-x: auto;
+    pre.ql-syntax {
+        margin-top: 2em;
         padding: 1em;
+        border-radius: $border-radius;
     }
 
     @media screen and (max-width: 1024px) {
