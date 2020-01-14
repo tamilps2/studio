@@ -42,8 +42,8 @@ class TopicController extends Controller
             return response()->json([
                 'topic'  => $topic,
                 'posts'  => $posts,
-                'tags'   => Tag::all(['name', 'slug']),
-                'topics' => Topic::all(['name', 'slug']),
+                'tags'   => Tag::select(['name', 'slug'])->whereHas('posts')->get(),
+                'topics' => Topic::select(['name', 'slug'])->whereHas('posts')->get(),
             ]);
         } else {
             return response()->json(null, 404);

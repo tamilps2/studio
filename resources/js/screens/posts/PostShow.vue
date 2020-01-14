@@ -274,7 +274,9 @@
         text-decoration: underline;
     }
 
-    .post-content h1, h2, h3 {
+    .post-content h1,
+    .post-content h2,
+    .post-content h3 {
         margin: 1.5em 0 0 0;
     }
 
@@ -330,7 +332,6 @@
     }
 
     .post-content > p > code {
-        border-radius: $border-radius;
         background-color: $text-muted;
     }
 

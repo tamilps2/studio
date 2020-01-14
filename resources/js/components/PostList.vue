@@ -1,21 +1,22 @@
 <template>
     <div>
         <div v-for="post in availablePosts">
-            <h3>
-                <router-link
-                    :to="{ name: 'post', params: { username: post.user_meta.username, slug: post.slug } }"
-                    class="font-serif text-dark text-decoration-none">
-                    {{ post.title }}
-                </router-link>
-            </h3>
-            <p class="text-muted mb-2">{{ moment(post.published_at).format('MMM D') }} — {{ post.read_time }}</p>
-            <p>
-                <router-link
-                    :to="{ name: 'post', params: { username: post.user_meta.username, slug: post.slug } }"
-                    class="text-dark text-decoration-none">
-                    {{ post.summary }}
-                </router-link>
-            </p>
+            <router-link :to="{ name: 'post', params: { username: post.user_meta.username, slug: post.slug } }" class="text-decoration-none">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row no-gutters">
+                        <div :class="post.featured_image ? 'col-9' : ''">
+                            <div class="card-body">
+                                <h4 class="card-title font-weight-bold mt-0">{{ post.title }}</h4>
+                                <p class="card-text">{{ post.summary }}</p>
+                                <p class="card-text"><small class="text-muted">{{ moment(post.published_at).format('MMM D') }} — {{ post.read_time }}</small></p>
+                            </div>
+                        </div>
+                        <div v-if="post.featured_image" class="col-3">
+                            <img :src="post.featured_image" class="card-img" :alt="post.featured_image_caption">
+                        </div>
+                    </div>
+                </div>
+            </router-link>
         </div>
     </div>
 </template>
@@ -39,3 +40,13 @@
         }
     }
 </script>
+
+<style scoped>
+    .card-img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+</style>
