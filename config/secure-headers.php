@@ -472,7 +472,7 @@ return [
 
         'script-src' => [
             'allow' => [
-                'cdn.jsdelivr.net'
+                'cdn.jsdelivr.net',
             ],
 
             'hashes' => [
@@ -500,7 +500,7 @@ return [
             'unsafe-hashed-attributes' => false,
 
             // https://www.chromestatus.com/feature/5792234276388864
-            'report-sample' => true,
+            'report-sample'            => true,
 
             'add-generated-nonce' => false,
         ],
@@ -538,6 +538,7 @@ return [
         'img-src' => [
             'allow' => [
                 'images.unsplash.com',
+                'favicons.githubusercontent.com',
             ],
 
             'self' => true,
