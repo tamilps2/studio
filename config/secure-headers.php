@@ -509,6 +509,7 @@ return [
             'allow' => [
                 'cdnjs.cloudflare.com',
                 'fonts.googleapis.com',
+                'cdn.jsdelivr.net'
             ],
 
             'hashes' => [
