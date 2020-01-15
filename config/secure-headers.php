@@ -508,7 +508,7 @@ return [
         'style-src' => [
             'allow' => [
                 'cdnjs.cloudflare.com',
-                'fonts.googleapis.com'
+                'fonts.googleapis.com',
             ],
 
             'hashes' => [
@@ -536,7 +536,7 @@ return [
 
         'img-src' => [
             'allow' => [
-                'images.unsplash.com'
+                'images.unsplash.com',
             ],
 
             'self' => true,
@@ -551,16 +551,16 @@ return [
         ],
 
         'connect-src' => [
-            'self' => true
+            'self' => true,
         ],
 
         'font-src' => [
             'allow' => [
                 'fonts.gstatic.com',
-                'data:'
+                'data:',
             ],
 
-            'self' => true
+            'self' => true,
         ],
 
         'form-action' => [
