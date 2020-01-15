@@ -110,7 +110,7 @@ return [
      */
 
     'hsts' => [
-        'enable' => false,
+        'enable' => true,
 
         'max-age' => 15552000,
 
@@ -452,7 +452,7 @@ return [
      * Note: custom-csp does not support report-only.
      */
 
-    'custom-csp' => '',
+    'custom-csp' => null,
 
     'csp' => [
         'report-only' => false,
@@ -489,11 +489,11 @@ return [
                 // 'https:',
             ],
 
-            'self' => false,
+            'self' => true,
 
-            'unsafe-inline' => false,
+            'unsafe-inline' => true,
 
-            'unsafe-eval' => false,
+            'unsafe-eval' => true,
 
             'strict-dynamic' => false,
 
@@ -507,7 +507,8 @@ return [
 
         'style-src' => [
             'allow' => [
-                //
+                'cdnjs.cloudflare.com',
+                'fonts.googleapis.com'
             ],
 
             'hashes' => [
@@ -524,9 +525,9 @@ return [
                 // 'https:',
             ],
 
-            'self' => false,
+            'self' => true,
 
-            'unsafe-inline' => false,
+            'unsafe-inline' => true,
 
             'report-sample' => true,
 
@@ -534,7 +535,11 @@ return [
         ],
 
         'img-src' => [
-            //
+            'allow' => [
+                'images.unsplash.com'
+            ],
+
+            'self' => true,
         ],
 
         'default-src' => [
@@ -546,11 +551,16 @@ return [
         ],
 
         'connect-src' => [
-            //
+            'self' => true
         ],
 
         'font-src' => [
-            //
+            'allow' => [
+                'fonts.gstatic.com',
+                'data:'
+            ],
+
+            'self' => true
         ],
 
         'form-action' => [
