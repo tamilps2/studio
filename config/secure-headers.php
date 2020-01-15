@@ -472,7 +472,7 @@ return [
 
         'script-src' => [
             'allow' => [
-                // 'url',
+                'cdn.jsdelivr.net'
             ],
 
             'hashes' => [
