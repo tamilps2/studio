@@ -564,7 +564,7 @@ return [
         ],
 
         'form-action' => [
-            //
+            'self' => true,
         ],
 
         'frame-ancestors' => [
