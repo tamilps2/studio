@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "99a68ec518c8ddf4cb80f86506a3f4ed",
+    "content-hash": "4efcb1d356d764df552997ee01edf154",
     "packages": [
         {
             "name": "bepsvpt/secure-headers",
@@ -73,10 +73,16 @@
         {
             "name": "cnvs/canvas",
             "version": "dev-develop",
-            "dist": {
-                "type": "path",
-                "url": "../canvas",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cnvs/canvas.git",
                 "reference": "c725f2c16bb961ef070d98d2b771ca7f30af5479"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cnvs/canvas/zipball/c725f2c16bb961ef070d98d2b771ca7f30af5479",
+                "reference": "c725f2c16bb961ef070d98d2b771ca7f30af5479",
+                "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "^2.6|^2.7|^2.8|^2.9|^2.10",
@@ -103,16 +109,7 @@
                     "Canvas\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Canvas\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/phpunit"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -130,10 +127,7 @@
                 "platform",
                 "publishing"
             ],
-            "support": {
-                "issues": "https://github.com/cnvs/canvas/issues",
-                "source": "https://github.com/cnvs/canvas"
-            }
+            "time": "2020-01-17T20:49:43+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
