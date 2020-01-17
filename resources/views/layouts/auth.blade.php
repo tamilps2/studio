@@ -19,7 +19,7 @@
 <body class="bg-light">
     <div class="container vh-100">
         <div class="row h-100 justify-content-center align-items-center">
-            <div class="col-lg-5">
+            <div class="col-lg-5 col-md-7 col-sm-8">
                 @yield('content')
             </div>
         </div>
