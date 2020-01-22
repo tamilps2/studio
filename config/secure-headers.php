@@ -554,7 +554,7 @@ return [
 
         'connect-src' => [
             'allow' => [
-                'https://api.unsplash.com'
+                'https://api.unsplash.com',
             ],
 
             'self' => true,
