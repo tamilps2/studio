@@ -47,6 +47,8 @@ return [
 
     'storage_path' => env('CANVAS_STORAGE_PATH', 'public/canvas'),
 
+    'upload_filesize' => env('CANVAS_UPLOAD_FILESIZE', 3145728),
+
     /*
     |--------------------------------------------------------------------------
     | Unsplash Integration
@@ -73,8 +75,8 @@ return [
     |
     */
 
-    'digest' => [
-        'enabled' => env('CANVAS_DIGEST_ENABLED', false),
+    'mail' => [
+        'enabled' => env('CANVAS_MAIL_ENABLED', false),
     ],
 
 ];
