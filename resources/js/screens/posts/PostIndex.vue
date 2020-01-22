@@ -2,8 +2,7 @@
     <div>
         <vue-headful
             title="Studio — A Laravel publishing platform"
-            description="A Laravel publishing platform"
-            image=""
+            description="Sometimes creating a blog is easier said than done. With Canvas, it's just easier."
         />
 
         <page-header/>

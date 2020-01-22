@@ -3,8 +3,6 @@
         <vue-headful
             v-if="isReady && !hasErrors"
             :title="tag.name + ' — Studio'"
-            description="A Laravel publishing platform"
-            image=""
         />
 
         <page-header/>
