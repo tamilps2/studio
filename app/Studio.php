@@ -14,7 +14,7 @@ class Studio
      */
     public static function scriptVariables()
     {
-        $user = auth()->user()->verified ? auth()->user()->only(['id', 'name', 'email']) : null;
+        $user = optional(auth()->user())->email_verified_at ? auth()->user() : null;
         $metaData = UserMeta::where('user_id', optional($user)->id)->first();
         $emailHash = md5(trim(Str::lower(optional($user)->email)));
 
