@@ -538,6 +538,7 @@ return [
         'img-src' => [
             'allow' => [
                 'images.unsplash.com',
+                'secure.gravatar.com',
                 'favicons.githubusercontent.com',
             ],
 
@@ -554,7 +555,7 @@ return [
 
         'connect-src' => [
             'allow' => [
-                'https://api.unsplash.com',
+                'api.unsplash.com',
             ],
 
             'self' => true,

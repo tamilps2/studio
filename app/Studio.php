@@ -14,15 +14,16 @@ class Studio
      */
     public static function scriptVariables()
     {
-        $metaData = UserMeta::where('user_id', optional(auth()->user())->id)->first();
-        $emailHash = md5(trim(Str::lower(optional(auth()->user())->email)));
+        $user = auth()->user()->verified ? auth()->user()->only(['id', 'name', 'email']) : null;
+        $metaData = UserMeta::where('user_id', optional($user)->id)->first();
+        $emailHash = md5(trim(Str::lower(optional($user)->email)));
 
         return [
             'avatar'   => optional($metaData)->avatar ?? "https://secure.gravatar.com/avatar/{$emailHash}?s=500",
             'lang'     => self::collectLanguageFiles(config('app.locale')),
             'path'     => config('canvas.path'),
             'timezone' => config('app.timezone'),
-            'user'     => optional(auth()->user())->only(['id', 'name', 'email']),
+            'user'     => $user,
         ];
     }
 
