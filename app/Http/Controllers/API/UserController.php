@@ -31,7 +31,7 @@ class UserController extends Controller
 
             $posts->each->append('read_time');
 
-            $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : generateDefaultGravatar($user->email, 500);
+            $avatar = ! empty($userMeta->avatar) ? $userMeta->avatar : generateDefaultGravatar($user->email, 500);
 
             return response()->json([
                 'user'    => $user,
