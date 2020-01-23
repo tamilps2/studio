@@ -7,19 +7,22 @@ use App\User;
 use Canvas\Post;
 use Canvas\UserMeta;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
+    /**
+     * Find a user for a given username.
+     *
+     * @param Request $request
+     * @param string $username
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show(Request $request, string $username)
     {
         $userMeta = UserMeta::where('username', $username)->first();
 
         if ($userMeta) {
             $user = User::where('id', $userMeta->user_id)->first();
-            $emailHash = md5(trim(Str::lower(optional(auth()->user())->email)));
-            $userAvatar = optional($userMeta)->avatar ?? "https://secure.gravatar.com/avatar/{$emailHash}?s=500";
-
             $posts = Post::where('user_id', $user->id)
                          ->published()
                          ->withUserMeta()
@@ -28,9 +31,11 @@ class UserController extends Controller
 
             $posts->each->append('read_time');
 
+            $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : generateDefaultGravatar($user->email, 500);
+
             return response()->json([
                 'user'    => $user,
-                'avatar'  => $userAvatar,
+                'avatar'  => $avatar,
                 'summary' => $userMeta->summary,
                 'posts'   => $posts,
             ]);

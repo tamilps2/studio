@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Canvas\Events\PostViewed;
 use Canvas\Post;
 use Canvas\Tag;
@@ -43,16 +44,19 @@ class PostController extends Controller
         $userMeta = UserMeta::where('username', $username)->first();
 
         if ($userMeta) {
+            $user = User::where('id', $userMeta->user_id)->first();
             $posts = Post::where('user_id', $userMeta->user_id)
                          ->published()
                          ->withUserMeta()
                          ->orderByDesc('published_at')
                          ->get();
 
+            $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : generateDefaultGravatar($user->email, 500);
+
             return response()->json([
                 'posts'    => $posts,
                 'user'     => $userMeta->user->only(['name', 'email']),
-                'avatar'   => $userMeta->avatar,
+                'avatar'   => $avatar,
                 'username' => $userMeta->username,
                 'summary'  => $userMeta->summary,
             ]);
@@ -74,8 +78,11 @@ class PostController extends Controller
         $userMeta = UserMeta::where('username', $username)->first();
 
         if ($userMeta) {
+            $user = User::where('id', $userMeta->user_id)->first();
             $posts = Post::published()->get();
             $post = $posts->firstWhere('slug', $slug);
+
+            $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : generateDefaultGravatar($user->email, 200);
 
             if ($post && $post->published && $post->user->id == $userMeta->user_id) {
                 $post->append('read_time');
@@ -117,9 +124,9 @@ class PostController extends Controller
                     'post'     => $post,
                     'tags'     => $post->tags->pluck('name', 'slug'),
                     'topic'    => $post->topic->pluck('name', 'slug'),
-                    'user'     => $post->user->only(['id', 'name', 'email']),
+                    'user'     => $post->user,
                     'username' => $userMeta->username,
-                    'avatar'   => $userMeta->avatar,
+                    'avatar'   => $avatar,
                     'meta'     => $post->meta,
                     'next'     => [
                         'post'     => $readNext,

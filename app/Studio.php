@@ -3,7 +3,6 @@
 namespace App;
 
 use Canvas\UserMeta;
-use Illuminate\Support\Str;
 
 class Studio
 {
@@ -15,11 +14,14 @@ class Studio
     public static function scriptVariables()
     {
         $user = optional(auth()->user())->email_verified_at ? auth()->user() : null;
-        $metaData = UserMeta::where('user_id', optional($user)->id)->first();
-        $emailHash = md5(trim(Str::lower(optional($user)->email)));
+
+        if ($user) {
+            $metaData = UserMeta::where('user_id', $user->id)->first();
+            $avatar = !empty(optional($metaData)->avatar) ? $metaData->avatar : generateDefaultGravatar($user->email);
+        }
 
         return [
-            'avatar'   => optional($metaData)->avatar ?? "https://secure.gravatar.com/avatar/{$emailHash}?s=500",
+            'avatar'   => $avatar ?? null,
             'lang'     => self::collectLanguageFiles(config('app.locale')),
             'path'     => config('canvas.path'),
             'timezone' => config('app.timezone'),
