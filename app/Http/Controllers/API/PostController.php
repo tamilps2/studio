@@ -51,7 +51,7 @@ class PostController extends Controller
                          ->orderByDesc('published_at')
                          ->get();
 
-            $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : generateDefaultGravatar($user->email, 500);
+            $avatar = ! empty($userMeta->avatar) ? $userMeta->avatar : generateDefaultGravatar($user->email, 500);
 
             return response()->json([
                 'posts'    => $posts,
@@ -82,7 +82,7 @@ class PostController extends Controller
             $posts = Post::published()->get();
             $post = $posts->firstWhere('slug', $slug);
 
-            $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : generateDefaultGravatar($user->email, 200);
+            $avatar = ! empty($userMeta->avatar) ? $userMeta->avatar : generateDefaultGravatar($user->email, 200);
 
             if ($post && $post->published && $post->user->id == $userMeta->user_id) {
                 $post->append('read_time');
