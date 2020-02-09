@@ -10,7 +10,7 @@
     "require": {
         "php": "^7.2",
         "bepsvpt/secure-headers": "^5.5",
-        "cnvs/canvas": "dev-develop",
+        "cnvs/canvas": "^5.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",

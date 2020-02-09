@@ -472,7 +472,7 @@ return [
 
         'script-src' => [
             'allow' => [
-                'cdn.jsdelivr.net',
+                // 'url',
             ],
 
             'hashes' => [
@@ -489,27 +489,25 @@ return [
                 // 'https:',
             ],
 
-            'self' => true,
+            'self' => false,
 
-            'unsafe-inline' => true,
+            'unsafe-inline' => false,
 
-            'unsafe-eval' => true,
+            'unsafe-eval' => false,
 
             'strict-dynamic' => false,
 
             'unsafe-hashed-attributes' => false,
 
             // https://www.chromestatus.com/feature/5792234276388864
-            'report-sample'            => true,
+            'report-sample' => true,
 
             'add-generated-nonce' => false,
         ],
 
         'style-src' => [
             'allow' => [
-                'cdnjs.cloudflare.com',
-                'fonts.googleapis.com',
-                'cdn.jsdelivr.net',
+                //
             ],
 
             'hashes' => [
@@ -526,9 +524,9 @@ return [
                 // 'https:',
             ],
 
-            'self' => true,
+            'self' => false,
 
-            'unsafe-inline' => true,
+            'unsafe-inline' => false,
 
             'report-sample' => true,
 
@@ -536,13 +534,7 @@ return [
         ],
 
         'img-src' => [
-            'allow' => [
-                'images.unsplash.com',
-                'secure.gravatar.com',
-                'favicons.githubusercontent.com',
-            ],
-
-            'self' => true,
+            //
         ],
 
         'default-src' => [
@@ -554,24 +546,15 @@ return [
         ],
 
         'connect-src' => [
-            'allow' => [
-                'api.unsplash.com',
-            ],
-
-            'self' => true,
+            //
         ],
 
         'font-src' => [
-            'allow' => [
-                'fonts.gstatic.com',
-                'data:',
-            ],
-
-            'self' => true,
+            //
         ],
 
         'form-action' => [
-            'self' => true,
+            //
         ],
 
         'frame-ancestors' => [

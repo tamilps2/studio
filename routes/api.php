@@ -17,7 +17,7 @@ Route::namespace('API')->group(function () {
     Route::get('posts', 'PostController@index');
     Route::get('posts/{username}', 'PostController@getByUsername');
     Route::get('posts/{username}/{slug}', 'PostController@findByUsername')
-         ->middleware('Canvas\Http\Middleware\ViewThrottle');
+         ->middleware('Canvas\Http\Middleware\Session');
 
     Route::get('tags', 'TagController@index');
     Route::get('tags/{slug}', 'TagController@getPostsForTag');
