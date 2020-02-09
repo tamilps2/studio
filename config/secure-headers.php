@@ -452,7 +452,7 @@ return [
      * Note: custom-csp does not support report-only.
      */
 
-    'custom-csp' => null,
+    'custom-csp' => '',
 
     'csp' => [
         'report-only' => false,
