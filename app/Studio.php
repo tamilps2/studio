@@ -17,7 +17,7 @@ class Studio
 
         if ($user) {
             $metaData = UserMeta::where('user_id', $user->id)->first();
-            $avatar = !empty(optional($metaData)->avatar) ? $metaData->avatar : generateDefaultGravatar($user->email);
+            $avatar = ! empty(optional($metaData)->avatar) ? $metaData->avatar : generateDefaultGravatar($user->email);
         }
 
         return [
