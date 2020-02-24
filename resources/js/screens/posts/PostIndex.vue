@@ -16,7 +16,7 @@
                         <h1 class="font-italic font-serif">{{ featuredPost.title }}</h1>
                         <p v-if="featuredPost.summary" class="lead my-3">{{ featuredPost.summary }}</p>
                         <p v-else class="lead my-3">{{ featuredPost.body | trim }}</p>
-                        <p class="lead mb-0">{{ trans.studio.buttons.continue }}</p>
+                        <p class="lead mb-0">Continue reading...</p>
                     </div>
                 </div>
             </router-link>
@@ -24,7 +24,7 @@
             <main role="main" class="row justify-content-between">
                 <div class="col-md-8">
                     <h3 class="mb-4 font-italic font-serif border-bottom pb-2">
-                        {{ trans.studio.posts.label }}
+                        Recent posts
                     </h3>
 
                     <post-list v-if="isReady" :posts="posts"/>
@@ -35,8 +35,6 @@
                 </div>
             </main>
         </div>
-
-        <not-found v-if="hasErrors"/>
     </div>
 </template>
 
@@ -45,7 +43,6 @@
     import NProgress from 'nprogress'
     import vueHeadful from 'vue-headful'
     import TagList from '../../components/TagList'
-    import NotFound from '../../components/NotFound'
     import PostList from '../../components/PostList'
     import TopicBar from '../../components/TopicBar'
     import PageHeader from '../../components/PageHeader'
@@ -54,7 +51,6 @@
         name: 'post-index',
 
         components: {
-            NotFound,
             PageHeader,
             PostList,
             TagList,
@@ -70,7 +66,6 @@
                 topics: null,
                 isReady: false,
                 hasErrors: false,
-                trans: JSON.parse(Studio.lang),
             }
         },
 
@@ -87,7 +82,7 @@
         methods: {
             fetchData() {
                 this.request()
-                    .get('/api/posts')
+                    .get('/studio/posts')
                     .then(response => {
                         this.posts = response.data.posts
                         this.featuredPost = this.posts.shift()

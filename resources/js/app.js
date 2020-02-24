@@ -26,7 +26,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({
     routes: Routes,
     mode: 'history',
-    base: '/',
+    base: Studio.path,
 })
 
 NProgress.configure({

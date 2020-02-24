@@ -35,7 +35,6 @@
         data() {
             return {
                 availablePosts: this.posts,
-                trans: JSON.parse(Studio.lang),
             }
         }
     }

@@ -7,7 +7,7 @@
             :image="avatar"
         />
 
-        <page-header/>
+        <page-header></page-header>
 
         <div v-if="isReady">
             <div v-if="!hasErrors">
@@ -27,14 +27,16 @@
 
                 <main role="main" class="col-xl-8 offset-xl-2 col-md-10 offset-md-1">
                     <h3 class="mb-4 font-italic font-serif border-bottom pb-2">
-                        {{ trans.studio.posts.label }}
+                        Featured
                     </h3>
+                    <post-list v-if="isReady" :posts="[featuredPost]"/>
 
+                    <h3 class="mb-4 font-italic font-serif border-bottom pb-2">
+                        Latest
+                    </h3>
                     <post-list v-if="isReady" :posts="posts"/>
                 </main>
             </div>
-
-            <not-found v-if="hasErrors"/>
         </div>
     </div>
 </template>
@@ -43,7 +45,6 @@
     import NProgress from 'nprogress'
     import vueHeadful from 'vue-headful';
     import PostList from '../../components/PostList'
-    import NotFound from '../../components/NotFound'
     import PageHeader from '../../components/PageHeader'
 
     export default {
@@ -52,7 +53,6 @@
         components: {
             PageHeader,
             PostList,
-            NotFound,
             vueHeadful
         },
 
@@ -62,9 +62,9 @@
                 avatar: null,
                 summary: null,
                 posts: null,
+                featuredPost: null,
                 isReady: false,
                 hasErrors: false,
-                trans: JSON.parse(Studio.lang),
             }
         },
 
@@ -75,11 +75,12 @@
         methods: {
             fetchData() {
                 this.request()
-                    .get('/api/users/' + this.$route.params.username)
+                    .get('/studio/users/' + this.$route.params.username)
                     .then(response => {
                         this.user = response.data.user
                         this.avatar = response.data.avatar
                         this.summary = response.data.summary
+                        this.featuredPost = response.data.posts.shift()
                         this.posts = response.data.posts
                         this.isReady = true
 

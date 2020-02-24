@@ -24,7 +24,7 @@
                 </div>
 
                 <div v-if="user" class="btn-group pr-0 col-3 d-flex justify-content-end align-items-center">
-                    <slot name="actions" />
+                    <slot name="actions"/>
 
                     <div class="dropdown">
                         <a href="#" id="dropdownMenu" class="nav-link p-0" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,21 +37,21 @@
                                 {{ user.email }}
                             </h6>
                             <div class="dropdown-divider"></div>
-                            <a :href="'/' + canvasPath + '/posts'" class="dropdown-item">{{ trans.studio.nav.user.posts }}</a>
-                            <a :href="'/' + canvasPath + '/tags'" class="dropdown-item">{{ trans.studio.nav.user.tags }}</a>
-                            <a :href="'/' + canvasPath + '/topics'" class="dropdown-item">{{ trans.studio.nav.user.topics }}</a>
-                            <a :href="'/' + canvasPath + '/stats'" class="dropdown-item">{{ trans.studio.nav.user.stats }}</a>
+                            <a :href="'/' + canvasPath + '/posts'" class="dropdown-item">Posts</a>
+                            <a :href="'/' + canvasPath + '/tags'" class="dropdown-item">Tags</a>
+                            <a :href="'/' + canvasPath + '/topics'" class="dropdown-item">Topics</a>
+                            <a :href="'/' + canvasPath + '/stats'" class="dropdown-item">Stats</a>
                             <div class="dropdown-divider"></div>
-                            <a :href="'/' + canvasPath + '/settings'" class="dropdown-item">{{ trans.studio.nav.user.settings }}</a>
+                            <a :href="'/' + canvasPath + '/settings'" class="dropdown-item">Settings</a>
                             <a href="" class="dropdown-item" @click.prevent="sessionLogout">
-                                {{ trans.studio.nav.user.logout }}
+                                Sign out
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <div v-else class="col-3 pr-0 d-flex justify-content-end align-items-center">
-                    <a class="text-muted text-decoration-none" href="/login">{{ trans.studio.nav.user.login }}</a>
+                    <a class="text-muted text-decoration-none" href="/login">Sign in</a>
                 </div>
             </nav>
         </div>
@@ -67,7 +67,6 @@
                 user: Studio.user,
                 avatar: Studio.avatar,
                 canvasPath: Studio.path,
-                trans: JSON.parse(Studio.lang),
             }
         },
 

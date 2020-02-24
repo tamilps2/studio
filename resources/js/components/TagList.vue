@@ -1,6 +1,6 @@
 <template>
     <div class="p-md-4">
-        <h4 class="font-italic font-serif">{{ trans.studio.tags.label }}</h4>
+        <h4 class="font-italic font-serif">Tags</h4>
         <ol class="list-unstyled mb-0">
             <li v-for="tag in availableTags">
                 <router-link
@@ -28,7 +28,6 @@
         data() {
             return {
                 availableTags: this.tags,
-                trans: JSON.parse(Studio.lang),
             }
         }
     }

@@ -12,18 +12,3 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::namespace('API')->group(function () {
-    Route::get('posts', 'PostController@index');
-    Route::get('posts/{username}', 'PostController@getByUsername');
-    Route::get('posts/{username}/{slug}', 'PostController@findByUsername')
-         ->middleware('Canvas\Http\Middleware\Session');
-
-    Route::get('tags', 'TagController@index');
-    Route::get('tags/{slug}', 'TagController@getPostsForTag');
-
-    Route::get('topics', 'TopicController@index');
-    Route::get('topics/{slug}', 'TopicController@getPostsForTopic');
-
-    Route::get('users/{username}', 'UserController@show');
-});

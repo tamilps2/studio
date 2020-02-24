@@ -17,10 +17,10 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actionDropdownMenu">
                     <a :href="'/' + canvasPath + '/posts/' + post.id + '/edit'" class="dropdown-item">
-                        {{ trans.studio.buttons.edit }}
+                        Edit post
                     </a>
                     <a :href="'/' + canvasPath + '/stats/' + post.id" class="dropdown-item">
-                        {{ trans.studio.buttons.stats }}
+                        View stats
                     </a>
                 </div>
             </div>
@@ -75,10 +75,7 @@
             <div v-if="isReady && !hasErrors && meta.canonical_link" class="post-content position-relative align-items-center overflow-y-visible font-serif">
                 <hr>
                 <p class="text-center font-italic pt-3 my-5">
-                    {{ trans.studio.buttons.canonical }}
-                    <a :href="meta.canonical_link" target="_blank" rel="noopener">
-                        {{ parseURL(meta.canonical_link).hostname }}
-                    </a>
+                    This post was originally published on <a :href="meta.canonical_link" target="_blank" rel="noopener">{{ parseURL(meta.canonical_link).hostname }}</a>
                 </p>
             </div>
         </div>
@@ -93,7 +90,7 @@
                         class="btn btn-sm text-decoration-none text-uppercase mt-3"
                         :class="next.post.featured_image ? 'btn-outline-light' : 'btn-outline-secondary'"
                         @click.native="scrollToTop">
-                        {{ trans.studio.buttons.next }}
+                        Read this next
                     </router-link>
                     <h2 class="font-serif my-3">
                         <router-link
@@ -118,7 +115,7 @@
                         class="btn btn-sm text-decoration-none text-uppercase mt-3"
                         :class="random.post.featured_image ? 'btn-outline-light' : 'btn-outline-secondary'"
                         @click.native="scrollToTop">
-                        {{ trans.studio.buttons.enjoy }}
+                        You might enjoy
                     </router-link>
                     <h2 class="font-serif my-3">
                         <router-link
@@ -135,8 +132,6 @@
                 </div>
             </div>
         </div>
-
-        <not-found v-if="hasErrors"/>
     </div>
 </template>
 
@@ -145,14 +140,12 @@
     import NProgress from 'nprogress'
     import vueHeadful from 'vue-headful'
     import mediumZoom from 'medium-zoom'
-    import NotFound from '../../components/NotFound'
     import PageHeader from '../../components/PageHeader'
 
     export default {
         name: 'post-show',
 
         components: {
-            NotFound,
             PageHeader,
             vueHeadful
         },
@@ -177,7 +170,6 @@
                 isReady: false,
                 hasErrors: false,
                 canvasPath: Studio.path,
-                trans: JSON.parse(Studio.lang),
             }
         },
 
@@ -204,7 +196,7 @@
         methods: {
             fetchData() {
                 this.request()
-                    .get('/api/posts/' + this.$route.params.username + '/' + this.$route.params.slug)
+                    .get('/studio/posts/' + this.$route.params.username + '/' + this.$route.params.slug)
                     .then(response => {
                         this.user = response.data.user
                         this.post = response.data.post

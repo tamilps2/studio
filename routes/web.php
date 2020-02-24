@@ -14,6 +14,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['verify' => true]);
+Route::namespace('Studio')->prefix('studio')->group(function () {
+    Route::prefix('posts')->group(function () {
+        Route::get('/', 'PostController@index');
+        Route::get('{username}', 'PostController@getByUsername');
+        Route::get('{username}/{slug}', 'PostController@findByUsername')->middleware('Canvas\Http\Middleware\Session');
+    });
 
-Route::get('/{view?}', 'BaseController')->where('view', '(.*)')->name('studio');
+    Route::prefix('tags')->group(function () {
+        Route::get('/', 'TagController@index');
+        Route::get('{slug}', 'TagController@getPostsForTag');
+    });
+
+    Route::prefix('topics')->group(function () {
+        Route::get('/', 'TopicController@index');
+        Route::get('{slug}', 'TopicController@getPostsForTopic');
+    });
+
+    Route::prefix('users')->group(function () {
+        Route::get('{username}', 'UserController@show');
+    });
+
+    Route::get('/{view?}', 'ViewController')->where('view', '(.*)')->name('studio');
+});

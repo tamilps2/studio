@@ -31,7 +31,7 @@
                         <router-link
                             :to="{ name: 'post', params: { username: featuredPost.user_meta.username, slug: featuredPost.slug } }"
                             class="text-white text-decoration-none">
-                            {{ trans.studio.buttons.continue }}
+                            Continue reading...
                         </router-link>
                     </p>
                 </div>
@@ -40,7 +40,7 @@
             <main role="main" class="row justify-content-between">
                 <div class="col-md-8">
                     <h3 class="mb-4 font-italic font-serif border-bottom pb-2">
-                        {{ trans.studio.posts.label }}
+                        Recent posts
                     </h3>
 
                     <post-list v-if="isReady" :posts="posts"/>
@@ -51,8 +51,6 @@
                 </div>
             </main>
         </div>
-
-        <not-found v-if="hasErrors"/>
     </div>
 </template>
 
@@ -60,7 +58,6 @@
     import NProgress from 'nprogress'
     import vueHeadful from 'vue-headful'
     import TagList from '../../components/TagList'
-    import NotFound from '../../components/NotFound'
     import PostList from '../../components/PostList'
     import TopicBar from '../../components/TopicBar'
     import PageHeader from '../../components/PageHeader'
@@ -69,7 +66,6 @@
         name: 'post-index',
 
         components: {
-            NotFound,
             PageHeader,
             PostList,
             TagList,
@@ -86,7 +82,6 @@
                 topics: null,
                 isReady: false,
                 hasErrors: false,
-                trans: JSON.parse(Studio.lang),
             }
         },
 
@@ -103,7 +98,7 @@
         methods: {
             fetchData() {
                 this.request()
-                    .get('/api/topics/' + this.$route.params.slug)
+                    .get('/studio/topics/' + this.$route.params.slug)
                     .then(response => {
                         this.posts = response.data.posts
                         this.topic = response.data.topic

@@ -4,14 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="Sometimes creating a blog is easier said than done. With Canvas, it's just easier.">
+
     <meta property="og:image" content="{{ asset('img/opengraph.png') }}">
-    <meta property="og:title" content="Studio ― A Laravel publishing platform">
-    <meta property="og:description" content="Sometimes creating a blog is easier said than done. With Canvas, it's just easier.">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+
     <meta name="twitter:image" content="{{ asset('img/opengraph.png') }}">
-    <meta name="twitter:title" content="Studio ― A Laravel publishing platform">
-    <meta name="twitter:description" content="Sometimes creating a blog is easier said than done. With Canvas, it's just easier.">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
     <meta name="twitter:card" content="summary">
 
     <title>{{ config('app.name') }}</title>
@@ -29,7 +31,9 @@
     <router-view></router-view>
 </div>
 
-@javascript('Studio', $scripts)
+<script>
+    window.Studio = @json($scripts);
+</script>
 
 <script src="{{ asset('js/app.js') }}" defer></script>
 </body>

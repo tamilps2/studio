@@ -1,32 +1,32 @@
 export default [
     {
-        path: '/',
+        path: '/studio',
         name: 'home',
         component: require('./screens/posts/PostIndex').default,
     },
     {
-        path: '/tag/:slug',
+        path: '/studio/tag/:slug',
         name: 'tag',
         component: require('./screens/tags/PostIndex').default,
     },
     {
-        path: '/topic/:slug',
+        path: '/studio/topic/:slug',
         name: 'topic',
         component: require('./screens/topics/PostIndex').default,
     },
     {
-        path: '/:username',
+        path: '/studio/@:username',
         name: 'user',
         component: require('./screens/users/UserShow').default,
     },
     {
-        path: '/:username/:slug',
+        path: '/studio/@:username/:slug',
         name: 'post',
         component: require('./screens/posts/PostShow').default,
     },
     {
         path: '*',
         name: 'catch-all',
-        redirect: '/',
+        redirect: '/studio',
     },
 ]
