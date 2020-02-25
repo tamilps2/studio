@@ -90,7 +90,7 @@ class InstallCommand extends Command
                 }
             }
 
-            copy(__DIR__."../../resources/stubs/{$key}", $view);
+            copy(__DIR__."/../../resources/stubs/{$key}", $view);
         }
     }
 
