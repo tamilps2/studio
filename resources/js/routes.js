@@ -2,27 +2,27 @@ export default [
     {
         path: '/studio',
         name: 'home',
-        component: require('./screens/posts/PostIndex').default,
+        component: require('./screens/HomeScreen').default,
     },
     {
         path: '/studio/tag/:slug',
         name: 'tag',
-        component: require('./screens/tags/PostIndex').default,
+        component: require('./screens/TagScreen').default,
     },
     {
         path: '/studio/topic/:slug',
         name: 'topic',
-        component: require('./screens/topics/PostIndex').default,
+        component: require('./screens/TopicScreen').default,
     },
     {
         path: '/studio/@:username',
         name: 'user',
-        component: require('./screens/users/UserShow').default,
+        component: require('./screens/UserScreen').default,
     },
     {
         path: '/studio/@:username/:slug',
         name: 'post',
-        component: require('./screens/posts/PostShow').default,
+        component: require('./screens/PostScreen').default,
     },
     {
         path: '*',

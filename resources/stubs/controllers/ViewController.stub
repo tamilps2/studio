@@ -1,0 +1,61 @@
+<?php
+
+namespace {{namespace}}Http\Controllers\Studio;
+
+use {{namespace}}Http\Controllers\Controller;
+use Canvas\UserMeta;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class ViewController extends Controller
+{
+    /**
+     * Handle the incoming request.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function __invoke(Request $request)
+    {
+        return view('studio.app', [
+            'scripts' => $this->scriptVariables(),
+        ]);
+    }
+
+    /**
+     * Build a global JavaScript object for the Vue app.
+     *
+     * @return array
+     */
+    private function scriptVariables()
+    {
+        $user = optional(auth()->user())->email_verified_at ? auth()->user() : null;
+
+        if ($user) {
+            $metaData = UserMeta::where('user_id', $user->id)->first();
+            $avatar = ! empty(optional($metaData)->avatar) ? $metaData->avatar : $this->generateDefaultGravatar($user->email);
+        }
+
+        return [
+            'avatar' => $avatar ?? null,
+            'canvas_path' => config('canvas.path'),
+            'studio_path' => config('studio.path'),
+            'timezone' => config('app.timezone'),
+            'user' => $user,
+        ];
+    }
+
+    /**
+     * Generate a default Gravatar image url from a given email.
+     *
+     * @param string $email
+     * @param int $size
+     * @return string
+     */
+    private function generateDefaultGravatar(string $email, int $size = 200): string
+    {
+        $emailHash = md5(trim(Str::lower($email)));
+
+        return "https://secure.gravatar.com/avatar/{$emailHash}?s={$size}";
+    }
+}
