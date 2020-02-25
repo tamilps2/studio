@@ -62,6 +62,7 @@ class InstallCommand extends Command
         $this->callSilent('vendor:publish', ['--tag' => 'studio-config']);
 
         $this->info('Installation complete.');
+        $this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
     }
 
     /**
@@ -72,6 +73,10 @@ class InstallCommand extends Command
     protected function ensureDirectoriesExist()
     {
         if (! is_dir($directory = $this->getViewPath('studio'))) {
+            mkdir($directory, 0755, true);
+        }
+
+        if (! is_dir($directory = app_path('Http/Controllers/Studio'))) {
             mkdir($directory, 0755, true);
         }
     }
@@ -90,7 +95,7 @@ class InstallCommand extends Command
                 }
             }
 
-            copy(__DIR__."/../../resources/stubs/{$key}", $view);
+            copy(dirname(__DIR__, 2)."/resources/stubs/views/{$key}", $view);
         }
     }
 

@@ -136,7 +136,7 @@
 </template>
 
 <script>
-    import hljs from 'highlightjs'
+    import hljs from 'highlight.js'
     import NProgress from 'nprogress'
     import vueHeadful from 'vue-headful'
     import mediumZoom from 'medium-zoom'
@@ -237,7 +237,7 @@
 </script>
 
 <style lang="scss">
-    @import '../../sass/variables';
+    @import '../../../sass/studio/variables';
 
     .featured-image-caption {
         text-align: center;
