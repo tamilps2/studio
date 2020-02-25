@@ -88,15 +88,15 @@ class Studio extends Setup
     protected static function updatePackageArray(array $packages)
     {
         return [
-                'bootstrap' => '^4.0.0',
-                'jquery' => '^3.2',
-                'popper.js' => '^1.12',
-                'resolve-url-loader' => '^2.3.1',
-                'sass' => '^1.20.1',
-                'sass-loader' => '^8.0.0',
-                'vue' => '^2.5.17',
-                'vue-template-compiler' => '^2.6.10',
-            ] + $packages;
+            'bootstrap' => '^4.0.0',
+            'jquery' => '^3.2',
+            'popper.js' => '^1.12',
+            'resolve-url-loader' => '^2.3.1',
+            'sass' => '^1.20.1',
+            'sass-loader' => '^8.0.0',
+            'vue' => '^2.5.17',
+            'vue-template-compiler' => '^2.6.10',
+        ] + $packages;
     }
 
     /**
@@ -107,7 +107,7 @@ class Studio extends Setup
     protected static function updateSass()
     {
         foreach (self::SASS as $file) {
-            copy(__DIR__ . "/../resources/sass/{$file}.scss", resource_path("sass/studio/{$file}.scss"));
+            copy(__DIR__."/../resources/sass/{$file}.scss", resource_path("sass/studio/{$file}.scss"));
         }
     }
 
@@ -119,7 +119,7 @@ class Studio extends Setup
     protected static function updateComponents()
     {
         foreach (self::COMPONENTS as $file) {
-            copy(__DIR__ . "/../resources/js/components/{$file}.vue", resource_path("js/studio/components/{$file}.vue"));
+            copy(__DIR__."/../resources/js/components/{$file}.vue", resource_path("js/studio/components/{$file}.vue"));
         }
     }
 
@@ -131,7 +131,7 @@ class Studio extends Setup
     protected static function updateMixins()
     {
         foreach (self::MIXINS as $file) {
-            copy(__DIR__ . "/../resources/js/mixins/{$file}.js", resource_path("js/studio/mixins/{$file}.js"));
+            copy(__DIR__."/../resources/js/mixins/{$file}.js", resource_path("js/studio/mixins/{$file}.js"));
         }
     }
 
@@ -143,7 +143,7 @@ class Studio extends Setup
     protected static function updateScreens()
     {
         foreach (self::SCREENS as $file) {
-            copy(__DIR__ . "/../resources/js/screens/{$file}.vue", resource_path("js/studio/{$file}.vue"));
+            copy(__DIR__."/../resources/js/screens/{$file}.vue", resource_path("js/studio/{$file}.vue"));
         }
     }
 
@@ -155,7 +155,7 @@ class Studio extends Setup
     protected static function updateBase()
     {
         foreach (self::BASE as $file) {
-            copy(__DIR__ . "/../resources/js/{$file}.js", resource_path("js/studio/{$file}.js"));
+            copy(__DIR__."/../resources/js/{$file}.js", resource_path("js/studio/{$file}.js"));
         }
     }
 
@@ -166,6 +166,6 @@ class Studio extends Setup
      */
     protected static function updateWebpackConfiguration()
     {
-        copy(__DIR__ . '/../webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__.'/../webpack.mix.js', base_path('webpack.mix.js'));
     }
 }
