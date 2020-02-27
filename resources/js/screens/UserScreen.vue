@@ -17,8 +17,8 @@
                             <img :src="avatar" :alt="user.name" width="120" class="rounded-circle shadow-inner">
                         </div>
                         <div class="col-lg-10">
-                            <h1 class="font-weight-bold">{{ user.name }}</h1>
-                            <p class="text-muted">
+                            <h1>{{ user.name }}</h1>
+                            <p class="text-secondary">
                                 {{ summary }}
                             </p>
                         </div>
@@ -48,7 +48,7 @@
     import PageHeader from '../components/PageHeader'
 
     export default {
-        name: 'user-show',
+        name: 'user-screen',
 
         components: {
             PageHeader,

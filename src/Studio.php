@@ -88,19 +88,19 @@ class Studio extends Setup
     protected static function updatePackageArray(array $packages)
     {
         return [
-            'bootstrap' => '^4.0.0',
-            'highlight.js' => '^9.18',
-            'jquery' => '^3.2',
+            'bootstrap' => '^4.4.0',
+            'highlight.js' => '^9.18.1',
+            'jquery' => '^3.4',
             'medium-zoom' => '^1.0.5',
             'moment-timezone' => '^0.5.27',
             'nprogress' => '^0.2.0',
             'popper.js' => '^1.12',
-            'resolve-url-loader' => '^2.3.1',
-            'sass' => '^1.20.1',
+            'resolve-url-loader' => '^3.1.0',
+            'sass' => '^1.24.0',
             'sass-loader' => '^8.0.0',
-            'vue' => '^2.5.17',
-            'vue-headful' => '^2.1',
-            'vue-router' => '^3.1',
+            'vue' => '^2.6.10',
+            'vue-headful' => '^2.1.0',
+            'vue-router' => '^3.1.5',
             'vue-template-compiler' => '^2.6.10',
         ] + $packages;
     }

@@ -38,8 +38,8 @@ class ViewController extends Controller
 
         return [
             'avatar' => $avatar ?? null,
-            'canvas_path' => config('canvas.path'),
-            'studio_path' => config('studio.path'),
+            'canvasPath' => config('canvas.path'),
+            'studioPath' => config('studio.path'),
             'timezone' => config('app.timezone'),
             'user' => $user,
         ];

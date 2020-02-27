@@ -24,7 +24,7 @@
                 </div>
 
                 <div v-if="user" class="btn-group pr-0 col-3 d-flex justify-content-end align-items-center">
-                    <slot name="actions"/>
+                    <slot name="actions"></slot>
 
                     <div class="dropdown">
                         <a href="#" id="dropdownMenu" class="nav-link p-0" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +32,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu">
                             <h6 class="dropdown-header">
-                                <strong>{{ user.name }}</strong>
+                                {{ user.name }}
                                 <br/>
                                 {{ user.email }}
                             </h6>
@@ -66,7 +66,7 @@
             return {
                 user: Studio.user,
                 avatar: Studio.avatar,
-                canvasPath: Studio.path,
+                canvasPath: Studio.canvasPath
             }
         },
 
@@ -74,6 +74,6 @@
             sessionLogout() {
                 this.logout()
             },
-        },
+        }
     }
 </script>

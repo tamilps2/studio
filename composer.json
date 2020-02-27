@@ -4,10 +4,10 @@
     "keywords": ["canvas", "laravel", "studio", "ui"],
     "license": "MIT",
     "require": {
-        "php": ">=7.1",
-        "illuminate/console": "^5.6|^5.7|^5.8|^6.0",
-        "illuminate/filesystem": "^5.6|^5.7|^5.8|^6.0",
-        "illuminate/support": "^5.6|^5.7|^5.8|^6.0"
+        "php": "^7.2",
+        "illuminate/console": "^6.0",
+        "illuminate/filesystem": "^6.0",
+        "illuminate/support": "^6.0"
     },
     "config": {
         "optimize-autoloader": true,

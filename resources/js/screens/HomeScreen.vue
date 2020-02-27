@@ -48,7 +48,7 @@
     import PageHeader from '../components/PageHeader'
 
     export default {
-        name: 'post-index',
+        name: 'home-screen',
 
         components: {
             PageHeader,

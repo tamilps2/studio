@@ -6,7 +6,7 @@
                     <div v-for="topic in availableTopics">
                         <router-link
                             :to="{ name: 'topic', params: { slug: topic.slug } }"
-                            class="p-2 text-uppercase text-decoration-none">
+                            class="p-2 text-decoration-none">
                             {{ topic.name }}
                         </router-link>
                     </div>

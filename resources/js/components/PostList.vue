@@ -6,8 +6,8 @@
                     <div class="row no-gutters">
                         <div :class="post.featured_image ? 'col-9' : ''">
                             <div class="card-body">
-                                <h4 class="card-title font-weight-bold mt-0">{{ post.title }}</h4>
-                                <p class="card-text">{{ post.summary }}</p>
+                                <h4 class="card-title mt-0">{{ post.title }}</h4>
+                                <p class="card-text text-secondary">{{ post.summary }}</p>
                                 <p class="card-text"><small class="text-muted">{{ moment(post.published_at).format('MMM D') }} — {{ post.read_time }}</small></p>
                             </div>
                         </div>
