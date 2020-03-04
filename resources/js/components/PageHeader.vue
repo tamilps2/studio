@@ -20,7 +20,6 @@
                         class="h2 text-dark text-decoration-none font-serif d-inline-block mb-0">
                         Studio
                     </router-link>
-                    <span class="badge badge-secondary small text-uppercase ml-1 mb-3">Beta</span>
                 </div>
 
                 <div v-if="user" class="btn-group pr-0 col-3 d-flex justify-content-end align-items-center">
