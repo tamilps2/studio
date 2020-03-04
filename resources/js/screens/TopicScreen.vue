@@ -8,7 +8,7 @@
         <page-header></page-header>
         <topic-bar v-if="isReady" :topics="topics"/>
 
-        <div v-if="!hasErrors" class="col-xl-10 offset-xl-1 col-md-12">
+        <div v-if="!hasErrors" class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12">
             <div v-if="featuredPost"
                  class="jumbotron p-4 p-md-5 text-white rounded bg-dark"
                  :style="featuredPost.featured_image ? 'background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url('+featuredPost.featured_image+'); background-size: cover' : ''">

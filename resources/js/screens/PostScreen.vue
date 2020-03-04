@@ -28,7 +28,7 @@
         </page-header>
 
         <div v-if="isReady && !hasErrors">
-            <div class="col-xl-8 offset-xl-2 col-md-12">
+            <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12">
                 <h1 class="text-dark font-serif pt-5 mb-4">{{ post.title }}</h1>
 
                 <div class="media py-1">

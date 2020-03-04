@@ -11,7 +11,7 @@
 
         <div v-if="isReady">
             <div v-if="!hasErrors">
-                <div class="container my-5 col-xl-8 offset-xl-2 col-md-10 offset-md-1 align-items-center">
+                <div class="container my-5 col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12 align-items-center">
                     <div class="row">
                         <div class="col-lg-2">
                             <img :src="avatar" :alt="user.name" width="120" class="rounded-circle shadow-inner">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <main role="main" class="col-xl-8 offset-xl-2 col-md-10 offset-md-1">
+                <main role="main" class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12">
                     <div v-if="featuredPost">
                         <h3 class="mb-4 font-italic font-serif border-bottom pb-2">
                             Featured
