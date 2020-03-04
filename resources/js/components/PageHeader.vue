@@ -43,7 +43,7 @@
                             <a :href="'/' + canvasPath + '/stats'" class="dropdown-item">Stats</a>
                             <div class="dropdown-divider"></div>
                             <a :href="'/' + canvasPath + '/settings'" class="dropdown-item">Settings</a>
-                            <a href="" class="dropdown-item" @click.prevent="sessionLogout">
+                            <a class="dropdown-item" style="cursor: pointer" @click.prevent="sessionLogout">
                                 Sign out
                             </a>
                         </div>

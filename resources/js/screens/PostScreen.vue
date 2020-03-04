@@ -216,9 +216,8 @@
                     })
                     .catch(error => {
                         // Add any error debugging...
-                        this.$router.push(this.$route.path).catch(err => {})
-                        this.isReady = true
                         this.hasErrors = true
+                        this.$router.push({name: 'home'})
 
                         NProgress.done()
                     })

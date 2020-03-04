@@ -5,7 +5,7 @@
             :title="tag.name + ' — Studio'"
         />
 
-        <page-header/>
+        <page-header></page-header>
         <topic-bar v-if="isReady" :topics="topics"/>
 
         <div v-if="!hasErrors" class="col-xl-10 offset-xl-1 col-md-12">
@@ -75,7 +75,7 @@
 
         data() {
             return {
-                posts: null,
+                posts: [],
                 featuredPost: null,
                 tag: null,
                 tags: null,
@@ -101,8 +101,8 @@
                     .get('/studio/tags/' + this.$route.params.slug)
                     .then(response => {
                         this.posts = response.data.posts
+                        this.featuredPost = this.posts.shift() ?? null
                         this.tag = response.data.tag
-                        this.featuredPost = this.posts.shift()
                         this.tags = response.data.tags
                         this.topics = response.data.topics
                         this.isReady = true
@@ -111,9 +111,8 @@
                     })
                     .catch(error => {
                         // Add any error debugging...
-                        this.$router.push(this.$route.path).catch(err => {})
-                        this.isReady = true
                         this.hasErrors = true
+                        this.$router.push({name: 'home'})
 
                         NProgress.done()
                     })

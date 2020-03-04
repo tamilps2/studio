@@ -26,15 +26,23 @@
                 </div>
 
                 <main role="main" class="col-xl-8 offset-xl-2 col-md-10 offset-md-1">
-                    <h3 class="mb-4 font-italic font-serif border-bottom pb-2">
-                        Featured
-                    </h3>
-                    <post-list v-if="isReady" :posts="[featuredPost]"/>
+                    <div v-if="featuredPost">
+                        <h3 class="mb-4 font-italic font-serif border-bottom pb-2">
+                            Featured
+                        </h3>
+                        <post-list :posts="[featuredPost]"/>
 
-                    <h3 class="mb-4 font-italic font-serif border-bottom pb-2">
-                        Latest
-                    </h3>
-                    <post-list v-if="isReady" :posts="posts"/>
+                        <div v-if="posts.length > 0">
+                            <h3 class="mb-4 font-italic font-serif border-bottom pb-2">
+                                Latest
+                            </h3>
+                            <post-list :posts="posts"/>
+                        </div>
+                    </div>
+                    <div v-else class="col-12">
+                        <p class="lead text-muted text-center mt-5 pt-5">You have no published posts</p>
+                        <p class="lead text-muted text-center mt-1">Write on the go with our mobile-ready app!</p>
+                    </div>
                 </main>
             </div>
         </div>
@@ -61,7 +69,7 @@
                 user: null,
                 avatar: null,
                 summary: null,
-                posts: null,
+                posts: [],
                 featuredPost: null,
                 isReady: false,
                 hasErrors: false,
@@ -80,17 +88,16 @@
                         this.user = response.data.user
                         this.avatar = response.data.avatar
                         this.summary = response.data.summary
-                        this.featuredPost = response.data.posts.shift()
                         this.posts = response.data.posts
+                        this.featuredPost = this.posts.shift() ?? null
                         this.isReady = true
 
                         NProgress.done()
                     })
                     .catch(error => {
                         // Add any error debugging...
-                        this.$router.push(this.$route.path).catch(err => {})
-                        this.isReady = true
                         this.hasErrors = true
+                        this.$router.push({name: 'home'})
 
                         NProgress.done()
                     })

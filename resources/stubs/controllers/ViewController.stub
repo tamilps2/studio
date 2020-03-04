@@ -29,7 +29,7 @@ class ViewController extends Controller
      */
     private function scriptVariables()
     {
-        $user = optional(auth()->user())->email_verified_at ? auth()->user() : null;
+        $user = auth()->user();
 
         if ($user) {
             $metaData = UserMeta::where('user_id', $user->id)->first();

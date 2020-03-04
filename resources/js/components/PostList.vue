@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="availablePosts.length > 0">
         <div v-for="post in availablePosts">
             <router-link :to="{ name: 'post', params: { username: post.user_meta.username, slug: post.slug } }" class="text-decoration-none">
                 <div class="card mb-4 shadow-sm">
@@ -18,6 +18,9 @@
                 </div>
             </router-link>
         </div>
+    </div>
+    <div v-else>
+        <p class="lead text-muted mb-5">No posts yet.</p>
     </div>
 </template>
 
