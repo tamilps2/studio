@@ -8,34 +8,22 @@
         <page-header></page-header>
         <topic-bar v-if="isReady" :topics="topics"/>
 
-        <div v-if="!hasErrors" class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12">
-            <div v-if="featuredPost"
-                 class="jumbotron p-4 p-md-5 text-white rounded bg-dark"
-                 :style="featuredPost.featured_image ? 'background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url('+featuredPost.featured_image+'); background-size: cover' : ''">
-                <div class="col-md-8 px-0">
-                    <h1 class="font-italic font-serif">
-                        <router-link
-                            :to="{ name: 'post', params: { username: featuredPost.user_meta.username, slug: featuredPost.slug } }"
-                            class="text-white text-decoration-none">
+        <div v-if="!hasErrors" class="col-xl-10 offset-xl-1 col-md-12">
+            <router-link v-if="featuredPost" :to="{ name: 'post', params: { username: featuredPost.user_meta.username, slug: featuredPost.slug } }" class="text-white text-decoration-none">
+                <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark" :style="featuredPost.featured_image ? 'background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url('+featuredPost.featured_image+'); background-size: cover' : ''">
+                    <div class="col-md-8 px-0">
+                        <h1 class="font-italic font-serif">
                             {{ featuredPost.title }}
-                        </router-link>
-                    </h1>
-                    <p class="lead my-3">
-                        <router-link
-                            :to="{ name: 'post', params: { username: featuredPost.user_meta.username, slug: featuredPost.slug } }"
-                            class="text-white text-decoration-none">
+                        </h1>
+                        <p class="lead my-3">
                             {{ featuredPost.summary }}
-                        </router-link>
-                    </p>
-                    <p class="lead mb-0">
-                        <router-link
-                            :to="{ name: 'post', params: { username: featuredPost.user_meta.username, slug: featuredPost.slug } }"
-                            class="text-white text-decoration-none">
+                        </p>
+                        <p class="lead mb-0">
                             Continue reading...
-                        </router-link>
-                    </p>
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </router-link>
 
             <main role="main" class="row justify-content-between">
                 <div class="col-md-8">

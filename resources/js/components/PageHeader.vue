@@ -1,6 +1,6 @@
 <template>
     <div class="shadow-sm">
-        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12">
+        <div class="col-xl-10 offset-xl-1 col-md-12">
             <nav class="navbar py-3 px-0">
                 <div class="btn-group pl-0 col-3 d-flex justify-content-start align-items-center">
                     <a href="https://twitter.com/@cnvs_io" class="pr-3 text-decoration-none" target="_blank" rel="noopener">
