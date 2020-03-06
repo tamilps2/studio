@@ -1,8 +1,12 @@
-# Studio
+<p align="center">
+<img src=".github/HEADER.png">
+</p>
 
+<p align="center">
 <a href="https://packagist.org/packages/cnvs/studio"><img src="https://poser.pugx.org/cnvs/studio/downloads"></a>
 <a href="https://packagist.org/packages/cnvs/studio"><img src="https://poser.pugx.org/cnvs/studio/v/stable"></a>
 <a href="https://packagist.org/packages/cnvs/studio"><img src="https://poser.pugx.org/cnvs/studio/license"></a>
+</p>
 
 ## Introduction
 
