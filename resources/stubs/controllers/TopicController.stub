@@ -39,11 +39,25 @@ class TopicController extends Controller
 
             $posts->each->append('read_time');
 
+            $tags = Tag::select(['name', 'slug'])
+                       ->whereHas('posts')
+                       ->withCount('posts')
+                       ->orderByDesc('posts_count')
+                       ->take(15)
+                       ->get();
+
+            $topics = Topic::select(['name', 'slug'])
+                           ->whereHas('posts')
+                           ->withCount('posts')
+                           ->orderByDesc('posts_count')
+                           ->take(15)
+                           ->get();
+
             return response()->json([
-                'topic'  => $topic,
-                'posts'  => $posts,
-                'tags'   => Tag::select(['name', 'slug'])->whereHas('posts')->get(),
-                'topics' => Topic::select(['name', 'slug'])->whereHas('posts')->get(),
+                'topic' => $topic,
+                'posts' => $posts,
+                'tags' => $tags,
+                'topics' => $topics,
             ]);
         } else {
             return response()->json(null, 404);

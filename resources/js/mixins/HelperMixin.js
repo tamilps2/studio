@@ -41,6 +41,32 @@ export default {
                 searchObject: searchObject,
                 hash: parser.hash
             };
+        },
+
+        postPublicIdentifier(post) {
+            switch (Studio.identifier) {
+                case 'id':
+                    return post.user_id
+
+                case 'username':
+                    return post.user_meta.username
+
+                default:
+                    break;
+            }
+        },
+
+        userPublicIdentifier(user) {
+            switch (Studio.identifier) {
+                case 'id':
+                    return user.user_id
+
+                case 'username':
+                    return user.username
+
+                default:
+                    break;
+            }
         }
     },
 }

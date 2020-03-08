@@ -83,7 +83,7 @@
         methods: {
             fetchData() {
                 this.request()
-                    .get('/studio/users/' + this.$route.params.username)
+                    .get('/studio/users/' + this.$route.params.identifier)
                     .then(response => {
                         this.user = response.data.user
                         this.avatar = response.data.avatar

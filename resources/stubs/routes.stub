@@ -2,8 +2,8 @@
 Route::namespace('Studio')->prefix('studio')->group(function () {
     Route::prefix('posts')->group(function () {
         Route::get('/', 'PostController@index');
-        Route::get('{username}', 'PostController@getByUsername');
-        Route::get('{username}/{slug}', 'PostController@findByUsername')->middleware('Canvas\Http\Middleware\Session');
+        Route::get('{identifier}', 'PostController@getByIdentifier');
+        Route::get('{identifier}/{slug}', 'PostController@findByIdentifier')->middleware('Canvas\Http\Middleware\Session');
     });
 
     Route::prefix('tags')->group(function () {
@@ -17,7 +17,7 @@ Route::namespace('Studio')->prefix('studio')->group(function () {
     });
 
     Route::prefix('users')->group(function () {
-        Route::get('{username}', 'UserController@show');
+        Route::get('{identifier}', 'UserController@show');
     });
 
     Route::get('/{view?}', 'ViewController')->where('view', '(.*)')->name('studio');

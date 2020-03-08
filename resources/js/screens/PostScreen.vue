@@ -32,7 +32,7 @@
                 <h1 class="text-dark font-serif pt-5 mb-4">{{ post.title }}</h1>
 
                 <div class="media py-1">
-                    <router-link :to="{ name: 'user', params: { username: username } }">
+                    <router-link :to="{name: 'user', params: { identifier: postPublicIdentifier(post) }}">
                         <img :src="avatar"
                              class="mr-3 rounded-circle shadow-inner"
                              style="width: 50px"
@@ -40,7 +40,7 @@
                     </router-link>
 
                     <div class="media-body">
-                        <router-link :to="{ name: 'user', params: { username: username } }" class="text-decoration-none">
+                        <router-link :to="{name: 'user', params: { identifier: userPublicIdentifier(user) }}" class="text-decoration-none">
                             <p class="my-0">{{ user.name }}</p>
                         </router-link>
                         <span class="text-secondary">{{ moment(post.published_at).format('MMM d, Y') }} — {{ post.read_time }}</span>
@@ -87,7 +87,7 @@
                      class="col-lg bg-light text-center px-lg-5 py-5"
                      :style="next.post.featured_image ? 'background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url('+next.post.featured_image+'); background-size: cover' : ''">
                     <router-link
-                        :to="{ name: 'post', params: { username: next.username, slug: next.post.slug } }"
+                        :to="{ name: 'post', params: { identifier: postPublicIdentifier(next.post), slug: next.post.slug } }"
                         class="btn btn-sm text-decoration-none text-uppercase mt-3"
                         :class="next.post.featured_image ? 'btn-outline-light' : 'btn-outline-secondary'"
                         @click.native="scrollToTop">
@@ -95,7 +95,7 @@
                     </router-link>
                     <h2 class="font-serif my-3">
                         <router-link
-                            :to="{ name: 'post', params: { username: next.username, slug: next.post.slug } }"
+                            :to="{ name: 'post', params: { identifier: postPublicIdentifier(next.post), slug: next.post.slug } }"
                             class="text-decoration-none"
                             :class="next.post.featured_image ? 'text-light' : 'text-dark'"
                             @click.native="scrollToTop">
@@ -112,7 +112,7 @@
                      class="col-lg bg-light text-center px-lg-5 py-5"
                      :style="random.post.featured_image ? 'background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url('+random.post.featured_image+'); background-size: cover' : ''">
                     <router-link
-                        :to="{ name: 'post', params: { username: random.username, slug: random.post.slug } }"
+                        :to="{ name: 'post', params: { identifier: postPublicIdentifier(random.post), slug: random.post.slug } }"
                         class="btn btn-sm text-decoration-none text-uppercase mt-3"
                         :class="random.post.featured_image ? 'btn-outline-light' : 'btn-outline-secondary'"
                         @click.native="scrollToTop">
@@ -120,7 +120,7 @@
                     </router-link>
                     <h2 class="font-serif my-3">
                         <router-link
-                            :to="{ name: 'post', params: { username: random.username, slug: random.post.slug } }"
+                            :to="{ name: 'post', params: { identifier: postPublicIdentifier(random.post), slug: random.post.slug } }"
                             class="text-decoration-none"
                             :class="random.post.featured_image ? 'text-light' : 'text-dark'"
                             @click.native="scrollToTop">
@@ -197,7 +197,7 @@
         methods: {
             fetchData() {
                 this.request()
-                    .get('/studio/posts/' + this.$route.params.username + '/' + this.$route.params.slug)
+                    .get('/studio/posts/' + this.$route.params.identifier + '/' + this.$route.params.slug)
                     .then(response => {
                         this.user = response.data.user
                         this.post = response.data.post

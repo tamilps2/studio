@@ -14,33 +14,88 @@ class UserController extends Controller
      * Find a user for a given username.
      *
      * @param Request $request
-     * @param string $username
+     * @param string $identifier
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Request $request, string $username)
+    public function show(Request $request, string $identifier)
     {
-        $userMeta = UserMeta::where('username', $username)->first();
+        switch ($this->publicIdentifier()) {
+            case 'id':
+                $user = User::where('id', $identifier)->first();
 
-        if ($userMeta) {
-            $user = User::where('id', $userMeta->user_id)->first();
-            $posts = Post::where('user_id', $user->id)
-                         ->published()
-                         ->withUserMeta()
-                         ->orderByDesc('published_at')
-                         ->get();
+                if ($user) {
+                    $userMeta = UserMeta::where('user_id', $user->id)->first();
+                    $posts = Post::where('user_id', $user->id)
+                                 ->published()
+                                 ->withUserMeta()
+                                 ->orderByDesc('published_at')
+                                 ->get();
 
-            $posts->each->append('read_time');
+                    $posts->each->append('read_time');
 
-            $avatar = ! empty($userMeta->avatar) ? $userMeta->avatar : generateDefaultGravatar($user->email, 500);
+                    $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : $this->generateDefaultGravatar($user->email, 500);
 
-            return response()->json([
-                'user'    => $user,
-                'avatar'  => $avatar,
-                'summary' => $userMeta->summary,
-                'posts'   => $posts,
-            ]);
-        } else {
-            return response()->json(null, 404);
+                    return response()->json([
+                        'user' => $user,
+                        'avatar' => $avatar,
+                        'summary' => $userMeta->summary,
+                        'posts' => $posts,
+                    ]);
+                } else {
+                    return response()->json(null, 404);
+                }
+                break;
+            case 'username':
+                $userMeta = UserMeta::where('username', $identifier)->first();
+
+                if ($userMeta) {
+                    $user = User::where('id', $userMeta->user_id)->first();
+                    $posts = Post::where('user_id', $user->id)
+                                 ->published()
+                                 ->withUserMeta()
+                                 ->orderByDesc('published_at')
+                                 ->get();
+
+                    $posts->each->append('read_time');
+
+                    $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : $this->generateDefaultGravatar($user->email, 500);
+
+                    return response()->json([
+                        'user' => $user,
+                        'avatar' => $avatar,
+                        'summary' => $userMeta->summary,
+                        'posts' => $posts,
+                    ]);
+                } else {
+                    return response()->json(null, 404);
+                }
+                break;
+            default:
+                break;
         }
+    }
+
+    /**
+     * Get the identifying attribute for posts.
+     *
+     * @return \Illuminate\Config\Repository|mixed
+     */
+    private function publicIdentifier()
+    {
+        return config('studio.identifier');
+    }
+
+    /**
+     * Generate a default Gravatar image url from a given email.
+     *
+     * @param string $email
+     * @param int $size
+     * @return string
+     */
+    private function generateDefaultGravatar(string $email, int $size = 200): string
+    {
+        $emailHash = md5(trim(Str::lower($email)));
+
+        return "https://secure.gravatar.com/avatar/{$emailHash}?s={$size}";
     }
 }

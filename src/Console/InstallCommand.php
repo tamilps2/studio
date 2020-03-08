@@ -19,7 +19,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install the resources and run migrations';
+    protected $description = 'Scaffold the frontend for Canvas';
 
     /**
      * The views that need to be exported.

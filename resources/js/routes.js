@@ -15,12 +15,12 @@ export default [
         component: require('./screens/TopicScreen').default,
     },
     {
-        path: '/studio/@:username',
+        path: '/studio/:identifier',
         name: 'user',
         component: require('./screens/UserScreen').default,
     },
     {
-        path: '/studio/@:username/:slug',
+        path: '/studio/:identifier/:slug',
         name: 'post',
         component: require('./screens/PostScreen').default,
     },

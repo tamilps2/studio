@@ -33,13 +33,14 @@ class ViewController extends Controller
 
         if ($user) {
             $metaData = UserMeta::where('user_id', $user->id)->first();
-            $avatar = ! empty(optional($metaData)->avatar) ? $metaData->avatar : $this->generateDefaultGravatar($user->email);
+            $avatar = !empty(optional($metaData)->avatar) ? $metaData->avatar : $this->generateDefaultGravatar($user->email);
         }
 
         return [
             'avatar' => $avatar ?? null,
             'canvasPath' => config('canvas.path'),
             'studioPath' => config('studio.path'),
+            'identifier' => config('studio.identifier'),
             'timezone' => config('app.timezone'),
             'user' => $user,
         ];

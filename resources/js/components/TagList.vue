@@ -1,6 +1,6 @@
 <template>
     <div class="p-md-4">
-        <h4 class="font-italic font-serif">Tags</h4>
+        <h4 class="font-italic font-serif">Popular</h4>
         <ol class="list-unstyled mb-0">
             <li v-for="tag in availableTags">
                 <router-link

@@ -38,6 +38,42 @@ yarn
 yarn dev
 ```
 
+## Configuration
+
+After compiling Studio's assets, a primary configuration file will be located at `config/studio.php`. This file allows you to customize various aspects of how your application uses the package.
+
+Studio exposes a simple UI at `/studio` by default. This can be changed by updating the `path` option:
+
+```php
+/*
+|--------------------------------------------------------------------------
+| Base Route
+|--------------------------------------------------------------------------
+|
+| This is the URI path where Studio will be accessible from. You are free
+| to change this path to anything you like. Note that the URI will not
+| affect the paths of its internal API that aren't exposed to users.
+|
+*/
+
+'path' => env('STUDIO_PATH_NAME', 'studio'),
+
+/*
+|--------------------------------------------------------------------------
+| User Identifier
+|--------------------------------------------------------------------------
+|
+| This is the publicly identifying attribute given in the URL to expose
+| users. By default, the User ID will be used. Note that "username"
+| requires a canvas_user_meta record to exist and be defined.
+|
+| Supported Identifiers: "id", "username"
+|
+*/
+
+'identifier' => env('STUDIO_USER_IDENTIFIER', 'id'),
+```
+
 ## License
 
 Studio is open-sourced software licensed under the [MIT license](license).
