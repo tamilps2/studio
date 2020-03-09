@@ -2,33 +2,36 @@
 
 namespace {{namespace}}Http\Controllers\Studio;
 
-use {{namespace}}Http\Controllers\Controller;
 use Canvas\Post;
-use Canvas\Tag;
 use Canvas\Topic;
 use Illuminate\Http\Request;
 
-class TopicController extends Controller
+class TopicController extends BaseController
 {
     /**
-     * Get all of the tags.
+     * Get all the topics.
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
-        return response()->json(Topic::all(['name', 'slug']));
+        return Topic::select(['name', 'slug'])
+                    ->whereHas('posts')
+                    ->withCount('posts')
+                    ->orderByDesc('posts_count')
+                    ->take(15)
+                    ->get();
     }
 
     /**
-     * Get all posts for a given topic.
+     * Show a given topic.
      *
      * @param Request $request
      * @param string $slug
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getPostsForTopic(Request $request, string $slug)
+    public function show(Request $request, string $slug)
     {
         $topic = Topic::select('name', 'slug')->where('slug', $slug)->first();
 
@@ -39,25 +42,9 @@ class TopicController extends Controller
 
             $posts->each->append('read_time');
 
-            $tags = Tag::select(['name', 'slug'])
-                       ->whereHas('posts')
-                       ->withCount('posts')
-                       ->orderByDesc('posts_count')
-                       ->take(15)
-                       ->get();
-
-            $topics = Topic::select(['name', 'slug'])
-                           ->whereHas('posts')
-                           ->withCount('posts')
-                           ->orderByDesc('posts_count')
-                           ->take(15)
-                           ->get();
-
             return response()->json([
                 'topic' => $topic,
                 'posts' => $posts,
-                'tags' => $tags,
-                'topics' => $topics,
             ]);
         } else {
             return response()->json(null, 404);

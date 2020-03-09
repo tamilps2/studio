@@ -19,9 +19,6 @@
             </router-link>
         </div>
     </div>
-    <div v-else>
-        <p class="lead text-muted mb-5">No posts yet.</p>
-    </div>
 </template>
 
 <script>
@@ -31,7 +28,7 @@
         props: {
             posts: {
                 type: Array,
-                required: false,
+                required: true,
             },
         },
 

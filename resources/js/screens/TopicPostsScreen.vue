@@ -1,8 +1,8 @@
 <template>
     <div>
         <vue-headful
-            title="Studio — Tags"
-            description="Tags are great for describing the details of your posts"
+            v-if="isReady"
+            :title="topic.name + ' — Studio'"
         />
 
         <navbar>
@@ -11,20 +11,16 @@
             </router-link>
         </navbar>
 
-        <div class="mt-5 pt-5">
+        <div v-if="isReady" class="mt-5 pt-5">
             <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12 mt-3">
-                <h1 class="font-serif">Tags</h1>
-                <p class="lead text-secondary">Tags are great for describing the details of your posts</p>
+                <h1 class="font-serif">{{ topic.name }}</h1>
 
                 <main role="main" class="mt-5">
-                    <div v-if="tags.length > 0">
-                        <taxonomy-grid :items="tags" type="tag"></taxonomy-grid>
-                    </div>
+                    <h4 class="my-4 border-bottom mt-5 pb-2">
+                        <span class="border-bottom border-dark pb-2">All Posts</span>
+                    </h4>
 
-                    <div v-else class="col-12">
-                        <p class="lead text-muted text-center mt-5 pt-5">You have no tags</p>
-                        <p class="lead text-muted text-center mt-1">Write on the go with our mobile-ready app!</p>
-                    </div>
+                    <post-list :posts="posts"></post-list>
                 </main>
             </div>
         </div>
@@ -34,34 +30,38 @@
 <script>
     import NProgress from 'nprogress'
     import vueHeadful from 'vue-headful'
+    import PostList from '../components/PostList'
     import Navbar from "../components/Navbar";
-    import TaxonomyGrid from "../components/TaxonomyGrid";
 
     export default {
-        name: 'tag-screen',
+        name: 'topic-posts-screen',
 
         components: {
-            TaxonomyGrid,
             Navbar,
+            PostList,
             vueHeadful
         },
 
         data() {
             return {
-                tags: [],
+                posts: [],
+                topic: null,
+                isReady: false,
             }
         },
 
         mounted() {
-            this.fetchTags()
+            this.fetchData()
         },
 
         methods: {
-            fetchTags() {
+            fetchData() {
                 this.request()
-                    .get(Studio.path + '/api/tags')
+                    .get(Studio.path + '/api/topics/' + this.$route.params.slug)
                     .then(response => {
-                        this.tags = response.data
+                        this.topic = response.data.topic
+                        this.posts = response.data.posts
+                        this.isReady = true
 
                         NProgress.done()
                     })

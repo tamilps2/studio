@@ -2,20 +2,44 @@
 
 namespace {{namespace}}Http\Controllers\Studio;
 
-use {{namespace}}Http\Controllers\Controller;
 use {{namespace}}User;
 use Canvas\Events\PostViewed;
 use Canvas\Post;
-use Canvas\Tag;
-use Canvas\Topic;
 use Canvas\UserMeta;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
-class PostController extends Controller
+class PostController extends BaseController
 {
     /**
-     * Get all of the posts, tags, and topics.
+     * The user associated with a post.
+     *
+     * @var User
+     */
+    protected $user;
+
+    /**
+     * The metadata associated with a user.
+     *
+     * @var UserMeta
+     */
+    protected $userMeta;
+
+    /**
+     * Specify if related posts should be returned.
+     *
+     * @var bool
+     */
+    protected $showRelated = true;
+
+    /**
+     * The posts with a similar taxonomy.
+     *
+     * @var array
+     */
+    protected $relatedPosts = [];
+
+    /**
+     * Get all the posts, tags, and topics.
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -29,296 +53,98 @@ class PostController extends Controller
 
         $posts->each->append('read_time');
 
-        $tags = Tag::select(['name', 'slug'])
-                   ->whereHas('posts')
-                   ->withCount('posts')
-                   ->orderByDesc('posts_count')
-                   ->take(15)
-                   ->get();
-
-        $topics = Topic::select(['name', 'slug'])
-                       ->whereHas('posts')
-                       ->withCount('posts')
-                       ->orderByDesc('posts_count')
-                       ->take(15)
-                       ->get();
-
         return response()->json([
             'posts' => $posts,
-            'tags' => $tags,
-            'topics' => $topics,
         ]);
     }
 
     /**
-     * Get all posts for a given identifier.
-     *
-     * @param Request $request
-     * @param string $identifier
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getByIdentifier(Request $request, string $identifier)
-    {
-        switch ($this->publicIdentifier()) {
-            case 'id':
-                $user = User::where('id', $identifier)->first();
-
-                if ($user) {
-                    $userMeta = UserMeta::where('user_id', $user->id)->first();
-                    $posts = Post::where('user_id', $user->id)
-                                 ->published()
-                                 ->withUserMeta()
-                                 ->orderByDesc('published_at')
-                                 ->get();
-
-                    $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : $this->generateDefaultGravatar($user->email, 500);
-
-                    return response()->json([
-                        'posts' => $posts,
-                        'user' => $userMeta->user->only(['name', 'email']),
-                        'avatar' => $avatar,
-                        'username' => $userMeta->username,
-                        'summary' => $userMeta->summary,
-                    ]);
-                } else {
-                    return response()->json(null, 404);
-                }
-                break;
-
-            case 'username':
-                $userMeta = UserMeta::where($this->publicIdentifier(), $identifier)->first();
-
-                if ($userMeta) {
-                    $user = User::where('id', $userMeta->user_id)->first();
-                    $posts = Post::where('user_id', $userMeta->user_id)
-                                 ->published()
-                                 ->withUserMeta()
-                                 ->orderByDesc('published_at')
-                                 ->get();
-
-                    $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : $this->generateDefaultGravatar($user->email, 500);
-
-                    return response()->json([
-                        'posts' => $posts,
-                        'user' => $userMeta->user->only(['name', 'email']),
-                        'avatar' => $avatar,
-                        'username' => $userMeta->username,
-                        'summary' => $userMeta->summary,
-                    ]);
-                } else {
-                    return response()->json(null, 404);
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
-     * Find a post for a given identifier.
+     * Show a given post.
      *
      * @param Request $request
      * @param string $identifier
      * @param string $slug
      * @return \Illuminate\Http\JsonResponse
      */
-    public function findByIdentifier(Request $request, string $identifier, string $slug = null)
+    public function show(Request $request, string $identifier, string $slug = null)
     {
-        switch ($this->publicIdentifier()) {
-            case 'id':
-                $user = User::where('id', $identifier)->first();
+        $posts = Post::published()->withUserMeta()->get();
+        $post = $posts->firstWhere('slug', $slug);
 
-                if ($user) {
-                    $userMeta = UserMeta::where('user_id', $user->id)->first();
-                    $posts = Post::published()->withUserMeta()->get();
-                    $post = $posts->firstWhere('slug', $slug);
+        if ($this->isPublished($post)) {
+            switch ($this->publicIdentifier()) {
+                case 'id':
+                    $this->user = User::where('id', $identifier)->first();
 
-                    $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : $this->generateDefaultGravatar($user->email, 200);
-
-                    if ($post && $post->published && $post->user->id == $userMeta->user_id) {
-                        $post->append('read_time');
-
-                        $readNext = $posts->sortBy('published_at')->firstWhere('published_at', '>', $post->published_at);
-
-                        if ($readNext) {
-                            if ($readNext->user_id == $userMeta->user_id) {
-                                $readNextUsername = $userMeta->username;
-                            } else {
-                                $readNextUsername = UserMeta::where('user_id', $readNext->user_id)->pluck('username')->first();
-                            }
-
-                            $randomPool = $posts->filter(function ($item) use ($readNext, $post) {
-                                return $item->id != $post->id && $item->id != $readNext->id;
-                            });
-                        } else {
-                            $randomPool = $posts->filter(function ($item) use ($readNext, $post) {
-                                return $item->id != $post->id;
-                            });
-                        }
-
-                        if ($post->tags || $post->topic) {
-                            $related = $this->findRelatedViaTaxonomy($randomPool, $post);
-                            $readRandom = $related->isEmpty() ? null : $related->first();
-                        } else {
-                            $readRandom = $randomPool->random();
-                        }
-
-                        if ($userMeta->user_id == optional($readRandom)->user_id) {
-                            $readRandomUsername = $userMeta->username;
-                        } else {
-                            $readRandomUsername = UserMeta::where('user_id', optional($readRandom)->user_id)->pluck('username')->first();
-                        }
-
-                        event(new PostViewed($post));
-
-                        return response()->json([
-                            'post' => $post,
-                            'tags' => $post->tags->pluck('name', 'slug'),
-                            'topic' => $post->topic->pluck('name', 'slug'),
-                            'user' => $post->user,
-                            'username' => $userMeta->username,
-                            'avatar' => $avatar,
-                            'meta' => $post->meta,
-                            'next' => [
-                                'post' => $readNext,
-                                'username' => $readNextUsername ?? null,
-                            ],
-                            'random' => [
-                                'post' => $readRandom,
-                                'username' => $readRandomUsername ?? null,
-                            ],
-                        ]);
-                    } else {
-                        return response()->json(null, 404);
+                    if ($this->user) {
+                        $this->userMeta = UserMeta::where('user_id', $this->user->id)->first();
                     }
-                } else {
-                    return response()->json(null, 404);
-                }
-                break;
+                    break;
 
-            case 'username':
-                $userMeta = UserMeta::where('username', $identifier)->first();
+                case 'username':
+                    $this->userMeta = UserMeta::where('username', $identifier)->first();
 
-                if ($userMeta) {
-                    $user = User::where('id', $userMeta->user_id)->first();
-                    $posts = Post::published()->withUserMeta()->get();
-                    $post = $posts->firstWhere('slug', $slug);
-
-                    $avatar = !empty($userMeta->avatar) ? $userMeta->avatar : $this->generateDefaultGravatar($user->email, 200);
-
-                    if ($post && $post->published && $post->user->id == $userMeta->user_id) {
-                        $post->append('read_time');
-
-                        $readNext = $posts->sortBy('published_at')->firstWhere('published_at', '>', $post->published_at);
-
-                        if ($readNext) {
-                            if ($readNext->user_id == $userMeta->user_id) {
-                                $readNextUsername = $userMeta->username;
-                            } else {
-                                $readNextUsername = UserMeta::where('user_id', $readNext->user_id)->pluck('username')->first();
-                            }
-
-                            $randomPool = $posts->filter(function ($item) use ($readNext, $post) {
-                                return $item->id != $post->id && $item->id != $readNext->id;
-                            });
-                        } else {
-                            $randomPool = $posts->filter(function ($item) use ($readNext, $post) {
-                                return $item->id != $post->id;
-                            });
-                        }
-
-                        if ($post->tags || $post->topic) {
-                            $related = $this->findRelatedViaTaxonomy($randomPool, $post);
-                            $readRandom = $related->isEmpty() ? null : $related->first();
-                        } else {
-                            $readRandom = $randomPool->random();
-                        }
-
-                        if ($userMeta->user_id == optional($readRandom)->user_id) {
-                            $readRandomUsername = $userMeta->username;
-                        } else {
-                            $readRandomUsername = UserMeta::where('user_id', optional($readRandom)->user_id)->pluck('username')->first();
-                        }
-
-                        event(new PostViewed($post));
-
-                        return response()->json([
-                            'post' => $post,
-                            'tags' => $post->tags->pluck('name', 'slug'),
-                            'topic' => $post->topic->pluck('name', 'slug'),
-                            'user' => $post->user,
-                            'username' => $userMeta->username,
-                            'avatar' => $avatar,
-                            'meta' => $post->meta,
-                            'next' => [
-                                'post' => $readNext,
-                                'username' => $readNextUsername ?? null,
-                            ],
-                            'random' => [
-                                'post' => $readRandom,
-                                'username' => $readRandomUsername ?? null,
-                            ],
-                        ]);
-                    } else {
-                        return response()->json(null, 404);
+                    if ($this->userMeta) {
+                        $this->user = User::where('id', $this->userMeta->user_id)->first();
                     }
-                } else {
-                    return response()->json(null, 404);
-                }
-                break;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
+
+            $post->append('read_time');
+
+            event(new PostViewed($post));
+
+            return response()->json([
+                'post' => $post,
+                'user' => $post->user,
+                'username' => $this->userMeta->username,
+                'avatar' => !empty($this->userMeta->avatar) ? $this->userMeta->avatar : $this->generateDefaultGravatar($this->user->email, 200),
+                'meta' => $post->meta,
+                'related' => $this->showRelated ? $this->getRelatedViaTaxonomy($post, $posts) : [],
+            ]);
+        } else {
+            return response()->json(null, 404);
         }
     }
 
     /**
-     * Get similar posts from a given pool.
+     * Filter posts from a given pool to find similarity. Similarity is defined
+     * as simply sharing a basic taxonomy: in this case, a "tag" or "topic".
      *
-     * @param \Illuminate\Support\Collection $pool
-     * @param \Canvas\Post $post
-     * @return mixed
+     * @param $post
+     * @param $posts
+     * @return array
      */
-    private function findRelatedViaTaxonomy(Collection $pool, Post $post)
+    private function getRelatedViaTaxonomy($post, $posts): array
     {
-        return collect($pool)->filter(function ($item, $key) use ($post) {
-            $matched_tag = array_intersect(
-                $item->tags->pluck('slug')->toArray(), $post->tags->pluck('slug')->toArray()
-            );
+        if ($post->tags || $post->topic) {
+            $this->relatedPosts = collect($posts)->filter(function ($item, $key) use ($post) {
+                $matchedTag = array_intersect(
+                    $item->tags->pluck('slug')->toArray(), $post->tags->pluck('slug')->toArray()
+                );
 
-            $matched_topic = array_intersect(
-                $item->topic->pluck('slug')->toArray(), $post->topic->pluck('slug')->toArray()
-            );
+                $matchedTopic = array_intersect(
+                    $item->topic->pluck('slug')->toArray(), $post->topic->pluck('slug')->toArray()
+                );
 
-            if ($matched_tag || $matched_topic) {
-                return true;
-            } else {
-                return false;
-            }
-        });
+                return $item->id != $post->id && ($matchedTag || $matchedTopic);
+            })->toArray();
+        }
+
+        return array_values($this->relatedPosts);
     }
 
     /**
-     * Get the identifying attribute for posts.
+     * Return true if the post is published.
      *
-     * @return \Illuminate\Config\Repository|mixed
+     * @param $post
+     * @return bool
      */
-    private function publicIdentifier()
+    private function isPublished($post): bool
     {
-        return config('studio.identifier');
-    }
-
-    /**
-     * Generate a default Gravatar image url from a given email.
-     *
-     * @param string $email
-     * @param int $size
-     * @return string
-     */
-    private function generateDefaultGravatar(string $email, int $size = 200): string
-    {
-        $emailHash = md5(trim(Str::lower($email)));
-
-        return "https://secure.gravatar.com/avatar/{$emailHash}?s={$size}";
+        return $post && $post->published;
     }
 }

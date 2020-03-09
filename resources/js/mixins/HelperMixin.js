@@ -56,13 +56,13 @@ export default {
             }
         },
 
-        userPublicIdentifier(user) {
+        userPublicIdentifier(meta) {
             switch (Studio.identifier) {
                 case 'id':
-                    return user.user_id
+                    return meta.user_id
 
                 case 'username':
-                    return user.username
+                    return meta.username
 
                 default:
                     break;

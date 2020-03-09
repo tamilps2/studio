@@ -7,19 +7,6 @@ use Illuminate\Filesystem\Filesystem;
 class Setup
 {
     /**
-     * The directories that need to be created.
-     *
-     * @const array
-     */
-    private const DIRECTORIES = [
-        'js/studio',
-        'js/studio/components',
-        'js/studio/mixins',
-        'js/studio/screens',
-        'sass/studio',
-    ];
-
-    /**
      * Ensure the component directories we need exist.
      *
      * @return void
@@ -28,8 +15,16 @@ class Setup
     {
         $filesystem = new Filesystem;
 
-        foreach (self::DIRECTORIES as $path) {
-            if (! $filesystem->isDirectory($directory = resource_path($path))) {
+        $directoryPaths = [
+            'js/studio',
+            'js/studio/components',
+            'js/studio/mixins',
+            'js/studio/screens',
+            'sass/studio',
+        ];
+
+        foreach ($directoryPaths as $path) {
+            if (!$filesystem->isDirectory($directory = resource_path($path))) {
                 $filesystem->makeDirectory($directory, 0755, true);
             }
         }
@@ -38,12 +33,12 @@ class Setup
     /**
      * Update the "package.json" file.
      *
-     * @param  bool  $dev
+     * @param bool $dev
      * @return void
      */
     protected static function updatePackages($dev = true)
     {
-        if (! file_exists(base_path('package.json'))) {
+        if (!file_exists(base_path('package.json'))) {
             return;
         }
 
@@ -60,7 +55,7 @@ class Setup
 
         file_put_contents(
             base_path('package.json'),
-            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT).PHP_EOL
+            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
         );
     }
 

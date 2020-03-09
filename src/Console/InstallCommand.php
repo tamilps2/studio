@@ -36,6 +36,7 @@ class InstallCommand extends Command
      * @var array
      */
     protected $controllers = [
+        'BaseController.stub' => 'Http/Controllers/Studio/BaseController.php',
         'PostController.stub' => 'Http/Controllers/Studio/PostController.php',
         'TagController.stub' => 'Http/Controllers/Studio/TagController.php',
         'TopicController.stub' => 'Http/Controllers/Studio/TopicController.php',
@@ -69,11 +70,11 @@ class InstallCommand extends Command
      */
     protected function ensureDirectoriesExist()
     {
-        if (! is_dir($directory = $this->getViewPath('studio'))) {
+        if (!is_dir($directory = $this->getViewPath('studio'))) {
             mkdir($directory, 0755, true);
         }
 
-        if (! is_dir($directory = app_path('Http/Controllers/Studio'))) {
+        if (!is_dir($directory = app_path('Http/Controllers/Studio'))) {
             mkdir($directory, 0755, true);
         }
     }
@@ -86,13 +87,13 @@ class InstallCommand extends Command
     protected function exportViews()
     {
         foreach ($this->views as $key => $value) {
-            if (file_exists($view = $this->getViewPath($value)) && ! $this->option('force')) {
-                if (! $this->confirm("The [{$value}] view already exists. Do you want to replace it?")) {
+            if (file_exists($view = $this->getViewPath($value)) && !$this->option('force')) {
+                if (!$this->confirm("The [{$value}] view already exists. Do you want to replace it?")) {
                     continue;
                 }
             }
 
-            copy(dirname(__DIR__, 2)."/resources/stubs/views/{$key}", $view);
+            copy(dirname(__DIR__, 2) . "/resources/stubs/views/{$key}", $view);
         }
     }
 
@@ -109,14 +110,14 @@ class InstallCommand extends Command
                 str_replace(
                     '{{namespace}}',
                     $this->laravel->getNamespace(),
-                    file_get_contents(__DIR__."/../../resources/stubs/controllers/{$key}")
+                    file_get_contents(__DIR__ . "/../../resources/stubs/controllers/{$key}")
                 )
             );
         }
 
         file_put_contents(
             base_path('routes/web.php'),
-            file_get_contents(__DIR__.'/../../resources/stubs/routes.stub'),
+            file_get_contents(__DIR__ . '/../../resources/stubs/routes.stub'),
             FILE_APPEND
         );
     }

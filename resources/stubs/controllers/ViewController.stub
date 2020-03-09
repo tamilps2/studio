@@ -2,12 +2,9 @@
 
 namespace {{namespace}}Http\Controllers\Studio;
 
-use {{namespace}}Http\Controllers\Controller;
-use Canvas\UserMeta;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
-class ViewController extends Controller
+class ViewController extends BaseController
 {
     /**
      * Handle the incoming request.
@@ -20,43 +17,5 @@ class ViewController extends Controller
         return view('studio.app', [
             'scripts' => $this->scriptVariables(),
         ]);
-    }
-
-    /**
-     * Build a global JavaScript object for the Vue app.
-     *
-     * @return array
-     */
-    private function scriptVariables()
-    {
-        $user = auth()->user();
-
-        if ($user) {
-            $metaData = UserMeta::where('user_id', $user->id)->first();
-            $avatar = !empty(optional($metaData)->avatar) ? $metaData->avatar : $this->generateDefaultGravatar($user->email);
-        }
-
-        return [
-            'avatar' => $avatar ?? null,
-            'canvasPath' => config('canvas.path'),
-            'studioPath' => config('studio.path'),
-            'identifier' => config('studio.identifier'),
-            'timezone' => config('app.timezone'),
-            'user' => $user,
-        ];
-    }
-
-    /**
-     * Generate a default Gravatar image url from a given email.
-     *
-     * @param string $email
-     * @param int $size
-     * @return string
-     */
-    private function generateDefaultGravatar(string $email, int $size = 200): string
-    {
-        $emailHash = md5(trim(Str::lower($email)));
-
-        return "https://secure.gravatar.com/avatar/{$emailHash}?s={$size}";
     }
 }

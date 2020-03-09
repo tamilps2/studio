@@ -1,32 +1,42 @@
 export default [
     {
-        path: '/studio',
+        path: '/',
         name: 'home',
         component: require('./screens/HomeScreen').default,
     },
     {
-        path: '/studio/tag/:slug',
-        name: 'tag',
+        path: '/tags',
+        name: 'tags',
         component: require('./screens/TagScreen').default,
     },
     {
-        path: '/studio/topic/:slug',
-        name: 'topic',
+        path: '/tags/:slug',
+        name: 'tag-posts',
+        component: require('./screens/TagPostsScreen').default,
+    },
+    {
+        path: '/topics',
+        name: 'topics',
         component: require('./screens/TopicScreen').default,
     },
     {
-        path: '/studio/:identifier',
+        path: '/topics/:slug',
+        name: 'topic-posts',
+        component: require('./screens/TopicPostsScreen').default,
+    },
+    {
+        path: '/:identifier',
         name: 'user',
         component: require('./screens/UserScreen').default,
     },
     {
-        path: '/studio/:identifier/:slug',
+        path: '/:identifier/:slug',
         name: 'post',
         component: require('./screens/PostScreen').default,
     },
     {
         path: '*',
         name: 'catch-all',
-        redirect: '/studio',
+        redirect: '/',
     },
 ]

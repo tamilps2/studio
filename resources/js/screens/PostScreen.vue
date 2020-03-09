@@ -1,16 +1,20 @@
 <template>
     <div>
         <vue-headful
-            v-if="isReady && !hasErrors"
+            v-if="isReady"
             :title="post.title + ' — Studio'"
             :description="post.summary"
             :image="post.featured_image"
             :url="meta.canonical_link"
         />
 
-        <page-header>
-            <div v-if="isReady && !hasErrors && postBelongsToAuthUser" class="dropdown" slot="actions">
-                <a href="#" id="actionDropdownMenu" class="pl-0 pr-3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <navbar>
+            <router-link slot="extra" :to="{name: 'home'}" class="btn btn-sm btn-outline-secondary">
+                Go home
+            </router-link>
+
+            <div v-if="isReady && postBelongsToAuthUser" class="dropdown" slot="actions">
+                <a href="#" id="actionDropdownMenu" class="ml-3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" viewBox="0 0 24 24" class="icon-cog primary">
                         <path d="M6.8 3.45c.87-.52 1.82-.92 2.83-1.17a2.5 2.5 0 0 0 4.74 0c1.01.25 1.96.65 2.82 1.17a2.5 2.5 0 0 0 3.36 3.36c.52.86.92 1.8 1.17 2.82a2.5 2.5 0 0 0 0 4.74c-.25 1.01-.65 1.96-1.17 2.82a2.5 2.5 0 0 0-3.36 3.36c-.86.52-1.8.92-2.82 1.17a2.5 2.5 0 0 0-4.74 0c-1.01-.25-1.96-.65-2.82-1.17a2.5 2.5 0 0 0-3.36-3.36 9.94 9.94 0 0 1-1.17-2.82 2.5 2.5 0 0 0 0-4.74c.25-1.01.65-1.96 1.17-2.82a2.5 2.5 0 0 0 3.36-3.36zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
                         <circle cx="12" cy="12" r="2"/>
@@ -25,10 +29,10 @@
                     </a>
                 </div>
             </div>
-        </page-header>
+        </navbar>
 
-        <div v-if="isReady && !hasErrors">
-            <div class="col-xl-8 offset-xl-2 col-md-12">
+        <div v-if="isReady" class="mt-5">
+            <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12">
                 <h1 class="text-dark font-serif pt-5 mb-4">{{ post.title }}</h1>
 
                 <div class="media py-1">
@@ -40,7 +44,7 @@
                     </router-link>
 
                     <div class="media-body">
-                        <router-link :to="{name: 'user', params: { identifier: userPublicIdentifier(user) }}" class="text-decoration-none">
+                        <router-link :to="{name: 'user', params: { identifier: userPublicIdentifier(post.user_meta) }}" class="text-decoration-none">
                             <p class="my-0">{{ user.name }}</p>
                         </router-link>
                         <span class="text-secondary">{{ moment(post.published_at).format('MMM d, Y') }} — {{ post.read_time }}</span>
@@ -64,90 +68,49 @@
 
                 <div v-if="tags" class="mt-5">
                     <router-link
-                        v-for="(key, value) in tags"
-                        :key="key"
-                        :to="{ name: 'tag', params: { slug: value } }"
+                        v-for="tag in tags"
+                        :key="tag.id"
+                        :to="{ name: 'tag-posts', params: { slug: tag.slug } }"
                         class="badge badge-light p-2 my-1 mr-2 text-decoration-none text-uppercase">
-                        {{ key }}
+                        {{ tag.name }}
                     </router-link>
                 </div>
             </div>
 
-            <div v-if="isReady && !hasErrors && meta.canonical_link" class="post-content position-relative align-items-center overflow-y-visible font-serif">
+            <div v-if="meta.canonical_link" class="post-content position-relative align-items-center overflow-y-visible font-serif">
                 <hr>
                 <p class="text-center font-italic pt-3 my-5">
                     This post was originally published on <a :href="meta.canonical_link" target="_blank" rel="noopener">{{ parseURL(meta.canonical_link).hostname }}</a>
                 </p>
             </div>
-        </div>
 
-        <div v-if="!hasErrors" class="read-more mt-5 container-fluid">
-            <div class="row">
-                <div v-if="next.post"
-                     class="col-lg bg-light text-center px-lg-5 py-5"
-                     :style="next.post.featured_image ? 'background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url('+next.post.featured_image+'); background-size: cover' : ''">
-                    <router-link
-                        :to="{ name: 'post', params: { identifier: postPublicIdentifier(next.post), slug: next.post.slug } }"
-                        class="btn btn-sm text-decoration-none text-uppercase mt-3"
-                        :class="next.post.featured_image ? 'btn-outline-light' : 'btn-outline-secondary'"
-                        @click.native="scrollToTop">
-                        Read this next
-                    </router-link>
-                    <h2 class="font-serif my-3">
-                        <router-link
-                            :to="{ name: 'post', params: { identifier: postPublicIdentifier(next.post), slug: next.post.slug } }"
-                            class="text-decoration-none"
-                            :class="next.post.featured_image ? 'text-light' : 'text-dark'"
-                            @click.native="scrollToTop">
-                            {{ next.post.title }}
-                        </router-link>
-                    </h2>
-                    <p class="text-lg font-serif"
-                       :class="next.post.featured_image ? 'text-white-50' : 'text-secondary'">
-                        {{ next.post.summary }}
-                    </p>
-                </div>
+            <main role="main" class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-12">
+                <div v-if="related.length > 0">
+                    <h4 class="mb-4 border-bottom pb-2">
+                        <span class="border-bottom border-dark pb-2">Related</span>
+                    </h4>
 
-                <div v-if="random.post"
-                     class="col-lg bg-light text-center px-lg-5 py-5"
-                     :style="random.post.featured_image ? 'background: linear-gradient(rgba(0, 0, 0, 0.85),rgba(0, 0, 0, 0.85)),url('+random.post.featured_image+'); background-size: cover' : ''">
-                    <router-link
-                        :to="{ name: 'post', params: { identifier: postPublicIdentifier(random.post), slug: random.post.slug } }"
-                        class="btn btn-sm text-decoration-none text-uppercase mt-3"
-                        :class="random.post.featured_image ? 'btn-outline-light' : 'btn-outline-secondary'"
-                        @click.native="scrollToTop">
-                        You might enjoy
-                    </router-link>
-                    <h2 class="font-serif my-3">
-                        <router-link
-                            :to="{ name: 'post', params: { identifier: postPublicIdentifier(random.post), slug: random.post.slug } }"
-                            class="text-decoration-none"
-                            :class="random.post.featured_image ? 'text-light' : 'text-dark'"
-                            @click.native="scrollToTop">
-                            {{ random.post.title }}
-                        </router-link>
-                    </h2>
-                    <p class="text-lg font-serif" :class="random.post.featured_image ? 'text-white-50' : 'text-secondary'">
-                        {{ random.post.summary }}
-                    </p>
+                    <post-list :posts="related"></post-list>
                 </div>
-            </div>
+            </main>
         </div>
     </div>
 </template>
 
 <script>
     import hljs from 'highlight.js'
+    import PostList from "../components/PostList";
     import NProgress from 'nprogress'
     import vueHeadful from 'vue-headful'
     import mediumZoom from 'medium-zoom'
-    import PageHeader from '../components/PageHeader'
+    import Navbar from "../components/Navbar";
 
     export default {
         name: 'post-screen',
 
         components: {
-            PageHeader,
+            Navbar,
+            PostList,
             vueHeadful
         },
 
@@ -160,16 +123,8 @@
                 username: null,
                 avatar: null,
                 meta: null,
-                next: {
-                    post: null,
-                    username: null
-                },
-                random: {
-                    post: null,
-                    username: null
-                },
+                related: [],
                 isReady: false,
-                hasErrors: false,
                 canvasPath: Studio.canvasPath,
             }
         },
@@ -190,6 +145,7 @@
         watch: {
             '$route.params.slug': function (slug) {
                 this.isReady = false
+                this.related = []
                 this.fetchData()
             }
         },
@@ -197,26 +153,22 @@
         methods: {
             fetchData() {
                 this.request()
-                    .get('/studio/posts/' + this.$route.params.identifier + '/' + this.$route.params.slug)
+                    .get(Studio.path + '/api/posts/' + this.$route.params.identifier + '/' + this.$route.params.slug)
                     .then(response => {
                         this.user = response.data.user
                         this.post = response.data.post
-                        this.tags = response.data.tags
-                        this.topic = response.data.topic
+                        this.tags = response.data.post.tags
+                        this.topic = response.data.post.topic
                         this.username = response.data.username
                         this.avatar = response.data.avatar
                         this.meta = response.data.meta
-                        this.next.post = response.data.next.post
-                        this.next.username = response.data.next.username
-                        this.random.post = response.data.random.post
-                        this.random.username = response.data.random.username
+                        this.related = response.data.related
                         this.isReady = true
 
                         NProgress.done()
                     })
                     .catch(error => {
                         // Add any error debugging...
-                        this.hasErrors = true
                         this.$router.push({name: 'home'})
 
                         NProgress.done()
@@ -238,6 +190,11 @@
 
 <style lang="scss">
     @import '../../../sass/studio/variables';
+
+    .post-content::first-letter {
+        font-size: 52px;
+        line-height: 0;
+    }
 
     .featured-image-caption {
         text-align: center;
