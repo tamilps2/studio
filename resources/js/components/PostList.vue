@@ -1,7 +1,7 @@
 <template>
     <div v-if="availablePosts.length > 0">
         <div v-for="post in availablePosts">
-            <router-link :to="{ name: 'post', params: { identifier: postPublicIdentifier(post), slug: post.slug } }" class="text-decoration-none">
+            <router-link :to="{ name: 'post', params: { identifier: publicIdentifier(post), slug: post.slug } }" class="text-decoration-none">
                 <div class="card mb-4 shadow-sm">
                     <div class="row no-gutters">
                         <div :class="post.featured_image ? 'col-9' : ''">

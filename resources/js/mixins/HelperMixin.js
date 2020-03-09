@@ -43,26 +43,13 @@ export default {
             };
         },
 
-        postPublicIdentifier(post) {
+        publicIdentifier(post) {
             switch (Studio.identifier) {
                 case 'id':
                     return post.user_id
 
                 case 'username':
                     return post.user_meta.username
-
-                default:
-                    break;
-            }
-        },
-
-        userPublicIdentifier(meta) {
-            switch (Studio.identifier) {
-                case 'id':
-                    return meta.user_id
-
-                case 'username':
-                    return meta.username
 
                 default:
                     break;

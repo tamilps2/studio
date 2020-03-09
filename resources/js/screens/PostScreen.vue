@@ -36,7 +36,7 @@
                 <h1 class="text-dark font-serif pt-5 mb-4">{{ post.title }}</h1>
 
                 <div class="media py-1">
-                    <router-link :to="{name: 'user', params: { identifier: postPublicIdentifier(post) }}">
+                    <router-link :to="{name: 'user', params: { identifier: publicIdentifier(post) }}">
                         <img :src="avatar"
                              class="mr-3 rounded-circle shadow-inner"
                              style="width: 50px"
@@ -44,7 +44,7 @@
                     </router-link>
 
                     <div class="media-body">
-                        <router-link :to="{name: 'user', params: { identifier: userPublicIdentifier(post.user_meta) }}" class="text-decoration-none">
+                        <router-link :to="{name: 'user', params: { identifier: publicIdentifier(post) }}" class="text-decoration-none">
                             <p class="my-0">{{ user.name }}</p>
                         </router-link>
                         <span class="text-secondary">{{ moment(post.published_at).format('MMM d, Y') }} — {{ post.read_time }}</span>
