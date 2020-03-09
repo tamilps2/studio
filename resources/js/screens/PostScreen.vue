@@ -47,7 +47,7 @@
                         <router-link :to="{name: 'user', params: { identifier: publicIdentifier(post) }}" class="text-decoration-none">
                             <p class="my-0">{{ user.name }}</p>
                         </router-link>
-                        <span class="text-secondary">{{ moment(post.published_at).format('MMM d, Y') }} — {{ post.read_time }}</span>
+                        <span class="text-secondary">{{ moment(post.published_at).format('MMM D, Y') }} — {{ post.read_time }}</span>
                     </div>
                 </div>
 
