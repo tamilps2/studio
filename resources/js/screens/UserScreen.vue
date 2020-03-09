@@ -36,7 +36,7 @@
 
                     <featured-post-list :posts="posts.slice(0, featuredPostCount)"></featured-post-list>
 
-                    <h4 class="my-4 border-bottom mt-5 pb-2">
+                    <h4 v-if="posts.slice(featuredPostCount).length > 0" class="my-4 border-bottom mt-5 pb-2">
                         <span class="border-bottom border-dark pb-2">All Posts</span>
                     </h4>
 
