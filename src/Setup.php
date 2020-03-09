@@ -24,7 +24,7 @@ class Setup
         ];
 
         foreach ($directoryPaths as $path) {
-            if (!$filesystem->isDirectory($directory = resource_path($path))) {
+            if (! $filesystem->isDirectory($directory = resource_path($path))) {
                 $filesystem->makeDirectory($directory, 0755, true);
             }
         }
@@ -38,7 +38,7 @@ class Setup
      */
     protected static function updatePackages($dev = true)
     {
-        if (!file_exists(base_path('package.json'))) {
+        if (! file_exists(base_path('package.json'))) {
             return;
         }
 
@@ -55,7 +55,7 @@ class Setup
 
         file_put_contents(
             base_path('package.json'),
-            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
+            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT).PHP_EOL
         );
     }
 

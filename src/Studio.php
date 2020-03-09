@@ -31,21 +31,21 @@ class Studio extends Setup
     protected static function updatePackageArray(array $packages)
     {
         return [
-                'bootstrap' => '^4.4.0',
-                'highlight.js' => '^9.18.1',
-                'jquery' => '^3.4',
-                'medium-zoom' => '^1.0.5',
-                'moment-timezone' => '^0.5.27',
-                'nprogress' => '^0.2.0',
-                'popper.js' => '^1.12',
-                'resolve-url-loader' => '^3.1.0',
-                'sass' => '^1.24.0',
-                'sass-loader' => '^8.0.0',
-                'vue' => '^2.6.10',
-                'vue-headful' => '^2.1.0',
-                'vue-router' => '^3.1.5',
-                'vue-template-compiler' => '^2.6.10',
-            ] + $packages;
+            'bootstrap' => '^4.4.0',
+            'highlight.js' => '^9.18.1',
+            'jquery' => '^3.4',
+            'medium-zoom' => '^1.0.5',
+            'moment-timezone' => '^0.5.27',
+            'nprogress' => '^0.2.0',
+            'popper.js' => '^1.12',
+            'resolve-url-loader' => '^3.1.0',
+            'sass' => '^1.24.0',
+            'sass-loader' => '^8.0.0',
+            'vue' => '^2.6.10',
+            'vue-headful' => '^2.1.0',
+            'vue-router' => '^3.1.5',
+            'vue-template-compiler' => '^2.6.10',
+        ] + $packages;
     }
 
     /**
@@ -63,7 +63,7 @@ class Studio extends Setup
         ];
 
         foreach ($files as $file) {
-            copy(__DIR__ . "/../resources/sass/{$file}.scss", resource_path("sass/studio/{$file}.scss"));
+            copy(__DIR__."/../resources/sass/{$file}.scss", resource_path("sass/studio/{$file}.scss"));
         }
     }
 
@@ -82,7 +82,7 @@ class Studio extends Setup
         ];
 
         foreach ($components as $component) {
-            copy(__DIR__ . "/../resources/js/components/{$component}.vue", resource_path("js/studio/components/{$component}.vue"));
+            copy(__DIR__."/../resources/js/components/{$component}.vue", resource_path("js/studio/components/{$component}.vue"));
         }
     }
 
@@ -99,7 +99,7 @@ class Studio extends Setup
         ];
 
         foreach ($mixins as $mixin) {
-            copy(__DIR__ . "/../resources/js/mixins/{$mixin}.js", resource_path("js/studio/mixins/{$mixin}.js"));
+            copy(__DIR__."/../resources/js/mixins/{$mixin}.js", resource_path("js/studio/mixins/{$mixin}.js"));
         }
     }
 
@@ -121,7 +121,7 @@ class Studio extends Setup
         ];
 
         foreach ($screens as $screen) {
-            copy(__DIR__ . "/../resources/js/screens/{$screen}.vue", resource_path("js/studio/screens/{$screen}.vue"));
+            copy(__DIR__."/../resources/js/screens/{$screen}.vue", resource_path("js/studio/screens/{$screen}.vue"));
         }
     }
 
@@ -138,7 +138,7 @@ class Studio extends Setup
         ];
 
         foreach ($files as $file) {
-            copy(__DIR__ . "/../resources/js/{$file}.js", resource_path("js/studio/{$file}.js"));
+            copy(__DIR__."/../resources/js/{$file}.js", resource_path("js/studio/{$file}.js"));
         }
     }
 
@@ -151,7 +151,7 @@ class Studio extends Setup
     {
         file_put_contents(
             base_path('webpack.mix.js'),
-            file_get_contents(__DIR__ . '/../resources/stubs/webpack.stub'),
+            file_get_contents(__DIR__.'/../resources/stubs/webpack.stub'),
             FILE_APPEND
         );
     }
