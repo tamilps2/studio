@@ -140,6 +140,17 @@
             document.querySelectorAll('pre').forEach((block) => {
                 hljs.highlightBlock(block)
             })
+
+            // Render any Tweets inside the editor
+            let tweets = document.querySelectorAll('div.ql-tweet')
+            console.log(tweets);
+            for (let i = 0; i <tweets.length; i++) {
+                while (tweets[i].firstChild) {
+                    tweets[i].removeChild(tweets[i].firstChild)
+                }
+
+                twttr.widgets.createTweet(tweets[i].dataset.id, tweets[i])
+            }
         },
 
         watch: {
@@ -294,5 +305,10 @@
         .post-content > .embedded_image[data-layout=wide] >>> img {
             max-width: 100%
         }
+    }
+
+    div.ql-tweet {
+        display: flex;
+        justify-content: center;
     }
 </style>
